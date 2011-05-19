@@ -1,0 +1,12 @@
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}[%{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+defscrollback 100000
+startup_message off
+escape ^tt
+
+# Default screens
+screen -t emacs		0
+screen -t main		1
+screen -t secondary	2
+screen -t tertiary 	3
+screen -t fourth	4
