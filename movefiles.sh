@@ -1,0 +1,1 @@
+cp -r ~/dotfiles/.[a-zA-Z]* ~

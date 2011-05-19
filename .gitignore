@@ -8,3 +8,4 @@
 !/.emacs-dir/*/*
 !/.emacs-dir/*/*/*
 !.gitignore
+!movefiles.sh
