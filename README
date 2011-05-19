@@ -2,12 +2,8 @@ All of my relevant dotfiles. Idea being that on any new system I can just pull t
 
 Since git will not allow you to clone into an existing directory (and on any new system, your home directory already exists), I clone this repository into ~/dotfiles with:
 
-```
-git clone git@github.com:victorquinn/dotfiles.git ~/dotfiles
-```
+    git clone git@github.com:victorquinn/dotfiles.git ~/dotfiles
 
 Then run the movefiles script to copy all dotfiles/directories into my home directory. Run:
 
-```
-sudo ~/dotfiles/movefiles.sh
-```
+    sudo ~/dotfiles/movefiles.sh
