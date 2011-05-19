@@ -1,0 +1,8 @@
+*
+!.zshrc
+!README
+!.emacs
+!.ackrc
+!.emacs-dir
+!.emacs-dir/*
+!.gitignore
