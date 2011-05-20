@@ -1,0 +1,9 @@
+[user]
+	name = Victor Quinn
+	email = vquinn@amherst.edu
+[core]
+        editor = emacs
+[color]
+        status = auto
+        diff = auto
+        interactive = auto
