@@ -1,13 +1,13 @@
 *
-!README
 !.ackrc
 !.emacs
 !/.emacs-dir*
 !/.emacs-dir/*
 !/.emacs-dir/*/*
 !/.emacs-dir/*/*/*
+!.gitconfig
 !.gitignore
 !.screenrc
 !.zshrc
 !movefiles.sh
-!.gitconfig
+!README
