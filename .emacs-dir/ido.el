@@ -3453,9 +3453,11 @@ For details of keybindings, do `\\[describe-function] ido-find-file'."
   ;; Copied from `icomplete-minibuffer-setup-hook'.
   (when (and (boundp 'ido-completing-read) 
 	     (or ido-xemacs (= ido-use-mycompletion-depth (minibuffer-depth))))
-    (make-local-hook 'pre-command-hook)
+    (if (fboundp 'make-local-hook)
+        (make-local-hook 'pre-command-hook))
     (add-hook 'pre-command-hook 'ido-tidy nil t)
-    (make-local-hook 'post-command-hook)
+    (if (fboundp 'make-local-hook)
+        (make-local-hook 'post-command-hook))
     (add-hook 'post-command-hook 'ido-exhibit nil t)
     (when ido-xemacs
       (ido-exhibit)
