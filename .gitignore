@@ -9,5 +9,6 @@
 !.gitignore
 !.screenrc
 !.zshrc
+!Desert.itermcolors
 !movefiles.sh
 !README

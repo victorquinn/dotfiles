@@ -2,7 +2,14 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
+
 setopt appendhistory autocd
+
+# Ensure /usr/local/bin is first so Homebrew works.
+export PATH="/usr/local/bin:$PATH"
+
+# Emacs!
+export EDITOR="emacs"
 
 (( ${+PAGER} ))   || export PAGER="less"
 bindkey -e
@@ -13,8 +20,6 @@ zstyle :compinstall filename '/home/rand/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-# Lines added by VJQ
 
 # default apps
   (( ${+BROWSER} )) || export BROWSER="w3m"
