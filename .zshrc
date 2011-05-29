@@ -164,3 +164,10 @@ shuffle() {
 
 # bashmarks
 #source ~/.local/bin/bashmarks.sh
+
+#Pygmentize
+alias pcat=pygmentize
+
+function pless() {
+    pcat "$1" | less -R
+}

@@ -7,3 +7,12 @@ Since git will not allow you to clone into an existing directory (and on any new
 Then run the movefiles script to copy all dotfiles/directories into my home directory. Run:
 
     . ~/dotfiles/movefiles.sh
+
+
+Quasi-Dependencies (not really dependencies per se, but little utilities I use which should be installed to make this group of dotfiles work, consistently)
+
+Magit
+% brew install magit
+
+Pygmentize
+% easy_install Pygments
