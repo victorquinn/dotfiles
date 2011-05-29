@@ -6,7 +6,7 @@ SAVEHIST=100000
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
