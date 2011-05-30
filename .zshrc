@@ -13,6 +13,9 @@ export EDITOR="emacs"
 
 (( ${+PAGER} ))   || export PAGER="less"
 bindkey -e
+
+bindkey "\e[3~" delete-char        # Delete
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/rand/.zshrc'
