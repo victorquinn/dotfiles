@@ -1,9 +1,31 @@
 [user]
-	name = Victor Quinn
-	email = vquinn@amherst.edu
+        name = Victor Quinn
+        email = vquinn@amherst.edu # Work
+#       email = mail@victorquinn.com # Personal
+
 [core]
         editor = emacs
+
 [color]
-        status = auto
+        branch = auto
         diff = auto
         interactive = auto
+        status = auto
+        ui = auto
+
+[alias]
+        cavm = commit -avm
+        st = status
+        pr = pull --rebase
+        br = branch
+        ri = rebase -i origin/master
+        lg = log -p
+        lol = log --graph --decorate --pretty=oneline --abbrev-commit
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+        l5 = log --graph --decorate --pretty=oneline --abbrev-commit --all -5
+        l = log --graph --decorate --pretty=oneline --abbrev-commit --all --first-parent
+        ls = ls-files
+        uncommit = reset --soft HEAD^
+        ldiff = log --stat
+        dw = diff --word-diff
+        ru = remote update
