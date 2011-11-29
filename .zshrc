@@ -133,6 +133,7 @@ setenv() { export $1=$2 }  # csh compatibility
 sdate() { date +%Y.%m.%d }
 pc() { awk "{print \$$1}" }
 rot13 () { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
+gitrmtree () { for i in `git status | grep deleted | awk '{print $3}'`; do git rm $i; done }
 
 # shuffle input lines. Nice for mp3 playlists etc...
 shuffle() {
