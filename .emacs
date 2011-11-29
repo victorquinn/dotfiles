@@ -20,6 +20,9 @@
 ;; Turn off tabs
 (setq-default indent-tabs-mode nil)
 
+;; Turn on column numbers
+(setq column-number-mode t)
+
 ;; Show the current time in the bar
 (display-time)
 
