@@ -26,7 +26,7 @@ compinit
 
 # default apps
   (( ${+BROWSER} )) || export BROWSER="w3m"
-  (( ${+PAGER} ))   || export PAGER="less"
+  (( ${+PAGER} ))   || export PAGER="less -R"
 
 cl() {
     if [ -d "$1" ]; then
@@ -122,10 +122,11 @@ alias pu='pushd'
 alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
 #alias drush='~/.drush/drush/drush'
-alias drush='/Applications/MAMP/bin/php5.3/bin/php /usr/local/bin/drush'
+alias drush='/usr/local/bin/drush'
 export COLUMNS
 alias du='du -h'
 alias untar='tar xzfv'
+alias diff='colordiff'
 
 # functions
 mdc() { mkdir -p "$1" && cd "$1" }
