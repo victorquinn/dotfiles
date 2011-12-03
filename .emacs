@@ -97,3 +97,6 @@
 ;; Magit
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; HAML
+(require 'haml-mode)
