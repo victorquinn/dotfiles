@@ -3,7 +3,7 @@
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
 
-(load "php-mode")
+(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 
 ;; drupal-mode!
 (require 'drupal-mode)
@@ -19,6 +19,9 @@
 
 ;; Turn off tabs
 (setq-default indent-tabs-mode nil)
+
+;; Turn on column numbers
+(setq column-number-mode t)
 
 ;; Show the current time in the bar
 (display-time)
