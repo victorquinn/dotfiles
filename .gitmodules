@@ -4,3 +4,6 @@
 [submodule ".emacs-dir/emacs-rails-reloaded"]
 	path = .emacs-dir/emacs-rails-reloaded
 	url = git://github.com/dima-exe/emacs-rails-reloaded.git
+[submodule "drush"]
+	path = drush
+	url = http://git.drupal.org/project/drush.git
