@@ -121,8 +121,8 @@ alias po='popd'
 alias pu='pushd'
 alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
-#alias drush='~/.drush/drush/drush'
-alias drush='/usr/local/bin/drush'
+alias drush='~/.drush/drush'
+#alias drush='/usr/local/bin/drush'
 export COLUMNS
 alias du='du -h'
 alias untar='tar xzfv'

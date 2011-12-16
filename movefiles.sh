@@ -5,3 +5,4 @@ cp ~/dotfiles/.gitconfig ~
 cp ~/dotfiles/.screenrc ~
 cp ~/dotfiles/.tmux.conf ~
 cp ~/dotfiles/.zshrc ~
+cp -r ~/dotfiles/drush ~/.drush
