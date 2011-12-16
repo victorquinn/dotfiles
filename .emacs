@@ -104,5 +104,8 @@
 ;; HAML
 (require 'haml-mode)
 
+;; LESS CSS mode
+(require 'less-mode)
+
 ;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)
