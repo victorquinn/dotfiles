@@ -107,5 +107,9 @@
 ;; LESS CSS mode
 (require 'less-mode)
 
+;; YAML
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml" . yaml-mode))
+
 ;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)
