@@ -6,7 +6,7 @@ SAVEHIST=100000
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
@@ -121,7 +121,7 @@ alias po='popd'
 alias pu='pushd'
 alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
-alias drush='~/.drush/drush'
+alias drush='~/.drush/drush/drush'
 #alias drush='/usr/local/bin/drush'
 export COLUMNS
 alias du='du -h'
@@ -174,3 +174,9 @@ alias pcat=pygmentize
 function pless() {
     pcat "$1" | less -R
 }
+
+#init rvm
+[[ -s "/Users/victorquinn/.rvm/scripts/rvm" ]] && source "/Users/victorquinn/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#init rbenv
+eval "$(rbenv init -)"
