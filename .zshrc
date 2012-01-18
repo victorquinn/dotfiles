@@ -127,6 +127,7 @@ export COLUMNS
 alias du='du -h'
 alias untar='tar xzfv'
 alias diff='colordiff'
+alias rake="noglob rake"
 
 # functions
 mdc() { mkdir -p "$1" && cd "$1" }
