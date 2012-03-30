@@ -1,6 +1,7 @@
 [user]
         name = Victor Quinn
-        email = vquinn@amherst.edu # Work
+#       email = vquinn@amherst.edu # Amherst
+        email = vquinn@ngpvan.com # NGP VAN
 #       email = mail@victorquinn.com # Personal
 
 [core]
