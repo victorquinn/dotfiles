@@ -117,3 +117,6 @@
 ;; Markdown Mode
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+
+;; node.js
+(require 'nodejs-mode)

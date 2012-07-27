@@ -7,3 +7,6 @@
 [submodule "drush"]
 	path = drush
 	url = http://git.drupal.org/project/drush.git
+[submodule ".emacs-dir/nodejs-mode"]
+	path = .emacs-dir/nodejs-mode
+	url = git://github.com/emacsmirror/nodejs-mode.git
