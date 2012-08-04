@@ -120,3 +120,13 @@
 
 ;; node.js
 (require 'nodejs-mode)
+
+;; Require the new emacs package manager
+(require 'package)
+
+;; Add the marmalade alternate emacs package repo
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
+
+;; Load the wombat theme
+(load-theme 'wombat t)
