@@ -1,15 +1,14 @@
+;; ===================
+;; emacs-wide settings
+;; ===================
+
+
+;; Include Paths
 (add-to-list 'load-path "~/.emacs-dir")
+(add-to-list 'load-path "~/.emacs-d")
 
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
-
-(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
-
-;; drupal-mode!
-(require 'drupal-mode)
-(add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\|inc\\)$" . drupal-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(php\\)$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 
 ;; Turn off stupid auto-save mode. Good idea, but lags the program to hell constantly.
 (setq auto-save-default nil)
@@ -34,7 +33,7 @@
 (setq blink-matching-paren-distance 51200)
 
 ;; Make it so delete key works!
-(global-set-key "\C-h" 'backward-delete-char)
+;; (global-set-key "\C-h" 'backward-delete-char)
 
 ;; Turn tramp password expiry off
 (setq tramp-default-method "ssh")
@@ -49,10 +48,10 @@
 (load-library "~/.emacs-dir/rainbow-mode.el")
 
 ;; Ido
-(load-library "~/.emacs-dir/ido.el")
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+;; (load-library "~/.emacs-dir/ido.el")
+;; (require 'ido)
+;; (ido-mode t)
+;; (setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
 ;; Place all backup files in one directory.
 (setq backup-directory-alist
@@ -80,22 +79,34 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+
+;; =================
+;; Modes and plugins
+;; =================
+
 ;; Javascript Mode
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(js2-basic-offset 2)
- '(js2-highlight-level 3))
+ '(js2-highlight-level 3)
+ '(mediawiki-site-alist (quote (("Vicki" "http://vicki.internal.ngpvan.net/vicki/" "VictorQuinn" "" "Team Violet")))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(setnu-line-number-face ((t (:inherit default)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(setnu-line-number-face ((t (:inherit default))) t))
+
+;; drupal-mode!
+(require 'drupal-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\|inc\\)$" . drupal-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(php\\)$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 
 ;; Magit
 (require 'magit)
@@ -130,3 +141,20 @@
 
 ;; Load the wombat theme
 (load-theme 'wombat t)
+
+;; Add key binding for anything
+(global-set-key (kbd "C-x b") 'anything)
+
+;; Autocomplete
+;;(require 'auto-complete-config)
+
+
+;; Org Mode Settings
+
+  ;; Set a keybinding for storing a link to the current document
+  ;; (global-set-key (kbd "C-c l") 'org-store-link)
+  ;; (global-set-key (kbd "C-c C-l") 'org-store-link)
+  ;; Show a timestamp when closed
+  (setq org-log-done 'time)
+  ;; Add a note when closed
+  (setq org-log-done 'note)
