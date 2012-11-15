@@ -1,11 +1,12 @@
 [user]
-        name = Victor Quinn
+	name = Victor Quinn
 #       email = vquinn@amherst.edu # Amherst College
-        email = vquinn@ngpvan.com # NGP VAN
+	email = vquinn@ngpvan.com
 #       email = mail@victorquinn.com # Personal
 
 [core]
         editor = emacs
+	excludesfile = /Users/vquinn/.gitignore_global
 
 [color]
         branch = auto
@@ -24,7 +25,7 @@
         lol = log --graph --decorate --pretty=oneline --abbrev-commit
         lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
         l5 = log --graph --decorate --pretty=oneline --abbrev-commit --all -5
-        l = log --graph --decorate --pretty=oneline --abbrev-commit --all --first-parent
+        l = log --graph --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --first-parent
         ls = ls-files
         uncommit = reset --soft HEAD^
         ldiff = log --stat
