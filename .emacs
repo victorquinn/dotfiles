@@ -5,7 +5,8 @@
 
 ;; Include Paths
 (add-to-list 'load-path "~/.emacs-dir")
-(add-to-list 'load-path "~/.emacs-d")
+(add-to-list 'load-path "~/.emacs.d/elpa")
+(add-to-list 'load-path "~/.el4r")
 
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
@@ -36,13 +37,13 @@
 ;; (global-set-key "\C-h" 'backward-delete-char)
 
 ;; Turn tramp password expiry off
-(setq tramp-default-method "ssh")
+(setq tramp-default-method "sshx")
 
 ;; Allow y or n instead of having to type yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Add line numbers
-(global-set-key "\C-x\C-n" 'setnu-mode)    
+(global-set-key "\C-x\C-n" 'setnu-mode)
 
 ;; Add rainbow mode
 (load-library "~/.emacs-dir/rainbow-mode.el")
@@ -79,6 +80,12 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+;; =====
+;; Fonts
+;; =====
+
+(set-face-attribute 'default nil :font "Source Code Pro")
+
 
 ;; =================
 ;; Modes and plugins
@@ -93,8 +100,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js2-basic-offset 2)
- '(js2-highlight-level 3)
- '(mediawiki-site-alist (quote (("Vicki" "http://vicki.internal.ngpvan.net/vicki/" "VictorQuinn" "" "Team Violet")))))
+ '(js2-highlight-level 3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -120,14 +126,14 @@
 
 ;; YAML
 (require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\)$" . yaml-mode))
 
 ;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)
 
 ;; Markdown Mode
 (require 'markdown-mode)
-(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
 
 ;; node.js
 (require 'nodejs-mode)
@@ -146,15 +152,32 @@
 (global-set-key (kbd "C-x b") 'anything)
 
 ;; Autocomplete
-;;(require 'auto-complete-config)
-
+(require 'popup)
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;; Org Mode Settings
 
-  ;; Set a keybinding for storing a link to the current document
-  ;; (global-set-key (kbd "C-c l") 'org-store-link)
-  ;; (global-set-key (kbd "C-c C-l") 'org-store-link)
-  ;; Show a timestamp when closed
-  (setq org-log-done 'time)
-  ;; Add a note when closed
-  (setq org-log-done 'note)
+(setq org-log-done 'time)
+;; Add a note when closed
+(setq org-log-done 'note)
+
+;; Supercollider
+(add-to-list 'load-path "~/.emacs.d/scel/")
+(require 'sclang)
+
+(custom-set-variables
+'(sclang-auto-scroll-post-buffer t)
+'(sclang-eval-line-forward nil)
+'(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
+'(sclang-runtime-directory "~/sclang/"))
+
+
+;; Beginning of the el4r block:
+;; RCtool generated this block automatically. DO NOT MODIFY this block!
+(add-to-list 'load-path "/Users/vquinn/.rvm/rubies/ruby-1.9.3-p194/share/emacs/site-lisp")
+(require 'el4r)
+(el4r-boot)
+;; End of the el4r block.
+;; User-setting area is below this line.
