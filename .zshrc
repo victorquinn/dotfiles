@@ -183,3 +183,6 @@ function pless() {
 
 #init rvm
 [[ -s "/Users/victorquinn/.rvm/scripts/rvm" ]] && source "/Users/victorquinn/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# ZSH Syntax Highlighting
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
