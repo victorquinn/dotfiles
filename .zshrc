@@ -6,7 +6,7 @@ SAVEHIST=100000
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
@@ -113,6 +113,7 @@ compinit
 #alias ls='pwd; ls --color=auto'
 alias ls='ls -FG'
 #alias ack='ack-grep -a'
+alias git='hub'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
@@ -145,6 +146,10 @@ shuffle() {
     echo $RANDOM$RANDOM "$i";
   done
   ) | sort | sed 's/^[0-9]* //'
+}
+
+cdw () {
+  cd $(dirname $(which $1))
 }
 
 #show git info in prompt
