@@ -110,8 +110,7 @@ autoload -U compinit
 compinit
 
 # aliases
-#alias ls='pwd; ls --color=auto'
-alias ls='ls -FG'
+alias ls='ls -F --color=auto'
 #alias ack='ack-grep -a'
 alias git='hub'
 alias md='mkdir -p'
