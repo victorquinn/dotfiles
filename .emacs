@@ -6,7 +6,7 @@
 ;; Include Paths
 (add-to-list 'load-path "~/.emacs-dir")
 (add-to-list 'load-path "~/.emacs.d/elpa")
-(add-to-list 'load-path "~/.el4r")
+;;(add-to-list 'load-path "~/.el4r")
 
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
@@ -76,15 +76,15 @@
 ;;(global-ede-mode t)
 
 ;; Lose the toolbars
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; =====
 ;; Fonts
 ;; =====
 
-(set-face-attribute 'default nil :font "Source Code Pro")
+(set-face-attribute 'default nil :font "Monaco")
 
 
 ;; =================
@@ -140,6 +140,7 @@
 
 ;; Require the new emacs package manager
 (require 'package)
+(package-initialize)
 
 ;; Add the marmalade alternate emacs package repo
 (add-to-list 'package-archives
@@ -162,6 +163,8 @@
 (setq org-log-done 'time)
 ;; Add a note when closed
 (setq org-log-done 'note)
+(global-set-key (kbd "C-c c") 'org-capture)
+
 
 ;; Supercollider
 (add-to-list 'load-path "~/.emacs.d/scel/")
@@ -176,8 +179,45 @@
 
 ;; Beginning of the el4r block:
 ;; RCtool generated this block automatically. DO NOT MODIFY this block!
-(add-to-list 'load-path "/Users/vquinn/.rvm/rubies/ruby-1.9.3-p194/share/emacs/site-lisp")
-(require 'el4r)
-(el4r-boot)
+;; (add-to-list 'load-path "/Users/vquinn/.rvm/rubies/ruby-1.9.3-p194/share/emacs/site-lisp")
+;; (require 'el4r)
+;; (el4r-boot)
 ;; End of the el4r block.
 ;; User-setting area is below this line.
+
+;; (require 'multi-mode)
+;; (require 'mustache-mode)
+
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key [(meta shift up)] 'move-line-up)
+(global-set-key [(meta shift down)] 'move-line-down)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((js . t)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)))
+
+
+;; Erlang
+(require 'erlang-mode)
