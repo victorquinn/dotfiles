@@ -3,6 +3,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+# Include local.zsh file for local configurations
+[[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh
+
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
@@ -10,6 +13,10 @@ export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
+
+
+# PHP path for MAMP
+export DRUSH_PHP="/Applications/MAMP/bin/php/php5.2.17/bin/php"
 
 (( ${+PAGER} ))   || export PAGER="less"
 bindkey -e
@@ -110,7 +117,8 @@ autoload -U compinit
 compinit
 
 # aliases
-alias ls='ls -F --color=auto'
+#alias ls='pwd; ls --color=auto'
+alias ls='ls -FG'
 #alias ack='ack-grep -a'
 alias git='hub'
 alias md='mkdir -p'
@@ -128,6 +136,13 @@ alias du='du -h'
 alias untar='tar xzfv'
 alias diff='colordiff'
 alias rake="noglob rake"
+alias jenkins="nohup java -jar ~/jenkins.war --httpPort=8081 --ajp13Port=8010 > /tmp/jenkins.log 2>&1 &"
+alias phpsh="/usr/local/share/python/phpsh"
+
+# Necessary on Mac systems because otherwise opening emacs from the command line
+# won't work.
+# alias emacs='open -a /Applications/Emacs.app $1'
+alias emacs='emacsclient $1'
 
 # functions
 mdc() { mkdir -p "$1" && cd "$1" }
@@ -152,23 +167,23 @@ cdw () {
 }
 
 #show git info in prompt
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' stagedstr '%F{28}●'
-zstyle ':vcs_info:*' unstagedstr '%F{11}●'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{yellow}]'
-  } else {
-    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}●%F{yellow}]'
-  }
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' stagedstr '%F{28}●'
+# zstyle ':vcs_info:*' unstagedstr '%F{11}●'
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+# zstyle ':vcs_info:*' enable git svn
+# precmd() {
+#   if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+#     zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{yellow}]'
+#   } else {
+#     zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}●%F{yellow}]'
+#   }
 
-  vcs_info
-}
-setopt prompt_subst
-PROMPT='%F{yellow}%n@%m %c${vcs_info_msg_0_}%F{yellow} %(?/%F{yellow}/%F{red})%% %{$reset_color%}%F{white}'
+#   vcs_info
+# }
+# setopt prompt_subst
+PROMPT='%F{yellow}%n@%m %% %{$reset_color%}%F{white}'
 
 # bashmarks
 #source ~/.local/bin/bashmarks.sh
@@ -185,3 +200,11 @@ function pless() {
 
 # ZSH Syntax Highlighting
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Load the default version of PHP
+export PHP_VERSIONS=/usr/local/Cellar/php53
+[ -f $(brew --prefix php-version)/php-version.sh ] && source $(brew --prefix php-version)/php-version.sh && php-version 5.3.20 >/dev/null
+
+#export PHP_VERSIONS=$(dirname $(brew --prefix php54))
+#source $(brew --prefix php-version)/php-version.sh && php-version 5.x.x >/dev/null
+
