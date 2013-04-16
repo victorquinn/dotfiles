@@ -5,5 +5,5 @@ cp ~/dotfiles/.gitconfig ~
 cp ~/dotfiles/.screenrc ~
 cp ~/dotfiles/.tmux.conf ~
 cp ~/dotfiles/.zshrc ~
-cp ~/dotfiles/.zsh-syntax-highlighting ~
+cp -r ~/dotfiles/.zsh-syntax-highlighting ~
 cp -r ~/dotfiles/drush ~/.drush
