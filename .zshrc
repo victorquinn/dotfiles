@@ -9,7 +9,7 @@ SAVEHIST=100000
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:/usr/local/share/npm/bin:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
