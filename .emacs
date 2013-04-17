@@ -6,7 +6,6 @@
 ;; Include Paths
 (add-to-list 'load-path "~/.emacs-dir")
 (add-to-list 'load-path "~/.emacs.d/elpa")
-;;(add-to-list 'load-path "~/.el4r")
 
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
@@ -48,12 +47,6 @@
 ;; Add rainbow mode
 (load-library "~/.emacs-dir/rainbow-mode.el")
 
-;; Ido
-;; (load-library "~/.emacs-dir/ido.el")
-;; (require 'ido)
-;; (ido-mode t)
-;; (setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
 ;; Place all backup files in one directory.
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -71,20 +64,31 @@
       (message file)
       (delete-file file))))
 
-;; Load CEDET
-;;(load-file "~/.emacs-dir/cedet/common/cedet.el")
-;;(global-ede-mode t)
-
 ;; Lose the toolbars
 ;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+;; Display visited file's path in the frame title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+;; Mic-Paren - better paren matching
+(require 'mic-paren)
+(paren-activate)
+
+
+(require 'color-theme-buffer-local)
+(add-hook 'term-mode
+          (lambda nil (color-theme-buffer-local 'color-theme-solarized (current-buffer))))
+
 ;; =====
 ;; Fonts
 ;; =====
 
-(set-face-attribute 'default nil :font "Monaco")
+(set-face-attribute 'default nil :font "Menlo")
 
 
 ;; =================
@@ -92,15 +96,18 @@
 ;; =================
 
 ;; Javascript Mode
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(custom-set-variables
+;; (autoload 'js2-mode "js2" nil t)
+
+;; Now defaulting to js-mode rather than js2-mode because js2-mode was too strict
+;; and often buggy for me.
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+;; (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js2-basic-offset 2)
- '(js2-highlight-level 3))
+;;  '(js2-basic-offset 4)
+;;  '(js2-highlight-level 3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -158,14 +165,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-;; Org Mode Settings
-
-(setq org-log-done 'time)
-;; Add a note when closed
-(setq org-log-done 'note)
-(global-set-key (kbd "C-c c") 'org-capture)
-
-
 ;; Supercollider
 (add-to-list 'load-path "~/.emacs.d/scel/")
 (require 'sclang)
@@ -176,17 +175,41 @@
 '(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
 '(sclang-runtime-directory "~/sclang/"))
 
-
-;; Beginning of the el4r block:
-;; RCtool generated this block automatically. DO NOT MODIFY this block!
-;; (add-to-list 'load-path "/Users/vquinn/.rvm/rubies/ruby-1.9.3-p194/share/emacs/site-lisp")
-;; (require 'el4r)
-;; (el4r-boot)
-;; End of the el4r block.
-;; User-setting area is below this line.
-
 ;; (require 'multi-mode)
 ;; (require 'mustache-mode)
+
+;; Erlang
+;;(require 'erlang-mode)
+
+;; JSON
+(require 'json-mode)
+
+
+;; =================
+;; Org Mode Settings
+;; =================
+
+(setq org-log-done 'time)
+;; Add a note when closed
+(setq org-log-done 'note)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((js . t)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)))
+
+
+;; =====================
+;; Other Misc. Functions
+;; =====================
 
 (defun move-line-up ()
   "Move up the current line."
@@ -206,18 +229,3 @@
 (global-set-key [(meta shift up)] 'move-line-up)
 (global-set-key [(meta shift down)] 'move-line-down)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((js . t)))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)))
-
-
-;; Erlang
-(require 'erlang-mode)
