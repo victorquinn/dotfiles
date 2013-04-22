@@ -206,6 +206,11 @@
  'org-babel-load-languages
  '((sh . t)))
 
+(setq org-todo-keywords
+'((sequence "TODO" "IN PROGRESS" "DONE")))
+
+(setq org-todo-keyword-faces
+'(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE")))
 
 ;; =====================
 ;; Other Misc. Functions
