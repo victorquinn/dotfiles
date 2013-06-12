@@ -9,7 +9,7 @@ SAVEHIST=100000
 setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:/usr/local/share/npm/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/sclang:$PATH"
 
 # Emacs!
 export EDITOR="emacs"
@@ -119,7 +119,7 @@ compinit
 # aliases
 #alias ls='pwd; ls --color=auto'
 alias ls='ls -FG'
-#alias ack='ack-grep -a'
+#alias ack='ack-grep'
 alias git='hub'
 alias md='mkdir -p'
 alias rd='rmdir'

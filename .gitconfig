@@ -5,7 +5,7 @@
 #       email = mail@victorquinn.com # Personal
 
 [core]
-        editor = emacs
+        editor = nano
 	excludesfile = /Users/vquinn/.gitignore_global
 
 [color]
@@ -31,3 +31,20 @@
         ldiff = log --stat
         dw = diff --word-diff
         ru = remote update
+        standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday
+    
+[push]
+	default = matching
+# [difftool "Kaleidoscope"]
+# 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+# [diff]
+# 	tool = Kaleidoscope
+# [difftool]
+# 	prompt = false
+# [mergetool "Kaleidoscope"]
+# 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+# 	trustExitCode = true
+# [mergetool]
+# 	prompt = false
+# [merge]
+# 	tool = Kaleidoscope

@@ -184,6 +184,9 @@
 ;; JSON
 (require 'json-mode)
 
+;;
+(require 'handlebars-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(hbs\\|handlebars\\)$" . handlebars-mode))
 
 ;; =================
 ;; Org Mode Settings
@@ -207,10 +210,10 @@
  '((sh . t)))
 
 (setq org-todo-keywords
-'((sequence "TODO" "IN PROGRESS" "DONE")))
+'((sequence "TODO" "IN PROGRESS" "|" "DONE" "DEFERRED")))
 
 (setq org-todo-keyword-faces
-'(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE")))
+'(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE") ("DEFERRED" . "orange")))
 
 ;; =====================
 ;; Other Misc. Functions
@@ -234,3 +237,13 @@
 (global-set-key [(meta shift up)] 'move-line-up)
 (global-set-key [(meta shift down)] 'move-line-down)
 
+;; ================
+;; eshell Additions
+;; ================
+
+(setenv "PATH"
+  (concat
+   "/usr/local/bin" ":"
+   (getenv "PATH")
+  )
+)
