@@ -131,6 +131,10 @@
 ;; LESS CSS mode
 (require 'less-mode)
 
+;; Jade Mode
+(require 'sws-mode)
+(require 'jade-mode)
+
 ;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\)$" . yaml-mode))
@@ -166,8 +170,8 @@
 (ac-config-default)
 
 ;; Supercollider
-(add-to-list 'load-path "~/.emacs.d/scel/")
-(require 'sclang)
+;; (add-to-list 'load-path "~/.emacs.d/scel/")
+;; (require 'sclang)
 
 (custom-set-variables
 '(sclang-auto-scroll-post-buffer t)
