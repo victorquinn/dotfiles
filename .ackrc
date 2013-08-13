@@ -1,8 +1,7 @@
 --color
 
-# make sure ack knows how to search common filetypes used in node.js projects
+# Make ack Node friendly :)
 --ignore-dir=node_modules
 --type-set=coffee=.coffee
 --type-set=jade=.jade
---type-set=feature=.feature
 --type-set=json=.json
