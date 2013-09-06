@@ -76,13 +76,13 @@
                  "%b"))))
 
 ;; Mic-Paren - better paren matching
-(require 'mic-paren)
-(paren-activate)
+;; (require 'mic-paren)
+;; (paren-activate)
 
 
-(require 'color-theme-buffer-local)
-(add-hook 'term-mode
-          (lambda nil (color-theme-buffer-local 'color-theme-solarized (current-buffer))))
+;; (require 'color-theme-buffer-local)
+;; (add-hook 'term-mode
+;;           (lambda nil (color-theme-buffer-local 'color-theme-solarized (current-buffer))))
 
 ;; =====
 ;; Fonts
@@ -128,12 +128,13 @@
 ;; HAML
 (require 'haml-mode)
 
-;; LESS CSS mode
-(require 'less-mode)
-
-;; Jade Mode
+;; Jade mode
 (require 'sws-mode)
 (require 'jade-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(jade\\|jade\\)$" . jade-mode))
+
+;; LESS CSS mode
+(require 'less-mode)
 
 ;; YAML
 (require 'yaml-mode)
@@ -151,11 +152,12 @@
 
 ;; Require the new emacs package manager
 (require 'package)
-(package-initialize)
 
 ;; Add the marmalade alternate emacs package repo
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
+
+(package-initialize)
 
 ;; Load the wombat theme
 (load-theme 'wombat t)
@@ -170,8 +172,8 @@
 (ac-config-default)
 
 ;; Supercollider
-;; (add-to-list 'load-path "~/.emacs.d/scel/")
-;; (require 'sclang)
+(add-to-list 'load-path "~/.emacs.d/scel/")
+(require 'sclang)
 
 (custom-set-variables
 '(sclang-auto-scroll-post-buffer t)
