@@ -9,34 +9,52 @@ var fs = require('q-io/fs'),
 program
     .version('0.0.1')
     .option('-f, --force', 'Force overwriting all files')
+    .option('-r, --remove', 'Remove old files and directories instead of moving them')
     .parse(process.argv);
 
 var items = [
-    { type: 'file', path: '.ackrc' },
-    { type: 'file', path: '.emacs' },
-    { type: 'file', path: '.gitconfig' },
-    { type: 'file', path: '.tmux.conf' },
-    { type: 'file', path: '.zshrc' },
-    { type: 'directory', path: '.emacs.d' }
+    { type: 'file', name: '.ackrc' },
+    { type: 'file', name: '.emacs' },
+    { type: 'file', name: '.gitconfig' },
+    { type: 'file', name: '.tmux.conf' },
+    { type: 'file', name: '.zshrc' },
+    { type: 'directory', name: '.emacs.d' }
 ];
-  
-
 
 var promises = [], promise;
 
 var copy = function(options) {
     var force = options.force;
+    var remove = options.remove;
+    var backup_directory = 'backup.' + new Date().getTime();
 
     items.forEach(function(item) {
-        var filepath = path.join(process.env.HOME, item.path);
+        var filepath = path.join(process.env.HOME, item.name);
         // See if a file at this path already exists
         promise = fs.exists(filepath)
             .then(function(exists) {
-		if (exists) {
+                if (exists) {
                     return fs.statLink(filepath);
-		} else {
-		    return false;
-		}
+                } else {
+                    return false;
+                }
+            })
+            .then(function(stat) {
+                if (remove) {
+                    return stat;
+                } else if (force) {
+                    return fs.exists(path.join(process.env.HOME, backup_directory))
+                        .then(function(exists) {
+                            if (!exists) {
+                                fs.makeDirectory(path.join(process.env.HOME, backup_directory));
+                            } else {
+                                return;
+                            }
+                        })
+                        .then(function(){ return stat; });
+                } else {
+                    return stat;
+                }
             })
             .then(function(stat) {
                 if (typeof stat === 'undefined' || stat === false) {
@@ -45,14 +63,29 @@ var copy = function(options) {
 
                 // If it does, remove it
                 if (stat.isDirectory() && force) {
-                    console.log("Removing directory at " + filepath);
-                    return fs.removeTree(filepath);
+                    if (remove) {
+                        console.log("Deleting directory at " + filepath);
+                        return fs.removeTree(filepath);
+                    } else {
+                        console.log("Moving directory at " + filepath + " to backup location");
+                        return fs.move(filepath, path.join(backup_directory, item.name));
+                    }
                 } else if (stat.isSymbolicLink() && force) {
-                    console.log("Removing symlink at " + filepath);
-                    return fs.remove(filepath);
+                    if (remove) {
+                        console.log("Removing symlink at " + filepath);
+                        return fs.remove(filepath);
+                    } else {
+                        console.log("Moving symlink at " + filepath + " to backup location");
+                        return fs.move(filepath, path.join(backup_directory, item.name));
+                    }
                 } else if (stat.isFile() && force) {
-                    console.log("Removing file at " + filepath);
-                    return fs.remove(filepath);
+                    if (remove) {
+                        console.log("Removing file at " + filepath);
+                        return fs.remove(filepath);
+                    } else {
+                        console.log("Moving file at " + filepath + " to backup location");
+                        return fs.move(filepath, path.join(backup_directory, item.name));
+                    }
                 } else if (stat.isFile() || stat.isDirectory() || stat.isSymbolicLink()) {
                     throw new Error("File exists at " + filepath + " cannot overwrite. (try --force if desired)");
                 } else {
@@ -61,13 +94,13 @@ var copy = function(options) {
             })
             .then(function() {
                 // Then add the symlink
-                return fs.symbolicLink(filepath, path.join(__dirname, item.path), item.type);
+                return fs.symbolicLink(filepath, path.join(__dirname, item.name), item.type);
             })
             .then(function() {
                 console.log("Successfully added symlink to " + filepath);
             }).catch(function(err) {
-		console.log(err);
-	    });
+                console.log(err);
+            });
         
         promises.push(promise);
     });
@@ -92,12 +125,12 @@ if (program.force) {
     prompt.get(schema, function(err, result) {
         if (result.confirm.toLowerCase() === 'y') {
             console.log("Hold on to your butts...");
-            copy({force: true});
+            copy({force: true, remove: program.remove});
         } else {
             console.log("Aborting...");
         }
     });
 } else {
-    copy({force: false});
+    copy({force: false, remove: program.remove});
 }
 
