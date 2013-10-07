@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+var fs = require('q-io/fs'),
+    path = require('path'),
+    program = require('commander'),
+    prompt = require('prompt'),
+    Q = require('q');
+
+program
+    .version('0.0.1')
+    .option('-f, --force', 'Force overwriting all files')
+    .parse(process.argv);
+
+var items = [
+    { type: 'file', path: '.ackrc' },
+    { type: 'file', path: '.emacs' },
+    { type: 'file', path: '.gitconfig' },
+    { type: 'file', path: '.tmux.conf' },
+    { type: 'file', path: '.zshrc' },
+    { type: 'directory', path: '.emacs.d' }
+];
+  
+
+
+var promises = [], promise;
+
+var copy = function(options) {
+    var force = options.force;
+
+    items.forEach(function(item) {
+        var filepath = path.join(process.env.HOME, item.path);
+        // See if a file at this path already exists
+        promise = fs.exists(filepath)
+            .then(function(exists) {
+		if (exists) {
+                    return fs.statLink(filepath);
+		} else {
+		    return false;
+		}
+            })
+            .then(function(stat) {
+                if (typeof stat === 'undefined' || stat === false) {
+                    return;
+                }
+
+                // If it does, remove it
+                if (stat.isDirectory() && force) {
+                    console.log("Removing directory at " + filepath);
+                    return fs.removeTree(filepath);
+                } else if (stat.isSymbolicLink() && force) {
+                    console.log("Removing symlink at " + filepath);
+                    return fs.remove(filepath);
+                } else if (stat.isFile() && force) {
+                    console.log("Removing file at " + filepath);
+                    return fs.remove(filepath);
+                } else if (stat.isFile() || stat.isDirectory() || stat.isSymbolicLink()) {
+                    throw new Error("File exists at " + filepath + " cannot overwrite. (try --force if desired)");
+                } else {
+                    return;
+                }
+            })
+            .then(function() {
+                // Then add the symlink
+                return fs.symbolicLink(filepath, path.join(__dirname, item.path), item.type);
+            })
+            .then(function() {
+                console.log("Successfully added symlink to " + filepath);
+            }).catch(function(err) {
+		console.log(err);
+	    });
+        
+        promises.push(promise);
+    });
+
+    Q.all(promises).then(function() {
+        console.log("All symlinks have been created successfully and existing files or symlinks were overwritten.");
+    });
+};
+
+if (program.force) {
+    prompt.start();
+    var schema = {
+        properties: {
+            confirm: {
+                pattern: /^[yYnNaA]/,
+                description: 'Force enabled, this will delete all existing files. Are you sure you want to continue?',
+                message: 'Only y, n, or a are accepted (Yes, No, Abort)',
+                required: true
+            }
+        }
+    };
+    prompt.get(schema, function(err, result) {
+        if (result.confirm.toLowerCase() === 'y') {
+            console.log("Hold on to your butts...");
+            copy({force: true});
+        } else {
+            console.log("Aborting...");
+        }
+    });
+} else {
+    copy({force: false});
+}
+
