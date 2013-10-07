@@ -7,15 +7,11 @@ Since git will not allow you to clone directly into an existing directory (and o
 
     git clone git://github.com/victorquinn/dotfiles.git ~/dotfiles
 
-Then run the movefiles script to copy all dotfiles/directories into my home directory. Run:
+Then run the install script to symlink to  all dotfiles/directories into my home directory. Run:
 
-    . ~/dotfiles/movefiles.sh
+	cd ~/dotfiles
+    ./install
 
+You may see node errors if you don't have some of the node dependencies installed globally for this install script. To resolve them, run the following:
 
-Quasi-Dependencies (not really dependencies per se, but little utilities I use which should be installed to make this group of dotfiles work, consistently)
-
-Magit
-% brew install magit
-
-Pygmentize
-% easy_install Pygments
+	npm install -g q q-io commander prompt
