@@ -10,6 +10,8 @@ setopt appendhistory autocd
 
 # Ensure /usr/local/bin is first so Homebrew works.
 export PATH="/usr/local/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/sclang:$PATH"
+export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+
 
 # Emacs!
 export EDITOR="emacs"

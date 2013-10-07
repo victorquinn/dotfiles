@@ -1,8 +1,9 @@
 [user]
 	name = Victor Quinn
 #       email = vquinn@amherst.edu # Amherst College
-	email = vquinn@ngpvan.com
+#	email = vquinn@ngpvan.com # NGP VAN
 #       email = mail@victorquinn.com # Personal
+	email = victor@socialradar.com # SocialRadar
 
 [core]
         editor = nano
@@ -35,16 +36,3 @@
     
 [push]
 	default = matching
-# [difftool "Kaleidoscope"]
-# 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-# [diff]
-# 	tool = Kaleidoscope
-# [difftool]
-# 	prompt = false
-# [mergetool "Kaleidoscope"]
-# 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-# 	trustExitCode = true
-# [mergetool]
-# 	prompt = false
-# [merge]
-# 	tool = Kaleidoscope

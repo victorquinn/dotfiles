@@ -4,7 +4,6 @@
 
 
 ;; Include Paths
-(add-to-list 'load-path "~/.emacs-dir")
 (add-to-list 'load-path "~/.emacs.d/elpa")
 
 ;; default "history" length is just 32, apparently! Jeez.
@@ -45,7 +44,7 @@
 (global-set-key "\C-x\C-n" 'setnu-mode)
 
 ;; Add rainbow mode
-(load-library "~/.emacs-dir/rainbow-mode.el")
+;; (load-library "~/.emacs-dir/rainbow-mode.el")
 
 ;; Place all backup files in one directory.
 (setq backup-directory-alist
@@ -95,6 +94,15 @@
 ;; Modes and plugins
 ;; =================
 
+;; Require the new emacs package manager
+(require 'package)
+
+;; Add the marmalade alternate emacs package repo
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
+
+(package-initialize)
+
 ;; Javascript Mode
 ;; (autoload 'js2-mode "js2" nil t)
 
@@ -116,17 +124,17 @@
  '(setnu-line-number-face ((t (:inherit default))) t))
 
 ;; drupal-mode!
-(require 'drupal-mode)
-(add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\|inc\\)$" . drupal-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(php\\)$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
+;; (require 'drupal-mode)
+;; (add-to-list 'auto-mode-alist '("\\.\\(module\\|test\\|install\\|theme\\|inc\\)$" . drupal-mode))
+;; (add-to-list 'auto-mode-alist '("\\.\\(php\\)$" . php-mode))
+;; (add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 
 ;; Magit
-(require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
+;; (require 'magit)
+;; (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; HAML
-(require 'haml-mode)
+;; (require 'haml-mode)
 
 ;; Jade mode
 (require 'sws-mode)
@@ -134,11 +142,14 @@
 (add-to-list 'auto-mode-alist '("\\.\\(jade\\|jade\\)$" . jade-mode))
 
 ;; LESS CSS mode
-(require 'less-mode)
+(require 'less-css-mode)
 
 ;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\)$" . yaml-mode))
+
+;; Rainbow Delimiters mode
+(require 'rainbow-delimiters)
 
 ;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)
@@ -148,16 +159,7 @@
 (add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
 
 ;; node.js
-(require 'nodejs-mode)
-
-;; Require the new emacs package manager
-(require 'package)
-
-;; Add the marmalade alternate emacs package repo
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
-
-(package-initialize)
+(require 'nodejs-repl)
 
 ;; Load the wombat theme
 (load-theme 'wombat t)
@@ -172,20 +174,24 @@
 (ac-config-default)
 
 ;; Supercollider
-(add-to-list 'load-path "~/.emacs.d/scel/")
-(require 'sclang)
+;; (add-to-list 'load-path "~/.emacs.d/scel/")
+;; (require 'sclang)
 
-(custom-set-variables
-'(sclang-auto-scroll-post-buffer t)
-'(sclang-eval-line-forward nil)
-'(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
-'(sclang-runtime-directory "~/sclang/"))
+;; (custom-set-variables
+;; '(sclang-auto-scroll-post-buffer t)
+;; '(sclang-eval-line-forward nil)
+;; '(sclang-help-path (quote ("/Applications/SuperCollider/Help")))
+;; '(sclang-runtime-directory "~/sclang/"))
 
 ;; (require 'multi-mode)
 ;; (require 'mustache-mode)
 
 ;; Erlang
 ;;(require 'erlang-mode)
+
+;; DTRT mode, to match indent style
+;; (require 'dtrt-indent)
+;; (dtrt-indent-mode t)
 
 ;; JSON
 (require 'json-mode)
@@ -253,3 +259,16 @@
    (getenv "PATH")
   )
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
+ '(display-time-mode t)
+ '(indent-tabs-mode t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
