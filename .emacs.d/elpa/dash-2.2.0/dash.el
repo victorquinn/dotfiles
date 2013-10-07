@@ -3,7 +3,7 @@
 ;; Copyright (C) 2012 Magnar Sveen
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
-;; Version: 2.1.0
+;; Version: 2.2.0
 ;; Keywords: lists
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -709,9 +709,8 @@ element ELEM, in ascending order."
   (-find-indices (-partial 'equal elem) list))
 
 (defun -find-indices (pred list)
-  "Take a predicate PRED and a LIST and return the index of the
-first element in the list satisfying the predicate, or nil if
-there is no such element."
+  "Return the indices of all elements in LIST satisfying the
+predicate PRED, in ascending order."
   (let ((i 0))
     (apply 'append (--map-indexed (when (funcall pred it) (list it-index)) list))))
 
@@ -720,8 +719,9 @@ there is no such element."
   `(-find-indices (lambda (it) ,form) ,list))
 
 (defun -find-index (pred list)
-  "Return the indices of all elements in LIST satisfying the
-predicate PRED, in ascending order."
+  "Take a predicate PRED and a LIST and return the index of the
+first element in the list satisfying the predicate, or nil if
+there is no such element."
   (car (-find-indices pred list)))
 
 (defmacro --find-index (form list)

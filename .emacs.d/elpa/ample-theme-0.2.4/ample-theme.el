@@ -1,13 +1,13 @@
-;;; ample-theme.el --- Calm Dark Theme for Emacs
+;;; ample-theme.el --- Calm Dark Theme for Emacs 
 ;;
 ;; Filename: ample-theme.el
 ;; Description: Calm Dark Theme for Emacs
 ;; Author: Jordon Biondo <biondoj@mail.gvsu.edu>
 ;; Created: Wed Jul 24 01:04:58 2013 (-0400)
-;; Version: 0.2.3
-;; Last-Updated: Thu Sep 19 00:18:46 2013 (-0400)
+;; Version: 0.2.4
+;; Last-Updated: Sun Sep 29 17:01:14 2013 (-0400)
 ;;           By: Jordon Biondo
-;;     Update #: 8
+;;     Update #: 12
 ;; URL: https://github.com/jordonbiondo/ample-theme
 ;; Keywords: theme, dark
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,13 +82,17 @@
    `(font-lock-variable-name-face ((t (:foreground ,ample/yellow))))
    `(font-lock-doc-face ((t (:foreground ,ample/dark-tan))))
    
-   `(mode-line ((t (:background "#454545"))))
+   `(mode-line-inactive ((t (:background "#454545" :foreground "cornsilk4"))))
+   `(mode-line ((t (:background "cornsilk4" :foreground "#454545"))))
    
+   `(vertical-border ((t (:background "#454545" :foreground "#454545"))))
+
    `(hl-line ((t (:background "#1f1f1f"))))
-   `(mode-line-inactive ((t (:background "cornsilk4"))))
    
-   `(powerline-inactive1 ((t (:foreground "gray50"))))
-   `(powerline-active1 ((t (:foreground "gray50"))))
+   ;; `(powerline-inactive1 ((t (:foreground "gray50" :background "gray20"))))
+   ;; `(powerline-active1 ((t (:foreground "gray50" :background "gray20"))))
+   ;; `(powerline-inactive2 ((t (:foreground "gray50" :background "gray20"))))
+   ;; `(powerline-active2 ((t (:foreground "gray50" :background "gray20"))))
    
    `(minibuffer-prompt ((t (:foreground ,ample/bright-yellow :bold t))))
    
@@ -115,7 +119,7 @@
    `(magit-log-sha1 ((t (:foreground ,ample/purple))))
    `(magit-item-highlight ((t (:foreground nil :background "#162433"))))
    
-   
+
    ;; error
    `(error ((t (:foreground "red"))))
    
