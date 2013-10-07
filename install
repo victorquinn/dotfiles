@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// This is way more sophisticated than it needs to be...
+// But it was fun to build, huzzah! VQ 10/6/2013
+
 var fs = require('q-io/fs'),
     path = require('path'),
     program = require('commander'),
