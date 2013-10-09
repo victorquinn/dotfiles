@@ -1,0 +1,10 @@
+{
+  "name": "victorquinn-dotfiles-install",
+  "private": true,
+  "dependencies": {
+    "commander": "~2.0.0",
+    "q": "~0.9.7",
+    "q-io": "~1.10.1",
+    "prompt": "~0.2.11"
+  }
+}

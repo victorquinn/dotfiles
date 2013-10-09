@@ -2,3 +2,4 @@
 .emacs.d/url/cookies
 .emacs.d/auto-save-list/*
 .emacs.d/tramp
+node_modules/
