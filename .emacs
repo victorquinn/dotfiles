@@ -101,6 +101,10 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
 
+;; Add milkbox
+(add-to-list 'package-archives
+             '("milkbox" . "http://melpa.milkbox.net/" ) t)
+
 (package-initialize)
 
 ;; Javascript Mode
@@ -269,6 +273,5 @@
    (quote
     ("5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
  '(display-time-mode t)
- '(indent-tabs-mode t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
