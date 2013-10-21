@@ -21,7 +21,8 @@ var items = [
     { type: 'file', name: '.gitconfig' },
     { type: 'file', name: '.tmux.conf' },
     { type: 'file', name: '.zshrc' },
-    { type: 'directory', name: '.emacs.d' }
+    { type: 'directory', name: '.emacs.d' },
+    { type: 'directory', name: '.oh-my-zsh' }
 ];
 
 var promises = [], promise;
