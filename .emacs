@@ -4,7 +4,10 @@
 
 
 ;; Include Paths
+;; Load elpa packages
 (add-to-list 'load-path "~/.emacs.d/elpa")
+;; Load miscellaneous (non-package-manager) .el files
+(add-to-list 'load-path "~/.emacs.d/misc")
 
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
@@ -210,6 +213,10 @@
 (global-set-key (kbd "M-x") 'smex)
 ;; Bind classic 'M-x' to 'C-c C-c M-x'
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; Litable mode
+(load "litable")
+(add-to-list 'auto-mode-alist '("\\.\\(el\\)$" . litable-mode))
 
 ;; =================
 ;; Org Mode Settings
