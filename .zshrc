@@ -3,6 +3,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Include local.zsh file for local configurations
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh
 
@@ -210,3 +213,5 @@ export PHP_VERSIONS=/usr/local/Cellar/php53
 #export PHP_VERSIONS=$(dirname $(brew --prefix php54))
 #source $(brew --prefix php-version)/php-version.sh && php-version 5.x.x >/dev/null
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

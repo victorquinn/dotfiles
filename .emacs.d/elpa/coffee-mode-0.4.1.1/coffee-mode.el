@@ -1,8 +1,8 @@
 ;;; coffee-mode.el --- Major mode for CoffeeScript files
 
-;; Copyright (C) 2010-2012 Free Software Foundation, Inc.
+;; Copyright (C) 2010-2013 Free Software Foundation, Inc.
 
-;; Version: 0.4.1
+;; Version: 0.4.1.1
 ;; Keywords: CoffeeScript major mode
 ;; Author: Chris Wanstrath <chris@ozmm.org>
 ;; URL: http://github.com/defunkt/coffee-mode
@@ -155,8 +155,22 @@ with CoffeeScript."
   :type 'hook
   :group 'coffee)
 
-(defvar coffee-mode-map (make-keymap)
+(defvar coffee-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "A-r") 'coffee-compile-buffer)
+    (define-key map (kbd "A-R") 'coffee-compile-region)
+    (define-key map (kbd "A-M-r") 'coffee-repl)
+    (define-key map "\C-m" 'coffee-newline-and-indent)
+    (define-key map "\C-c\C-o\C-s" 'coffee-cos-mode)
+    map)
   "Keymap for CoffeeScript major mode.")
+
+(defvar coffee-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?# "< b" st)
+    (modify-syntax-entry ?\n "> b" st)
+    (modify-syntax-entry ?' "\"" st)
+    st))
 
 ;;
 ;; Commands
@@ -328,14 +342,6 @@ called `coffee-compiled-buffer-name'."
 ;; Helper Functions
 ;;
 
-(defun coffee-comment-dwim (arg)
-  "Comment or uncomment current line or region in a smart way.
-For details, see `comment-dwim'."
-  (interactive "*P")
-  (require 'newcomment)
-  (let ((deactivate-mark nil) (comment-start "#") (comment-end ""))
-    (comment-dwim arg)))
-
 (defun coffee-command-compile (file-name)
   "Run `coffee-command' to compile FILE."
   (let ((full-file-name (expand-file-name file-name)))
@@ -345,8 +351,9 @@ For details, see `comment-dwim'."
   "Run `coffee-command' with the given arguments, and display the
 output in a compilation buffer."
   (interactive "sArguments: ")
-  (let ((compilation-buffer-name-function (lambda (this-mode)
-                                            (generate-new-buffer-name coffee-compiled-buffer-name))))
+  (let ((compilation-buffer-name-function
+         (lambda (_this-mode)
+           (generate-new-buffer-name coffee-compiled-buffer-name))))
     (compile (concat coffee-command " " args))))
 
 ;;
@@ -464,8 +471,7 @@ output in a compilation buffer."
   (if (= (point) (point-at-bol))
       (insert-tab)
     (save-excursion
-      (let ((prev-indent (coffee-previous-indent))
-            (cur-indent (current-indentation)))
+      (let ((prev-indent (coffee-previous-indent)))
         ;; Shift one column to the left
         (beginning-of-line)
         (insert-tab)
@@ -495,7 +501,7 @@ output in a compilation buffer."
   ;; Remember the current line indentation level,
   ;; insert a newline, and indent the newline to the same
   ;; level as the previous line.
-  (let ((prev-indent (current-indentation)) (indent-next nil))
+  (let ((prev-indent (current-indentation)))
     (delete-horizontal-space t)
     (newline)
     (insert-tab (/ prev-indent coffee-tab-width))
@@ -576,35 +582,26 @@ previous line."
 ;; Define Major Mode
 ;;
 
+(unless (fboundp 'prog-mode) (defalias 'prog-mode 'fundamental-mode))
+
+(defvar electric-indent-inhibit)
+
 ;;;###autoload
-(define-derived-mode coffee-mode fundamental-mode
+(define-derived-mode coffee-mode prog-mode
   "Coffee"
   "Major mode for editing CoffeeScript."
-
-  ;; key bindings
-  (define-key coffee-mode-map (kbd "A-r") 'coffee-compile-buffer)
-  (define-key coffee-mode-map (kbd "A-R") 'coffee-compile-region)
-  (define-key coffee-mode-map (kbd "A-M-r") 'coffee-repl)
-  (define-key coffee-mode-map [remap comment-dwim] 'coffee-comment-dwim)
-  (define-key coffee-mode-map "\C-m" 'coffee-newline-and-indent)
-  (define-key coffee-mode-map "\C-c\C-o\C-s" 'coffee-cos-mode)
 
   ;; code for syntax highlighting
   (setq font-lock-defaults '((coffee-font-lock-keywords)))
 
   ;; perl style comment: "# ..."
-  (modify-syntax-entry ?# "< b" coffee-mode-syntax-table)
-  (modify-syntax-entry ?\n "> b" coffee-mode-syntax-table)
-  (make-local-variable 'comment-start)
-  (setq comment-start "#")
+  (set (make-local-variable 'comment-start) "#")
 
-  ;; single quote strings
-  (modify-syntax-entry ?' "\"" coffee-mode-syntax-table)
-
-  ;; indentation
-  (make-local-variable 'indent-line-function)
-  (setq indent-line-function 'coffee-indent-line)
+  ;; Indentation.
+  (set (make-local-variable 'indent-line-function) 'coffee-indent-line)
   (set (make-local-variable 'tab-width) coffee-tab-width)
+  ;; Because indentation is not redundant, we cannot safely reindent code.
+  (setq-local electric-indent-inhibit t)
 
   ;; imenu
   (make-local-variable 'imenu-create-index-function)
@@ -629,8 +626,26 @@ previous line."
    (t
     (remove-hook 'after-save-hook 'coffee-compile-file t))))
 
+;;
+;; On Load
+;;
+
+;; Run coffee-mode for files ending in .coffee.
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
+;;;###autoload
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
 ;;;; ChangeLog:
 
+;; 2013-10-07  Stefan Monnier  <monnier@iro.umontreal.ca>
+;; 
+;; 	* coffee-mode.el: Tame electric-indent-mode.
+;; 	(coffee-mode): Derive from prog-mode.  Set electric-indent-inhibit.
+;; 	(coffee-mode-map, coffee-mode-syntax-table): Move initialization into 
+;; 	declaration.
+;; 	(coffee-comment-dwim): Remove.
+;; 
 ;; 2013-08-22  Stefan Monnier  <monnier@iro.umontreal.ca>
 ;; 
 ;; 	Only keep the strictly necessary *-pkg.el files
@@ -654,14 +669,4 @@ previous line."
 
 
 (provide 'coffee-mode)
-
-;;
-;; On Load
-;;
-
-;; Run coffee-mode for files ending in .coffee.
-;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-;;;###autoload
-(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 ;;; coffee-mode.el ends here

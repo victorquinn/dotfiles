@@ -204,6 +204,13 @@
 (require 'handlebars-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(hbs\\|handlebars\\)$" . handlebars-mode))
 
+;; Load Smex for 'M-x' autocomplete
+(smex-initialize)
+;; Rebind 'M-x' to smex
+(global-set-key (kbd "M-x") 'smex)
+;; Bind classic 'M-x' to 'C-c C-c M-x'
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 ;; =================
 ;; Org Mode Settings
 ;; =================
