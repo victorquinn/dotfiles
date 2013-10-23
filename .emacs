@@ -12,10 +12,7 @@
 ;; default "history" length is just 32, apparently! Jeez.
 (setq comint-input-ring-size 65536)
 
-;; Turn off stupid auto-save mode. Good idea, but lags the program to hell constantly.
-(setq auto-save-default nil)
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+;; Inhibit startup message
 (setq inhibit-startup-message t)
 
 ;; Turn off tabs
@@ -50,10 +47,14 @@
 ;; (load-library "~/.emacs-dir/rainbow-mode.el")
 
 ;; Place all backup files in one directory.
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+      kept-new-versions 10
+      kept-old-versions 2
+      version-control t)
+(setq make-backup-files t)
+(setq auto-save-default t)
 
 ;; Purge backup files more than a week old.
 (message "Deleting old backup files...")
@@ -106,7 +107,7 @@
 
 ;; Add milkbox
 (add-to-list 'package-archives
-             '("milkbox" . "http://melpa.milkbox.net/" ) t)
+             '("milkbox" . "http://melpa.milkbox.net/packages/" ) t)
 
 (package-initialize)
 
@@ -217,6 +218,17 @@
 ;; Litable mode
 (load "litable")
 (add-to-list 'auto-mode-alist '("\\.\\(el\\)$" . litable-mode))
+
+;; Project Explorer
+;; (load "project-explorer")
+
+;; Multiple Cursor mode
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; =================
 ;; Org Mode Settings
