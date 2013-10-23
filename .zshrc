@@ -42,7 +42,7 @@ URLTOOLS_METHOD="xnode"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(battery brew colored-man colorize extract git git-extras gitfast git jira node npm urltools)
+plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast jira node npm urltools)
 
 source $ZSH/oh-my-zsh.sh
 
