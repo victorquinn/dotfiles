@@ -2,4 +2,6 @@
 .emacs.d/url/cookies
 .emacs.d/auto-save-list/*
 .emacs.d/tramp
+.emacs.d/eshell/history
+.emacs.d/eshell/lastdir
 node_modules/
