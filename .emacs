@@ -68,7 +68,7 @@
       (delete-file file))))
 
 ;; Lose the toolbars
-;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
@@ -78,14 +78,19 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
+
+(setq show-trailing-whitespace t)
+
 ;; Mic-Paren - better paren matching
-;; (require 'mic-paren)
-;; (paren-activate)
+(require 'mic-paren)
+(paren-activate)
 
 
-;; (require 'color-theme-buffer-local)
-;; (add-hook 'term-mode
-;;           (lambda nil (color-theme-buffer-local 'color-theme-solarized (current-buffer))))
+(require 'color-theme-buffer-local)
+(add-hook 'eshell-mode-hook
+          (lambda nil (color-theme-buffer-local 'color-theme-solarized-dark (current-buffer))))
+
+(global-set-key [f1] 'eshell)
 
 ;; =====
 ;; Fonts
@@ -138,8 +143,8 @@
 ;; (add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 
 ;; Magit
-;; (require 'magit)
-;; (global-set-key (kbd "C-x g") 'magit-status)
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; HAML
 ;; (require 'haml-mode)
@@ -238,6 +243,8 @@
 (autoload 'dash-at-point "dash-at-point"
           "Search the word at point with Dash." t nil)
 (global-set-key "\C-cd" 'dash-at-point)
+(add-to-list 'dash-at-point-mode-alist '((js-mode . "nodejs") (js-mode . "js")))
+
 
 ;; =================
 ;; Org Mode Settings

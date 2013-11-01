@@ -47,4 +47,4 @@ plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfa
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448@global/bin:/Users/victorquinn/.rvm/rubies/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/sbin:/Users/victorquinn/sclang:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/victorquinn/.rvm/bin
+export PATH=$PATH:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448@global/bin:/Users/victorquinn/.rvm/rubies/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/sbin:/Users/victorquinn/sclang:/usr/bin:/bin:/usr/sbin:/sbin:/Users/victorquinn/.rvm/bin
