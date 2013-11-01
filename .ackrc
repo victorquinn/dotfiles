@@ -2,6 +2,9 @@
 
 # Make ack Node friendly :)
 --ignore-dir=node_modules
+--ignore-dir=.npm
+--ignore-dir=.node-gyp
+
 --type-set=coffee=.coffee
 --type-set=jade=.jade
 --type-set=json=.json
