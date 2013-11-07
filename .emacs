@@ -47,14 +47,14 @@
 ;; (load-library "~/.emacs-dir/rainbow-mode.el")
 
 ;; Place all backup files in one directory.
-(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-directory-alist `((".*" . "~/.saves")))
+(setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
 (setq backup-by-copying t)
 (setq delete-old-versions t
       kept-new-versions 10
       kept-old-versions 2
       version-control t)
 (setq make-backup-files t)
-(setq auto-save-default t)
 
 ;; Purge backup files more than a week old.
 (message "Deleting old backup files...")
@@ -82,13 +82,13 @@
 (setq show-trailing-whitespace t)
 
 ;; Mic-Paren - better paren matching
-(require 'mic-paren)
-(paren-activate)
+;; (require 'mic-paren)
+;; (paren-activate)
 
 
-(require 'color-theme-buffer-local)
-(add-hook 'eshell-mode-hook
-          (lambda nil (color-theme-buffer-local 'color-theme-solarized-dark (current-buffer))))
+;; (require 'color-theme-buffer-local)
+;; (add-hook 'eshell-mode-hook
+;;           (lambda nil (color-theme-buffer-local 'color-theme-solarized-dark (current-buffer))))
 
 (global-set-key [f1] 'eshell)
 
@@ -117,18 +117,19 @@
 (package-initialize)
 
 ;; Javascript Mode
-;; (autoload 'js2-mode "js2" nil t)
+(autoload 'js2-mode "js2" nil t)
+(js2r-add-keybindings-with-prefix "C-c C-m")
 
 ;; Now defaulting to js-mode rather than js2-mode because js2-mode was too strict
 ;; and often buggy for me.
-(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
-;; (custom-set-variables
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;;  '(js2-basic-offset 4)
-;;  '(js2-highlight-level 3))
+ '(js2-basic-offset 4)
+ '(js2-highlight-level 3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -143,8 +144,8 @@
 ;; (add-to-list 'auto-mode-alist '("\\.info" . conf-windows-mode))
 
 ;; Magit
-(require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
+;; (require 'magit)
+;; (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; HAML
 ;; (require 'haml-mode)
@@ -178,7 +179,7 @@
 (load-theme 'wombat t)
 
 ;; Add key binding for anything
-(global-set-key (kbd "C-x b") 'anything)
+(global-set-key (kbd "C-x b") 'helm-mini)
 
 ;; Autocomplete
 (require 'popup)
