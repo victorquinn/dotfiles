@@ -7,7 +7,8 @@
 
 [core]
         editor = nano
-	excludesfile = /Users/vquinn/.gitignore_global
+	excludesfile = /Users/victorquinn/.gitignore
+        pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
 
 [color]
         branch = auto
@@ -18,6 +19,7 @@
 
 [alias]
         cavm = commit -avm
+        a = add -p
         st = status
         pr = pull --rebase
         br = branch
