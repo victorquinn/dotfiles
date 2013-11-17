@@ -3,9 +3,13 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        indent-for-tab-command
         kill-region
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        find-file
+        handle-switch-frame
+        markdown-dedent-or-delete
         ))

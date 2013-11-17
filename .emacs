@@ -81,6 +81,8 @@
 
 (setq show-trailing-whitespace t)
 
+(setq tab-width 4)
+
 ;; Mic-Paren - better paren matching
 ;; (require 'mic-paren)
 ;; (paren-activate)
