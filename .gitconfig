@@ -35,7 +35,8 @@
         dw = diff --word-diff
         ru = remote update
         standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday
-        today= log --since=midnight --author='Victor Quinn' --oneline
+	today = !git log --since=midnight --author=\"$(git config user.name)\" --oneline
+	yesterday = !git log --graph --all --since=\"yesterday.midnight\" --until=\"midnight\" --author=\"$(git config user.name)\" --oneline
     
 [push]
 	default = matching
