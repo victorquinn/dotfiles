@@ -35,6 +35,7 @@
         dw = diff --word-diff
         ru = remote update
         standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday
+        today= log --since=midnight --author='Victor Quinn' --oneline
     
 [push]
 	default = matching

@@ -67,6 +67,9 @@
       (message file)
       (delete-file file))))
 
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+
 ;; Lose the toolbars
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -98,7 +101,8 @@
 ;; Fonts
 ;; =====
 
-(set-face-attribute 'default nil :font "Menlo")
+;; (set-face-attribute 'default nil :font "Menlo")
+(set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
 
 
 ;; =================
@@ -180,8 +184,9 @@
 ;; Load the wombat theme
 (load-theme 'wombat t)
 
-;; Add key binding for anything
+;; Add key bindings for helm
 (global-set-key (kbd "C-x b") 'helm-mini)
+
 
 ;; Autocomplete
 (require 'popup)
@@ -248,6 +253,10 @@
 (global-set-key "\C-cd" 'dash-at-point)
 (add-to-list 'dash-at-point-mode-alist '((js-mode . "nodejs") (js-mode . "js")))
 
+(require 'uniquify)
+(setq
+  uniquify-buffer-name-style 'post-forward
+  uniquify-separator ":")
 
 ;; =================
 ;; Org Mode Settings
@@ -320,3 +329,4 @@
  '(display-time-mode t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
+(put 'upcase-region 'disabled nil)
