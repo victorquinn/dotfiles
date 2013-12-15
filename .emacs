@@ -101,8 +101,8 @@
 ;; Fonts
 ;; =====
 
-;; (set-face-attribute 'default nil :font "Menlo")
-(set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
+(set-face-attribute 'default nil :font "Menlo" :height 120)
+;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
 
 
 ;; =================
@@ -134,8 +134,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
+ '(display-time-mode t)
  '(js2-basic-offset 4)
- '(js2-highlight-level 3))
+ '(js2-highlight-level 3)
+ '(js2-include-node-externs t)
+ '(js2-indent-switch-body t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -258,6 +267,18 @@
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 
+(require 'js-comint)
+(setq inferior-js-program-command "node")
+(setenv "NODE_NO_READLINE" "1")
+;; not "node-repl"
+;; Use your favorited js mode here:
+(add-hook 'js2-mode-hook '(lambda ()
+  (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+  (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+  (local-set-key "\C-cb" 'js-send-buffer)
+  (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+  (local-set-key "\C-cl" 'js-load-file-and-go)))
+
 ;; =================
 ;; Org Mode Settings
 ;; =================
@@ -311,22 +332,6 @@
 ;; eshell Additions
 ;; ================
 
-(setenv "PATH"
-  (concat
-   "/usr/local/bin" ":"
-   (getenv "PATH")
-  )
-)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(custom-safe-themes
-   (quote
-    ("5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
- '(display-time-mode t)
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+(setenv "PATH" (concat "/usr/local/bin" ":" (getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
 (put 'upcase-region 'disabled nil)

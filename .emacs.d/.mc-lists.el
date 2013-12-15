@@ -11,5 +11,6 @@
       '(
         find-file
         handle-switch-frame
+        js2-mode-show-node
         markdown-dedent-or-delete
         ))
