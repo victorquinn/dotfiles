@@ -40,3 +40,6 @@
     
 [push]
 	default = matching
+
+[oh-my-zsh]
+        hide-status = 1       
