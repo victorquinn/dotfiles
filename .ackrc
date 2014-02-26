@@ -8,3 +8,6 @@
 --type-set=coffee=.coffee
 --type-set=jade=.jade
 --type-set=json=.json
+
+# Show some context around each item
+--context=3

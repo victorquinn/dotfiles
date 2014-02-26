@@ -160,7 +160,7 @@
 
 ;; Magit
 ;; (require 'magit)
-;; (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; HAML
 ;; (require 'haml-mode)
@@ -278,6 +278,20 @@
   (local-set-key "\C-cb" 'js-send-buffer)
   (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
   (local-set-key "\C-cl" 'js-load-file-and-go)))
+
+
+;; Git gutter fixes for OS X
+;; Fix spacing on added/deleted characters
+(setq git-gutter:added-sign "+ ")
+(setq git-gutter:deleted-sign "- ")
+(setq git-gutter:modified-sign "= ")
+
+;; Set update threshold so as not to impact performance
+(setq git-gutter:update-threshold 2)
+(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
+
+;; Turn git gutter on globally
+(global-git-gutter-mode +1)
 
 ;; =================
 ;; Org Mode Settings
