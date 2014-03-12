@@ -46,5 +46,9 @@ plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfa
 
 source $ZSH/oh-my-zsh.sh
 
+export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
+
 # Customize to your needs...
-export PATH=$PATH:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/gems/ruby-1.9.3-p448@global/bin:/Users/victorquinn/.rvm/rubies/ruby-1.9.3-p448/bin:/Users/victorquinn/.rvm/bin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/sbin:/Users/victorquinn/sclang:/usr/bin:/bin:/usr/sbin:/sbin:/Users/victorquinn/.rvm/bin
+export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/sclang:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_HOME/platform-tools:${GOPATH//://bin:}/bin
+
+export GOPATH=$HOME/Development/golang
