@@ -37,9 +37,13 @@
         standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday
 	today = !git log --since=midnight --author=\"$(git config user.name)\" --oneline
 	yesterday = !git log --graph --all --since=\"yesterday.midnight\" --until=\"midnight\" --author=\"$(git config user.name)\" --oneline
+        up = !git remote update -p; git merge --ff-only @{u}
     
 [push]
 	default = matching
 
 [oh-my-zsh]
-        hide-status = 1       
+        hide-status = 1
+
+[pull]
+	rebase = true
