@@ -101,7 +101,8 @@
 ;; Fonts
 ;; =====
 
-(set-face-attribute 'default nil :font "Menlo" :height 120)
+;; (set-face-attribute 'default nil :font "Menlo" :height 120)
+(set-face-attribute 'default nil :font "Inconsolata" :height 140)
 ;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
 
 
