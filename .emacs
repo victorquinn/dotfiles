@@ -46,6 +46,9 @@
 ;; Add rainbow mode
 ;; (load-library "~/.emacs-dir/rainbow-mode.el")
 
+;; More pretty on Mac
+(setq ns-use-srgb-colorspace t)
+
 ;; Place all backup files in one directory.
 (setq backup-directory-alist `((".*" . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" "~/.saves" t)))

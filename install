@@ -17,12 +17,12 @@ program
 
 var items = [
     { type: 'file', name: '.ackrc' },
+    { type: 'file', name: '.brew' },
     { type: 'file', name: '.emacs' },
     { type: 'file', name: '.gitconfig' },
     { type: 'file', name: '.tmux.conf' },
     { type: 'file', name: '.zshrc' },
-    { type: 'directory', name: '.emacs.d' },
-    { type: 'directory', name: '.oh-my-zsh' }
+    { type: 'directory', name: '.emacs.d' }
 ];
 
 var promises = [], promise;

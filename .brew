@@ -1,0 +1,40 @@
+#!/bin/bash
+
+brew install --use-git-head --cocoa --srgb emacs
+brew install git
+brew install node
+brew install jq
+brew install python
+brew install ruby
+brew install zsh
+
+brew linkapps
+
+brew cask install arq
+brew cask install dropbox
+brew cask install gpgtools
+brew cask install heroku-toolbelt
+brew cask install hipchat
+brew cask install ios7-screensaver
+brew cask install iterm2
+brew cask install java
+brew cask install kaleidoscope
+brew cask install kindle
+brew cask install paw
+brew cask install pcalc
+brew cask install qlcolorcode
+brew cask install qlimagesize
+brew cask install qlmarkdown
+brew cask install qlprettypatch
+brew cask install qlrest
+brew cask install qlstephen
+brew cask install quicklook-csv
+brew cask install rdio
+brew cask install robomongo
+brew cask install sequel-pro
+brew cask install truecrypt
+brew cask install vagrant
+brew cask install virtualbox
+brew cask install wasted
+
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh

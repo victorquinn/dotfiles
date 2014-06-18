@@ -54,3 +54,6 @@ export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/sclang:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_HOME/platform-tools:${GOPATH//://bin:}/bin
 
 export GOPATH=$HOME/Development/golang
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
