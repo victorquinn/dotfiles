@@ -6,7 +6,7 @@
 	email = victor@socialradar.com # SocialRadar
 
 [core]
-        editor = nano
+        editor = emacs
 	excludesfile = /Users/victorquinn/.gitignore
         pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
 

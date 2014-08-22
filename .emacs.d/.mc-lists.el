@@ -3,8 +3,11 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        helm-mini
         indent-for-tab-command
         kill-region
+        sgml-slash
+        smex
         ))
 
 (setq mc/cmds-to-run-once
@@ -13,4 +16,5 @@
         handle-switch-frame
         js2-mode-show-node
         markdown-dedent-or-delete
+        mouse-set-region
         ))

@@ -38,3 +38,9 @@ brew cask install virtualbox
 brew cask install wasted
 
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+npm install -g mocha
+npm install -g gulp
+npm install -g grunt
+npm install -g phantomjs
+
