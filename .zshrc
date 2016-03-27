@@ -7,7 +7,11 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 
 # ZSH_THEME="pygmalion"
-ZSH_THEME="agnoster"
+if [ -n "$INSIDE_EMACS" ]; then
+    export ZSH_THEME="rawsyntax"
+else
+    export ZSH_THEME="agnoster"
+fi
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -44,7 +48,7 @@ URLTOOLS_METHOD="xnode"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast jira node npm urltools)
+plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast jira node npm urltools zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -57,3 +61,6 @@ export GOPATH=$HOME/Development/golang
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+[ -f /Users/victor/.travis/travis.sh ] && source /Users/victor/.travis/travis.sh

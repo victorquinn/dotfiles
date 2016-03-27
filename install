@@ -3,14 +3,16 @@
 // This is way more sophisticated than it needs to be...
 // But it was fun to build, huzzah! VQ 10/6/2013
 
-var fs = require('q-io/fs'),
+var Promise = require('bluebird'),
+    fs = Promise.promisifyAll(require('fs')),
     path = require('path'),
     program = require('commander'),
-    prompt = require('prompt'),
-    Q = require('q');
+    prompt = require('prompt');
+
+Promise.longStackTraces();
 
 program
-    .version('0.0.1')
+    .version('0.0.2')
     .option('-f, --force', 'Force overwriting all files')
     .option('-r, --remove', 'Remove old files and directories instead of moving them')
     .parse(process.argv);
@@ -25,93 +27,89 @@ var items = [
     { type: 'directory', name: '.emacs.d' }
 ];
 
-var promises = [], promise;
-
 var copy = function(options) {
     var force = options.force;
     var remove = options.remove;
     var backup_directory = 'backup.' + new Date().getTime();
 
-    items.forEach(function(item) {
+    return Promise.map(items, function(item) {
         var filepath = path.join(process.env.HOME, item.name);
+        console.log("filepath: %s", filepath);
         // See if a file at this path already exists
-        promise = fs.exists(filepath)
+        return fs.existsAsync(filepath)
             .then(function(exists) {
-                if (exists) {
-                    return fs.statLink(filepath);
-                } else {
-                    return false;
-                }
+                return fs.statLinkAsync(filepath);
+            })
+            .catch(function(err) {
+                return false;
             })
             .then(function(stat) {
                 if (remove) {
                     return stat;
                 } else if (force) {
-                    return fs.exists(path.join(process.env.HOME, backup_directory))
+                    return fs.existsAsync(path.join(process.env.HOME, backup_directory))
                         .then(function(exists) {
                             if (!exists) {
-                                fs.makeDirectory(path.join(process.env.HOME, backup_directory));
+                                return fs.makeDirectoryAsync(path.join(process.env.HOME, backup_directory));
                             } else {
-                                return;
+                                return Promise.resolve();
                             }
                         })
-                        .then(function(){ return stat; });
+                        .return(stat);
                 } else {
                     return stat;
                 }
             })
             .then(function(stat) {
                 if (typeof stat === 'undefined' || stat === false) {
-                    return;
+                    return null;
                 }
 
                 // If it does, remove it
                 if (stat.isDirectory() && force) {
                     if (remove) {
                         console.log("Deleting directory at " + filepath);
-                        return fs.removeTree(filepath);
+                        return fs.removeTreeAsync(filepath);
                     } else {
                         console.log("Moving directory at " + filepath + " to backup location");
-                        return fs.move(filepath, path.join(backup_directory, item.name));
+                        return fs.moveAsync(filepath, path.join(backup_directory, item.name));
                     }
                 } else if (stat.isSymbolicLink() && force) {
                     if (remove) {
                         console.log("Removing symlink at " + filepath);
-                        return fs.remove(filepath);
+                        return fs.removeAsync(filepath);
                     } else {
                         console.log("Moving symlink at " + filepath + " to backup location");
-                        return fs.move(filepath, path.join(backup_directory, item.name));
+                        return fs.moveAsync(filepath, path.join(backup_directory, item.name));
                     }
                 } else if (stat.isFile() && force) {
                     if (remove) {
                         console.log("Removing file at " + filepath);
-                        return fs.remove(filepath);
+                        return fs.removeAsync(filepath);
                     } else {
                         console.log("Moving file at " + filepath + " to backup location");
-                        return fs.move(filepath, path.join(backup_directory, item.name));
+                        return fs.moveAsync(filepath, path.join(backup_directory, item.name));
                     }
                 } else if (stat.isFile() || stat.isDirectory() || stat.isSymbolicLink()) {
                     throw new Error("File exists at " + filepath + " cannot overwrite. (try --force if desired)");
                 } else {
-                    return;
+                    return null;
                 }
             })
             .then(function() {
                 // Then add the symlink
-                return fs.symbolicLink(filepath, path.join(__dirname, item.name), item.type);
+                return fs.symlinkAsync(filepath, path.join(__dirname, item.name), item.type);
             })
             .then(function() {
                 console.log("Successfully added symlink to " + filepath);
-            }).catch(function(err) {
+            })
+            .catch(function(err) {
                 console.log(err);
             });
-        
-        promises.push(promise);
-    });
-
-    Q.all(promises).then(function() {
-        console.log("All symlinks have been created successfully and existing files or symlinks were overwritten.");
-    });
+    })
+        .then(function() {
+            console.log("All symlinks have been created successfully and existing files or symlinks were overwritten.");
+        });
 };
 
 if (program.force) {

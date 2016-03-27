@@ -60,18 +60,22 @@
 (setq make-backup-files t)
 
 ;; Purge backup files more than a week old.
-(message "Deleting old backup files...")
-(let ((week (* 60 60 24 7))
-      (current (float-time (current-time))))
-  (dolist (file (directory-files temporary-file-directory t))
-    (when (and (backup-file-name-p file)
-               (> (- current (float-time (fifth (file-attributes file))))
-                  week))
-      (message file)
-      (delete-file file))))
+;; (message "Deleting old backup files...")
+;; (let ((week (* 60 60 24 7))
+;;       (current (float-time (current-time))))
+;;   (dolist (file (directory-files temporary-file-directory t))
+;;     (when (and (backup-file-name-p file)
+;;                (> (- current (float-time (fifth (file-attributes file))))
+;;                   week))
+;;       (message file)
+;;       (delete-file file))))
 
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+
+;; Inhibit .# lockfiles. This was breaking lint and so on. Nice feature, but
+;; wish you could specify a different directory for them.
+(setq create-lockfiles nil)
 
 ;; Lose the toolbars
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -105,9 +109,11 @@
 ;; =====
 
 ;; (set-face-attribute 'default nil :font "Menlo" :height 120)
-(set-face-attribute 'default nil :font "Inconsolata" :height 140)
+;; (set-face-attribute 'default nil :font "Inconsolata" :height 120)
+;; (set-face-attribute 'default nil :font "Source Code Pro" :height 140)
 ;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
-
+;; (set-face-attribute 'default nil :font "Hack" :height 140)
+(set-face-attribute 'default nil :font "Operator" :height 140)
 
 ;; =================
 ;; Modes and plugins
@@ -130,9 +136,10 @@
 (autoload 'js2-mode "js2" nil t)
 (js2r-add-keybindings-with-prefix "C-c C-m")
 
-;; Now defaulting to js-mode rather than js2-mode because js2-mode was too strict
-;; and often buggy for me.
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; Now defaulting to web-mode because I'm mostly editing jsx these days
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+;;(web-mode-set-content-type "jsx")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -141,12 +148,13 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
+    ("5e6c2e2116c7a72ae0668390f92504fd0b77524cedd387582648b1aa1c582f59" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
  '(display-time-mode t)
  '(js2-basic-offset 4)
  '(js2-highlight-level 3)
  '(js2-include-node-externs t)
  '(js2-indent-switch-body t)
+ '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -154,6 +162,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(js2-function-call ((t (:inherit default))))
  '(setnu-line-number-face ((t (:inherit default))) t))
 
 ;; drupal-mode!
@@ -191,11 +200,18 @@
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
 
+;; Web Mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(jsx\\|html\\)$" . web-mode))
+
 ;; node.js
 (require 'nodejs-repl)
 
-;; Load the wombat theme
-(load-theme 'misterioso t)
+;; (load-theme 'wombat t)
+
+;; Load the seti theme
+;; (load-theme 'seti t)
+(load-theme 'zenburn t)
 
 ;; Add key bindings for helm
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -210,6 +226,12 @@
 ;; Supercollider
 ;; (add-to-list 'load-path "~/.emacs.d/scel/")
 ;; (require 'sclang)
+
+;; Fireplace
+(add-to-list 'load-path "~/.emacs.d/emacs-fireplace/")
+(load "~/.emacs.d/emacs-fireplace/fireplace")
+
+; (zone-when-idle 120)
 
 ;; (custom-set-variables
 ;; '(sclang-auto-scroll-post-buffer t)
@@ -242,8 +264,8 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Litable mode
-(load "litable")
-(add-to-list 'auto-mode-alist '("\\.\\(el\\)$" . litable-mode))
+;; (load "litable")
+;; (add-to-list 'auto-mode-alist '("\\.\\(el\\)$" . litable-mode))
 
 ;; Project Explorer
 ;; (load "project-explorer")
@@ -339,6 +361,9 @@ If you do not like default setup, modify it, with (KEY . COMMAND) format."
           (lambda ()
             (define-key term-raw-map (kbd "C-y") 'term-paste)))
 
+;; Stop scss mode from trying to compile on save
+(setq scss-compile-at-save nil)
+
 ;; =================
 ;; Org Mode Settings
 ;; =================
@@ -365,6 +390,9 @@ If you do not like default setup, modify it, with (KEY . COMMAND) format."
 
 (setq org-todo-keyword-faces
 '(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE") ("DEFERRED" . "orange")))
+
+(setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; =====================
 ;; Other Misc. Functions

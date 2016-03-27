@@ -15,6 +15,8 @@
         find-file
         handle-switch-frame
         js2-mode-show-node
+        mac-mwheel-scroll
         markdown-dedent-or-delete
+        markdown-exdent-or-delete
         mouse-set-region
         ))

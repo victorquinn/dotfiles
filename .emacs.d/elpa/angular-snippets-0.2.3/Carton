@@ -1,3 +1,0 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
-
-(package-file "angular-snippets.el")
