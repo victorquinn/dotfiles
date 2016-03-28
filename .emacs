@@ -134,7 +134,7 @@
 
 ;; Javascript Mode
 (autoload 'js2-mode "js2" nil t)
-(js2r-add-keybindings-with-prefix "C-c C-m")
+;; (js2r-add-keybindings-with-prefix "C-c C-m")
 
 ;; Now defaulting to web-mode because I'm mostly editing jsx these days
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
@@ -226,10 +226,6 @@
 ;; Supercollider
 ;; (add-to-list 'load-path "~/.emacs.d/scel/")
 ;; (require 'sclang)
-
-;; Fireplace
-(add-to-list 'load-path "~/.emacs.d/emacs-fireplace/")
-(load "~/.emacs.d/emacs-fireplace/fireplace")
 
 ; (zone-when-idle 120)
 

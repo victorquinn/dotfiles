@@ -48,7 +48,7 @@ URLTOOLS_METHOD="xnode"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast jira node npm urltools zsh-syntax-highlighting)
+plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,5 +62,7 @@ export GOPATH=$HOME/Development/golang
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# added by travis gem
-[ -f /Users/victor/.travis/travis.sh ] && source /Users/victor/.travis/travis.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+eval $(thefuck --alias)

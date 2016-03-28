@@ -8,7 +8,6 @@
 [core]
         editor = emacs
 	excludesfile = /Users/victorquinn/.gitignore
-        pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
 
 [color]
         branch = auto
