@@ -50,7 +50,7 @@ var copy = function(options) {
                     return fs.existsAsync(path.join(process.env.HOME, backup_directory))
                         .then(function(exists) {
                             if (!exists) {
-                                return fs.makeDirectoryAsync(path.join(process.env.HOME, backup_directory));
+                                return fs.mkdirAsync(path.join(process.env.HOME, backup_directory));
                             } else {
                                 return Promise.resolve();
                             }
