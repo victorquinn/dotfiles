@@ -1,9 +1,0 @@
-{
-  "name": "victorquinn-dotfiles-install",
-  "private": true,
-  "dependencies": {
-    "bluebird": "^2.2.2",
-    "commander": "~2.0.0",
-    "prompt": "~0.2.11"
-  }
-}

@@ -1,8 +1,8 @@
-.emacs.d/ac-comphist.dat
-.emacs.d/url/cookies
-.emacs.d/auto-save-list/*
-.emacs.d/recentf
-.emacs.d/tramp
-.emacs.d/eshell/history
-.emacs.d/eshell/lastdir
-node_modules/
+emacs/.emacs.d/ac-comphist.dat
+emacs/.emacs.d/url/cookies
+emacs/.emacs.d/auto-save-list/*
+emacs/.emacs.d/recentf
+emacs/.emacs.d/tramp
+emacs/.emacs.d/eshell/history
+emacs/.emacs.d/eshell/lastdir
+emacs/.emacs.d/image-dired/

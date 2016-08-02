@@ -1,9 +1,0 @@
-[submodule ".emacs-dir/git-emacs"]
-	path = .emacs-dir/git-emacs
-	url = git://github.com/magit/magit.git
-[submodule ".emacs-dir/emacs-rails-reloaded"]
-	path = .emacs-dir/emacs-rails-reloaded
-	url = git://github.com/dima-exe/emacs-rails-reloaded.git
-[submodule "drush"]
-	path = drush
-	url = http://git.drupal.org/project/drush.git
