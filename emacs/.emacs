@@ -112,8 +112,8 @@
 ;; (set-face-attribute 'default nil :font "Inconsolata" :height 120)
 ;; (set-face-attribute 'default nil :font "Source Code Pro" :height 140)
 ;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
-;; (set-face-attribute 'default nil :font "Hack" :height 140)
-(set-face-attribute 'default nil :font "Operator" :height 140)
+(set-face-attribute 'default nil :font "Hack" :height 100)
+;; (set-face-attribute 'default nil :font "Operator" :height 140)
 
 ;; =================
 ;; Modes and plugins
@@ -138,7 +138,8 @@
 
 ;; Now defaulting to web-mode because I'm mostly editing jsx these days
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-;;(web-mode-set-content-type "jsx")
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; (web-mode-set-content-type "jsx")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -148,7 +149,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("5e6c2e2116c7a72ae0668390f92504fd0b77524cedd387582648b1aa1c582f59" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
+    ("cdd26fa6a8c6706c9009db659d2dffd7f4b0350f9cc94e5df657fa295fffec71" "345f8f92edc3508574c61850b98a2e0a7a3f5ba3bb9ed03a50f6e41546fe2de0" "a3132bd39a977ddde4c002f8bd0ef181414c3fbe9228e3643b999491192680ad" "b79104a19e95f10698badb711bd4ab25565af3ffcf18fa7d3c7db4de7d759ac8" "9b402e9e8f62024b2e7f516465b63a4927028a7055392290600b776e4a5b9905" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "94ba29363bfb7e06105f68d72b268f85981f7fba2ddef89331660033101eb5e5" "a444b2e10bedc64e4c7f312a737271f9a2f2542c67caa13b04d525196562bf38" "5e6c2e2116c7a72ae0668390f92504fd0b77524cedd387582648b1aa1c582f59" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
  '(display-time-mode t)
  '(js2-basic-offset 4)
  '(js2-highlight-level 3)
@@ -211,7 +212,7 @@
 
 ;; Load the seti theme
 ;; (load-theme 'seti t)
-(load-theme 'zenburn t)
+(load-theme 'farmhouse-dark t)
 
 ;; Add key bindings for helm
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -277,12 +278,6 @@
 ;; Anzu mode https://github.com/syohex/emacs-anzu
 (require 'anzu)
 (global-anzu-mode +1)
-
-;; Add Dash http://kapeli.com/dash support
-(autoload 'dash-at-point "dash-at-point"
-          "Search the word at point with Dash." t nil)
-(global-set-key "\C-cd" 'dash-at-point)
-(add-to-list 'dash-at-point-mode-alist '((js-mode . "nodejs") (js-mode . "js")))
 
 (require 'uniquify)
 (setq
