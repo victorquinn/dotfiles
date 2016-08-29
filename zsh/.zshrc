@@ -67,3 +67,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 eval $(thefuck --alias)
+
+# These are for linux systems and will muck with things on OS X
+# @todo figure out a way to run these only on non-OS X machines
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'

@@ -109,10 +109,10 @@
 ;; =====
 
 ;; (set-face-attribute 'default nil :font "Menlo" :height 120)
-;; (set-face-attribute 'default nil :font "Inconsolata" :height 120)
-;; (set-face-attribute 'default nil :font "Source Code Pro" :height 140)
+(set-face-attribute 'default nil :font "Inconsolata" :height 120)
+;; (set-face-attribute 'default nil :font "Source Code Pro" :height 110)
 ;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
-(set-face-attribute 'default nil :font "Hack" :height 100)
+;; (set-face-attribute 'default nil :font "Hack" :height 100)
 ;; (set-face-attribute 'default nil :font "Operator" :height 140)
 
 ;; =================
@@ -137,8 +137,8 @@
 ;; (js2r-add-keybindings-with-prefix "C-c C-m")
 
 ;; Now defaulting to web-mode because I'm mostly editing jsx these days
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\)$" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;; (web-mode-set-content-type "jsx")
 
 (custom-set-variables
