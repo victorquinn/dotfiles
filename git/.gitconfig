@@ -2,8 +2,8 @@
 	name = Victor Quinn
 #       email = vquinn@amherst.edu # Amherst College
 #	email = vquinn@ngpvan.com # NGP VAN
-        email = mail@victorquinn.com # Personal
 #	email = victor@socialradar.com # SocialRadar
+        email = mail@victorquinn.com # Personal
         signingkey = mail@victorquinn.com
 
 [core]
