@@ -6,6 +6,7 @@
         helm-mini
         indent-for-tab-command
         kill-region
+        org-self-insert-command
         sgml-slash
         smex
         ))
