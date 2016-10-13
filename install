@@ -6,3 +6,6 @@ do
     echo "Symlinking $file"
     stow $file
 done
+
+echo "Installing Oh My ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
