@@ -72,3 +72,5 @@ eval $(thefuck --alias)
 # @todo figure out a way to run these only on non-OS X machines
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+
+export PATH="$HOME/.yarn/bin:$PATH"
