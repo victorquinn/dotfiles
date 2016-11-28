@@ -63,14 +63,22 @@ export GOPATH=$HOME/Development/golang
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### Add the yarn path
+export PATH="$(yarn global bin | grep -o '/.*'):$PATH"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 eval $(thefuck --alias)
 
 # These are for linux systems and will muck with things on OS X
-# @todo figure out a way to run these only on non-OS X machines
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
+
+if  [[ "$(uname)" != "Darwin" ]]
+then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
