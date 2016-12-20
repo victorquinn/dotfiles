@@ -108,12 +108,11 @@
 ;; Fonts
 ;; =====
 
-;; (set-face-attribute 'default nil :font "Menlo" :height 120)
-(set-face-attribute 'default nil :font "Inconsolata" :height 120)
-;; (set-face-attribute 'default nil :font "Source Code Pro" :height 110)
-;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
-;; (set-face-attribute 'default nil :font "Hack" :height 100)
-;; (set-face-attribute 'default nil :font "Operator" :height 140)
+(defun font-candidate (&rest fonts)
+  "Find the first font that exists"
+  (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
+
+(set-face-attribute 'default nil :font (font-candidate '"Hack" "Menlo" "Inconsolata" "CosmicSansNeueMono" "Source Code Pro") :height 140)
 
 ;; =================
 ;; Modes and plugins
