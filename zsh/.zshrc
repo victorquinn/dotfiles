@@ -49,11 +49,20 @@ URLTOOLS_METHOD="xnode"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
+if  [[ "$(uname)" != "Darwin" ]]
+then
+    # Linux
+    plugins=(battery colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+else
+    # Mac only
+    plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
+    export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
 
 source $ZSH/oh-my-zsh.sh
-
-export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/sclang:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_HOME/platform-tools:${GOPATH//://bin:}/bin
@@ -71,14 +80,4 @@ export NVM_DIR="$HOME/.nvm"
 
 eval $(thefuck --alias)
 
-# These are for linux systems and will muck with things on OS X
-
-if  [[ "$(uname)" != "Darwin" ]]
-then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-fi
-
-export PATH="$HOME/.yarn/bin:$PATH"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PATH="$PATH:`yarn global bin`"
