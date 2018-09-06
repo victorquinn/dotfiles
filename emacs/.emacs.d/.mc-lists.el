@@ -6,6 +6,7 @@
         helm-mini
         indent-for-tab-command
         kill-region
+        org-end-of-line
         org-self-insert-command
         sgml-slash
         smex
@@ -19,5 +20,6 @@
         mac-mwheel-scroll
         markdown-dedent-or-delete
         markdown-exdent-or-delete
+        markdown-outdent-or-delete
         mouse-set-region
         ))

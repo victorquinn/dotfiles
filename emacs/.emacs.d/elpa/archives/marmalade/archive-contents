@@ -1,4 +1,16 @@
 (1
+ (zone-tunnels .
+	       [(20180309 2155)
+		((emacs
+		  (24)))
+		"A zone program inspired from the old DOS game" single])
+ (zone-quotes .
+	      [(20170919 1825)
+	       ((emacs
+		 (24))
+		(cl-lib
+		 (0 5)))
+	       "A zone program to display quotes from a specific collection" single])
  (zone-nyan .
 	    [(0 2 2)
 	     ((esxml
@@ -148,7 +160,7 @@
       (2 12 1)))
     "Use the Emacsclient as $EDITOR" tar])
  (wisp-mode .
-	    [(0 2 1)
+	    [(0 2 3)
 	     nil "Tools for wisp: the Whitespace-to-Lisp preprocessor" single])
  (wisp .
        [(0 1 4)
@@ -164,6 +176,9 @@
  (winner-mode-enable .
 		     [(0 0 5)
 		      nil "Enables winner mode if its available" tar])
+ (window-shaper .
+		[(20171218 1222)
+		 nil "A utility to easily resize windows within Emacs" single])
  (window-number .
 		[(1 0 3)
 		 nil "Select windows by numbers." single])
@@ -460,11 +475,11 @@
 	     [(12)
 	      nil "A theme loosely based on Tron: Legacy colors" single])
  (transmission .
-	       [(0 9)
+	       [(0 12)
 		((emacs
 		  (24 4))
 		 (let-alist
-		  (1 0 3)))
+		  (1 0 5)))
 		"Interface to a Transmission session" single])
  (tracking .
 	   [(1 6)
@@ -508,7 +523,7 @@
 	    [(2012 4 7)
 	     nil "replace a word with a synonym looked up in a web service." single])
  (theme-looper .
-	       [(20150723 1104)
+	       [(20170330 1829)
 		((cl-lib
 		  (0 5)))
 		"Loop thru the available color-themes" single])
@@ -575,7 +590,7 @@
 		 [(0 2)
 		  nil "A mode for SystemTap" single])
  (systemd .
-	  [(1 4 1)
+	  [(1 6)
 	   nil "Major mode for editing systemd units" tar])
  (syslog-mode .
 	      [(2 2)
@@ -624,7 +639,7 @@
 	    [(0 0 1)
 	     nil "Utilities for opening files with sudo" single])
  (sudden-death .
-	       [(0 1)
+	       [(0 2 1)
 		nil "Totsuzen-no-Shi" single])
  (subshell-proc .
 		[(1 0 0)
@@ -772,7 +787,7 @@
 	  [(1 23)
 	   nil "Play the Sokoban game in emacs" single])
  (snakehump .
-	    [(0 1 1)
+	    [(0 3 1)
 	     nil "Convert between compound word conventions" tar])
  (smtpmail-multi .
 		 [(0 6)
@@ -869,7 +884,7 @@
 	    (0 8 17)))
 	  "a blog engine with elnode" single])
  (skewer-mode .
-	      [(1 6 2)
+	      [(1 7 0)
 	       ((simple-httpd
 		 (1 4 0))
 		(js2-mode
@@ -892,7 +907,7 @@
 		   [(0 3)
 		    nil "Simplified Mode Line for Emacs 24" single])
  (simple-httpd .
-	       [(1 4 6)
+	       [(1 5 0)
 		((cl-lib
 		  (0 3)))
 		"pure elisp HTTP server" single])
@@ -930,7 +945,7 @@
 	   [(1 4)
 	    nil "pattern matching for elisp" single])
  (shackle .
-	  [(0 9 0)
+	  [(1 0 1)
 	   ((cl-lib
 	     (0 5)))
 	   "Enforce rules for popups" single])
@@ -1408,8 +1423,10 @@
 	   [(0 0 1)
 	    nil "get stuff from pinboard" single])
  (picpocket .
-	    [(22)
-	     nil "Image viewer" single])
+	    [(39)
+	     ((emacs
+	       (24 4)))
+	     "Image viewer" single])
  (pickup .
 	 [(0 0 3)
 	  nil "pickup file." single])
@@ -1434,7 +1451,7 @@
      [(0 12)
       nil "Emacs Lisp interface to the PostgreSQL RDBMS" single])
  (perspective .
-	      [(1 12)
+	      [(2 1)
 	       ((cl-lib
 		 (0 5)))
 	       "switch between named \"perspectives\" of the editor" single])
@@ -1501,6 +1518,9 @@
 	     ((web
 	       (0 3 6)))
 	     "paste text to KDE's pastebin service" single])
+ (passmm .
+	 [(0 2 0)
+	  nil "A minor mode for pass (Password Store). " tar])
  (parscope .
 	   [(0 1 0)
 	    nil "Minor mode for showing the current scope in Lisp-like languages." single])
@@ -1531,7 +1551,7 @@
 		  [(0 8)
 		   nil "Various deletion strategies when editing" single])
  (palimpsest .
-	     [(0 8)
+	     [(1 0)
 	      nil "Various deletion strategies when editing" single])
  (pager-default-keybindings .
 			    [(1 1)
@@ -1568,9 +1588,17 @@
 	     (pkg-info
 	      (0 4)))
 	    "Ert-runner Integration Into Emacs." single])
+ (overcast-theme .
+		 [(20180315 1825)
+		  ((emacs
+		    (24)))
+		  "A dark but vibrant color theme for Emacs" single])
  (outlined-elisp-mode .
 		      [(1 0 5)
 		       nil "outline-minor-mode settings for emacs lisp" single])
+ (outer-spaces .
+	       [(20170825 2025)
+		nil "A minimalistic minor-mode to highlight redundant spaces" single])
  (otter-mode .
 	     [(1 2)
 	      nil "Major mode for source files of the Otter automated theorem prover" single])
@@ -1615,7 +1643,7 @@
 	      (1 6 8)))
 	    "Blog from Org mode to wordpress" tar])
  (org-trello .
-	     [(0 7 9)
+	     [(0 8 1)
 	      ((request-deferred
 		(0 2 0))
 	       (deferred
@@ -1625,13 +1653,16 @@
 	       (dash-functional
 		(2 12 1))
 	       (dash
-		(2 12 1))
-	       (emacs
-		(24)))
+		(2 12 1)))
 	      "Minor mode to synchronize org-mode buffer and trello board" tar])
  (org-table-comment .
 		    [(0 2)
 		     nil "Org table comment modes." single])
+ (org-static-blog .
+		  [(1 0 3)
+		   ((emacs
+		     (24 3)))
+		   "a simple org-mode based static blog generator" single])
  (org-readme .
 	     [(20130322 926)
 	      ((http-post-simple
@@ -1672,7 +1703,7 @@
 	       (6 1)))
 	     "basic support for magit links" single])
  (org-journal .
-	      [(1 11 1)
+	      [(1 12 3)
 	       nil "a simple org-mode based journaling mode" single])
  (org-gnome .
 	    [(0 1)
@@ -1872,8 +1903,8 @@
 	     [(0 8 8)
 	      nil "Managing multiple terminal buffers in Emacs." single])
  (multi-project .
-		[(0 0 17)
-		 nil "Easily work with multiple projects." single])
+		[(0 0 25)
+		 nil "Find files, compile, search, and switch between" single])
  (multi-eshell .
 	       [(0 0 1)
 		nil "makes it easier to use multiple shells within emacs" single])
@@ -2205,6 +2236,11 @@
  (lolcode-mode .
 	       [(0 2)
 		nil "Major mode for editing LOLCODE" single])
+ (lognav-mode .
+	      [(0 0 5)
+	       ((emacs
+		 (24 3)))
+	       "Navigate Log Error Messages" single])
  (logito .
 	 [(0 1)
 	  ((eieio
@@ -2353,7 +2389,7 @@
 	[(0 1 0)
 	 nil "Karma Test Runner Emacs Integration" single])
  (kanban .
-	 [(0 1 6)
+	 [(0 2 1)
 	  nil "Parse org-todo headlines to use org-tables as Kanban tables" single])
  (jump-dls .
 	   [(0 6)
@@ -2478,7 +2514,7 @@
 	  [(2927)
 	   nil "Adds support for IPython to python-mode.el" single])
  (insert-shebang .
-		 [(0 9 5)
+		 [(0 9 6)
 		  nil "Insert shebang line automatically." single])
  (inline-crypt .
 	       [(0 1 4)
@@ -2492,7 +2528,7 @@
 	      [(1 6 2)
 	       nil "Major mode for Inform 6 interactive fiction code" single])
  (inf-ruby .
-	   [(2 3 2)
+	   [(2 5 0)
 	    nil "Run a Ruby process in a buffer" single])
  (inf-groovy .
 	     [(2 0)
@@ -2594,8 +2630,14 @@
 		[(1 1 2)
 		 nil "hungry delete minor mode" single])
  (hugo .
-       [(0 1 2)
-	nil "Helper functions for Hugo" single])
+       [(0 1 3)
+	((f
+	  (0 19 0))
+	 (dash
+	  (2 13 0))
+	 (ht
+	  (2 2)))
+	"Helper functions for Hugo" single])
  (httpd .
 	[(1 0 1)
 	 nil "HTTP/1.0 web server for emacs" single])
@@ -2826,7 +2868,7 @@
 	   [(1 6)
 	    nil "goto last change" single])
  (gotham-theme .
-	       [(1 1 6)
+	       [(1 1 8)
 		nil "A very dark Emacs color theme." single])
  (gotests .
 	  [(0 0 2)
@@ -2997,6 +3039,11 @@
  (fsvn .
        [(0 9 13)
 	nil "Another frontend of subversion." tar])
+ (fsbot-data-browser .
+		     [(0 1)
+		      ((dash
+			(2 12 1)))
+		      "browse the fsbot database using tabulated-list-mode" single])
  (fringe-helper .
 		[(1 0 1)
 		 nil "helper functions for fringe bitmaps" single])
@@ -3295,7 +3342,7 @@
 	    [(0)
 	     nil "Resize a frame.  In particular, fit a frame to its buffers." single])
  (firestarter .
-	      [(0 2 4)
+	      [(0 2 5)
 	       nil "Execute (shell) commands on save" single])
  (fiplr .
 	[(0 1 3)
@@ -3325,7 +3372,7 @@
 	      (1 4)))
 	    "finalizers for Emacs Lisp" tar])
  (fill-column-indicator .
-			[(1 87)
+			[(1 90)
 			 nil "Graphically indicate the fill column" single])
  (file-format .
 	      [(0 0 4)
@@ -3366,7 +3413,7 @@
        (2 2 0)))
      "Modern API for working with files and directories" single])
  (eyebrowse .
-	    [(0 7 0)
+	    [(0 7 7)
 	     ((dash
 	       (2 7 0))
 	      (emacs
@@ -3516,13 +3563,6 @@
        ((cl-lib
 	 (0 3)))
        "Emacs Package Library" single])
- (epc .
-      [(0 1 1)
-       ((concurrent
-	 (0 3 1))
-	(ctable
-	 (0 1 1)))
-       "A RPC stack for the Emacs Lisp" single])
  (env-var-import .
 		 [(2 1)
 		  nil "Import shell environment variables in GUI Emacs" single])
@@ -3551,9 +3591,35 @@
 	      ((json
 		(1 4)))
 	      "View xkcd from Emacs" single])
+ (emacs-sounds .
+	       [(20171017 1215)
+		((sound-wav
+		  (20160725 724)))
+		"Sound effects for Emacs" single])
+ (emacs-new-buffer .
+		   [(20171026 1922)
+		    ((emacs
+		      (24)))
+		    "Quickly create new buffers to take notes and more" single])
+ (emacs-home .
+	     [(20170911 1835)
+	      ((emacs
+		(24))
+	       (cl-lib
+		(0 5)))
+	      "A home-screen for Emacs" single])
  (emacs-droid .
 	      [(0 0 0)
 	       nil "Android application development tools for Emacs" single])
+ (emacs-daily-events .
+		     [(20180707 2135)
+		      ((emacs
+			(24))
+		       (cl-lib
+			(0 5))
+		       (emacs-visual-notifications
+			(20180707 2135)))
+		      "An Emacs package to notify you on specified daily occurring events" single])
  (emacs-cl .
 	   [(0 5)
 	    nil "Emacs Common Lisp" tar])
@@ -3630,16 +3696,16 @@
 	      [(1 15)
 	       nil "Faster emacs startup through byte-compiling." single])
  (elfeed-web .
-	     [(1 1 0)
+	     [(3 0 0)
 	      ((simple-httpd
 		(1 4 3))
 	       (elfeed
-		(1 0 1))
+		(1 4 0))
 	       (emacs
 		(24 1)))
 	      "web interface to Elfeed" tar])
  (elfeed .
-	 [(1 3 0)
+	 [(3 0 0)
 	  ((emacs
 	    (24 3)))
 	  "an Emacs Atom/RSS feed reader" tar])
@@ -3714,21 +3780,15 @@
 	    ((dash
 	      (1 1 0)))
 	    "Extensions for Edebug" single])
- (edbi .
-       [(0 1 1)
-	((concurrent
-	  (0 3 1))
-	 (ctable
-	  (0 1 1))
-	 (epc
-	  (0 1 1)))
-	"Emacs Database Interface" tar])
  (ecb-snapshot .
 	       [(20120830)
 		nil "Emacs Code Browser CVS snapshot" tar])
  (ecb .
       [(2 40)
        nil "Emacs Code Browser" tar])
+ (eagle-eye .
+	    [(20170823 2205)
+	     nil "A utility to zoom-in and zoom-out while editing text" single])
  (dynamic-fonts .
 		[(0 6 4)
 		 ((font-utils
@@ -3739,7 +3799,7 @@
 		   (0 2 3)))
 		 "Set faces based on available fonts" single])
  (dxr .
-      [(2 2)
+      [(2 4)
        nil "Convenient access to a DXR server" single])
  (durendal .
 	   [(0 2)
@@ -3765,7 +3825,7 @@
 	       [(0 2 2)
 		nil "Aspell extra dictionary for Drupal" tar])
  (drupal-mode .
-	      [(0 7 1)
+	      [(0 7 3)
 	       ((php-mode
 		 (1 5 0)))
 	       "Advanced minor mode for Drupal development" tar])
@@ -3859,9 +3919,6 @@
  (deft .
      [(0 3)
       nil "quickly browse, filter, and edit plain text notes" single])
- (deferred .
-     [(0 3 1)
-      nil "Simple asynchronous functions for emacs lisp" single])
  (deep-thought-theme .
 		     [(0 1 1)
 		      nil "Emacs 24 theme with the Answer to The Ultimate Question" single])
@@ -3894,13 +3951,17 @@
        [(2 11 0)
 	nil "A modern list library for Emacs" single])
  (dart-mode .
-	    [(0 14)
-	     ((cl-lib
+	    [(1 0 3)
+	     ((emacs
+	       (24 5))
+	      (cl-lib
 	       (0 5))
 	      (dash
 	       (2 10 0))
 	      (flycheck
-	       (0 23)))
+	       (0 23))
+	      (s
+	       (1 10)))
 	     "Major mode for editing Dart files" single])
  (d-mode .
 	 [(2 0 4)
@@ -3937,11 +3998,8 @@
  (ctags .
 	[(1 1 1)
 	 nil "Exuberant Ctags utilities for Emacs" single])
- (ctable .
-	 [(0 1 1)
-	  nil "Table component for Emacs Lisp" single])
  (csharp-mode .
-	      [(0 8 12)
+	      [(0 9 0)
 	       ((cl-lib
 		 (0 5)))
 	       "C# mode derived mode" tar])
@@ -3991,11 +4049,6 @@
  (config-block .
 	       [(0 0 1)
 		nil "config-block is utility for individual settings (e.g. .emacs)." single])
- (concurrent .
-	     [(0 3 1)
-	      ((deferred
-		   (0 3 1)))
-	      "Concurrent utility functions for emacs lisp" single])
  (company-inf-ruby .
 		   [(0 2)
 		    ((company
@@ -4008,6 +4061,9 @@
 		 ((company
 		   (0 6 8)))
 		 "company-mode completion back-end for CMake" single])
+ (common-header-mode-line .
+			  [(0 5 6)
+			   nil "Manage per-frame and per-window header- and mode- lines." tar])
  (command-t .
 	    [(0 0 1)
 	     ((find-file-in-project
@@ -4324,11 +4380,6 @@
  (calfw-gcal .
 	     [(0 0 3)
 	      nil "edit Google calendar for calfw.el." single])
- (cacoo .
-	[(2 1 2)
-	 ((concurrent
-	   (0 3 1)))
-	 "Minor mode for Cacoo : http://cacoo.com" tar])
  (cache .
 	[(0 1)
 	 nil "implementation of a hash table whose key-value pairs expire" single])
@@ -4349,8 +4400,8 @@
 	    (1 2)))
 	  "Emacs client for Jenkins" tar])
  (bug-reference-github .
-		       [(0 2 0)
-			nil "Automatically set `bug-reference-url-format' in Github repositories." single])
+		       [(1 0 0)
+			nil "Set `bug-reference-url-format' in Github repos" tar])
  (bufshow .
 	  [(0 1 0)
 	   nil "A simple presentation tool for Emacs." tar])
@@ -4513,7 +4564,7 @@
 		 (24 1)))
 	       "Ansible documentation Minor Mode" single])
  (annotate .
-	   [(0 4 5)
+	   [(0 4 7)
 	    nil "annotate files without changing them" single])
  (angular-snippets .
 		   [(0 2 3)

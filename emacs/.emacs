@@ -91,7 +91,7 @@
 
 (setq show-trailing-whitespace t)
 
-(setq tab-width 4)
+(setq tab-width 2)
 
 ;; Mic-Paren - better paren matching
 ;; (require 'mic-paren)
@@ -108,11 +108,13 @@
 ;; Fonts
 ;; =====
 
-(defun font-candidate (&rest fonts)
-  "Find the first font that exists"
-  (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
+;; (defun font-candidate (&rest fonts)
+;;   "Find the first font that exists"
+;;   (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
 
-(set-face-attribute 'default nil :font (font-candidate '"Hack" "Menlo" "Inconsolata" "CosmicSansNeueMono" "Source Code Pro") :height 140)
+;; (set-face-attribute 'default nil :font (font-candidate '"Hack" "Menlo" "Inconsolata" "CosmicSansNeueMono" "Source Code Pro") :height 140)
+
+(set-face-attribute 'default nil :font "Hack" :height 140)
 
 ;; =================
 ;; Modes and plugins
@@ -150,10 +152,13 @@
    (quote
     ("cdd26fa6a8c6706c9009db659d2dffd7f4b0350f9cc94e5df657fa295fffec71" "345f8f92edc3508574c61850b98a2e0a7a3f5ba3bb9ed03a50f6e41546fe2de0" "a3132bd39a977ddde4c002f8bd0ef181414c3fbe9228e3643b999491192680ad" "b79104a19e95f10698badb711bd4ab25565af3ffcf18fa7d3c7db4de7d759ac8" "9b402e9e8f62024b2e7f516465b63a4927028a7055392290600b776e4a5b9905" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "94ba29363bfb7e06105f68d72b268f85981f7fba2ddef89331660033101eb5e5" "a444b2e10bedc64e4c7f312a737271f9a2f2542c67caa13b04d525196562bf38" "5e6c2e2116c7a72ae0668390f92504fd0b77524cedd387582648b1aa1c582f59" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "5f81724ae9625b1286a6ef627cefa8b01ccab8e37496375dea2ab4210687300a" default)))
  '(display-time-mode t)
- '(js2-basic-offset 4)
+ '(js2-basic-offset 2)
  '(js2-highlight-level 3)
  '(js2-include-node-externs t)
  '(js2-indent-switch-body t)
+ '(package-selected-packages
+   (quote
+    (js2-closure graphql-mode typescript-mode vue-mode zenburn-theme yaml-mode web-mode w3m vlf toml-mode symon swift-mode spaceline smex seti-theme rust-mode rainbow-delimiters quack org-bullets nodejs-repl nim-mode multi-term mic-paren markdown-mode magit less-css-mode keyfreq json-mode jscs js3-mode js2-refactor js2-highlight-vars js-doc js-comint jade-mode helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame flycheck-rust farmhouse-theme dtrt-indent dracula-theme dark-krystal-theme company-sourcekit color-theme-solarized color-theme-buffer-local coffee-mode cider caroline-theme badger-theme autopair arduino-mode anzu ansible angular-snippets android-mode ample-theme alect-themes ag ace-window)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -179,9 +184,9 @@
 ;; (require 'haml-mode)
 
 ;; Jade mode
-(require 'sws-mode)
-(require 'jade-mode)
-(add-to-list 'auto-mode-alist '("\\.\\(jade\\|jade\\)$" . jade-mode))
+;; (require 'sws-mode)
+;; (require 'jade-mode)
+;; (add-to-list 'auto-mode-alist '("\\.\\(jade\\|jade\\)$" . jade-mode))
 
 ;; LESS CSS mode
 (require 'less-css-mode)
@@ -203,6 +208,12 @@
 ;; Web Mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(jsx\\|html\\)$" . web-mode))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;; node.js
 (require 'nodejs-repl)
@@ -373,7 +384,7 @@ If you do not like default setup, modify it, with (KEY . COMMAND) format."
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sh . t)))
+ '((shell . t)))
 
 (setq org-todo-keywords
 '((sequence "TODO" "IN PROGRESS" "|" "DONE" "DEFERRED")))
