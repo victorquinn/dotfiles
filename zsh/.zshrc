@@ -10,7 +10,7 @@ ZSH=$HOME/.oh-my-zsh
 if [ -n "$INSIDE_EMACS" ]; then
     export ZSH_THEME="rawsyntax"
 else
-    export ZSH_THEME="agnoster"
+    export ZSH_THEME="bullet-train"
 fi
 
 # Example aliases
@@ -81,3 +81,10 @@ export NVM_DIR="$HOME/.nvm"
 eval $(thefuck --alias)
 
 export PATH="$PATH:`yarn global bin`"
+
+export GPG_TTY=$(tty)
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+autoload -U +X bashcompinit && bashcompinit
+
+alias git=hub
