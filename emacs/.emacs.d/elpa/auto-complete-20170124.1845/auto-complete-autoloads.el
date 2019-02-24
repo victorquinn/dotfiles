@@ -1,12 +1,19 @@
 ;;; auto-complete-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "auto-complete" "auto-complete.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "auto-complete" "auto-complete.el" (22844 4716
+;;;;;;  941541 84000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from auto-complete.el
 
 (autoload 'auto-complete "auto-complete" "\
@@ -41,12 +48,19 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 
 \(fn &optional ARG)" t nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "auto-complete" '("auto-complete-mode" "ac-")))
 
 ;;;***
 
 ;;;### (autoloads nil "auto-complete-config" "auto-complete-config.el"
 ;;;;;;  (0 0 0 0))
+=======
+;;;***
+
+;;;### (autoloads nil "auto-complete-config" "auto-complete-config.el"
+;;;;;;  (22844 4717 144870 649000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from auto-complete-config.el
 
 (autoload 'ac-config-default "auto-complete-config" "\
@@ -54,11 +68,18 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 
 \(fn)" nil nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "auto-complete-config" '("ac-")))
 
 ;;;***
 
 ;;;### (autoloads nil nil ("auto-complete-pkg.el") (0 0 0 0))
+=======
+;;;***
+
+;;;### (autoloads nil nil ("auto-complete-pkg.el") (22844 4716 938207
+;;;;;;  813000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 
 ;;;***
 
@@ -66,6 +87,9 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; auto-complete-autoloads.el ends here

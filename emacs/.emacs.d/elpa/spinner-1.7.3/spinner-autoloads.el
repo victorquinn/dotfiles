@@ -1,12 +1,18 @@
 ;;; spinner-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "spinner" "spinner.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "spinner" "spinner.el" (22844 4693 978621 593000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from spinner.el
 
 (autoload 'spinner-create "spinner" "\
@@ -60,14 +66,20 @@ this time, in which case it won't display at all.
 
 \(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spinner" '("spinner")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; spinner-autoloads.el ends here

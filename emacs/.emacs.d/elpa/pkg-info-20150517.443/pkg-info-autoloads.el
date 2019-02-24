@@ -1,12 +1,19 @@
 ;;; pkg-info-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "pkg-info" "pkg-info.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "pkg-info" "pkg-info.el" (22548 52520 661260
+;;;;;;  779000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from pkg-info.el
 
 (autoload 'pkg-info-library-original-version "pkg-info" "\
@@ -114,14 +121,20 @@ version.
 
 \(fn LIBRARY &optional PACKAGE SHOW)" t nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pkg-info" '("pkg-info-")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; pkg-info-autoloads.el ends here

@@ -92,6 +92,7 @@
 (setq show-trailing-whitespace t)
 
 (setq tab-width 2)
+(setq js-indent-level 2)
 
 ;; Mic-Paren - better paren matching
 ;; (require 'mic-paren)
@@ -108,13 +109,12 @@
 ;; Fonts
 ;; =====
 
-;; (defun font-candidate (&rest fonts)
-;;   "Find the first font that exists"
-;;   (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
-
-;; (set-face-attribute 'default nil :font (font-candidate '"Hack" "Menlo" "Inconsolata" "CosmicSansNeueMono" "Source Code Pro") :height 140)
-
-(set-face-attribute 'default nil :font "Hack" :height 140)
+;; (set-face-attribute 'default nil :font "Menlo" :height 120)
+;; (set-face-attribute 'default nil :font "Inconsolata" :height 100)
+;; (set-face-attribute 'default nil :font "Source Code Pro" :height 110)
+;; (set-face-attribute 'default nil :font "CosmicSansNeueMono" :height 140)
+;; (set-face-attribute 'default nil :font "Hack" :height 90)
+(set-face-attribute 'default nil :font "Operator Mono" :height 100)
 
 ;; =================
 ;; Modes and plugins
@@ -142,6 +142,8 @@
 ;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;; (web-mode-set-content-type "jsx")
 
+(add-to-list 'auto-mode-alist '("\\.\\(ts\\|tsx\\)$" . typescript-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -161,7 +163,9 @@
     (js2-closure graphql-mode typescript-mode vue-mode zenburn-theme yaml-mode web-mode w3m vlf toml-mode symon swift-mode spaceline smex seti-theme rust-mode rainbow-delimiters quack org-bullets nodejs-repl nim-mode multi-term mic-paren markdown-mode magit less-css-mode keyfreq json-mode jscs js3-mode js2-refactor js2-highlight-vars js-doc js-comint jade-mode helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame flycheck-rust farmhouse-theme dtrt-indent dracula-theme dark-krystal-theme company-sourcekit color-theme-solarized color-theme-buffer-local coffee-mode cider caroline-theme badger-theme autopair arduino-mode anzu ansible angular-snippets android-mode ample-theme alect-themes ag ace-window)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(tab-width 2)
+ '(tool-bar-mode nil)
+ '(typescript-indent-level 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -182,11 +186,6 @@
 
 ;; HAML
 ;; (require 'haml-mode)
-
-;; Jade mode
-;; (require 'sws-mode)
-;; (require 'jade-mode)
-;; (add-to-list 'auto-mode-alist '("\\.\\(jade\\|jade\\)$" . jade-mode))
 
 ;; LESS CSS mode
 (require 'less-css-mode)
@@ -257,7 +256,7 @@
 ;; (dtrt-indent-mode t)
 
 ;; JSON
-(require 'json-mode)
+;; (require 'json-mode)
 
 ;;
 (require 'handlebars-mode)

@@ -1,12 +1,19 @@
 ;;; let-alist-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "let-alist" "let-alist.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "let-alist" "let-alist.el" (22844 4701 558489
+;;;;;;  364000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from let-alist.el
 
 (autoload 'let-alist "let-alist" "\
@@ -42,14 +49,20 @@ displayed in the example above.
 
 (function-put 'let-alist 'lisp-indent-function '1)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "let-alist" '("let-alist--")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; let-alist-autoloads.el ends here

@@ -10,7 +10,12 @@ done
 echo "Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+echo "Symlinking .zshrc"
+
 mkdir -p "$HOME/.zfunctions"
 cp "./zsh/pure.zsh" "$HOME/.zfunctions/prompt_pure_setup"
 cp "./zsh/async.zsh" "$HOME/.zfunctions/async"
 cp "./zsh/bullet-train.zsh-theme" "$ZSH_CUSTOM/themes"
+
+
+

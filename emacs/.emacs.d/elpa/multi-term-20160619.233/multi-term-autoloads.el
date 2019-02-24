@@ -1,12 +1,19 @@
 ;;; multi-term-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "multi-term" "multi-term.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "multi-term" "multi-term.el" (22548 52522 667883
+;;;;;;  804000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from multi-term.el
 
 (autoload 'multi-term "multi-term" "\
@@ -43,14 +50,20 @@ Select the `multi-term' dedicated window.
 
 \(fn)" t nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "multi-term" '("multi-term-" "term-")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; multi-term-autoloads.el ends here

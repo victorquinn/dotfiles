@@ -1,12 +1,18 @@
 ;;; keyfreq-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "keyfreq" "keyfreq.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "keyfreq" "keyfreq.el" (22548 52526 54476 801000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from keyfreq.el
 
 (defvar keyfreq-mode nil "\
@@ -48,14 +54,20 @@ Save keyfreq data now.
 
 \(fn)" t nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "keyfreq" '("keyfreq-")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; keyfreq-autoloads.el ends here

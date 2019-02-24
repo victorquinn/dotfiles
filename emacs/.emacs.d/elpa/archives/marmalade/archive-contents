@@ -1423,7 +1423,11 @@
 	   [(0 0 1)
 	    nil "get stuff from pinboard" single])
  (picpocket .
+<<<<<<< HEAD
 	    [(39)
+=======
+	    [(40)
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 	     ((emacs
 	       (24 4)))
 	     "Image viewer" single])

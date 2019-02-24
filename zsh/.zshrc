@@ -64,10 +64,11 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:$HOME/sclang:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_HOME/platform-tools:${GOPATH//://bin:}/bin
+export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
+export GOPATH=$HOME/Development/go
 
-export GOPATH=$HOME/Development/golang
+# Customize to your needs...
+export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -78,7 +79,7 @@ export PATH="$(yarn global bin | grep -o '/.*'):$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 export PATH="$PATH:`yarn global bin`"
 
@@ -87,4 +88,6 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 autoload -U +X bashcompinit && bashcompinit
 
-alias git=hub
+export PATH="$PATH:`yarn global bin`"
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+

@@ -1,12 +1,19 @@
 ;;; go-errcheck-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
+<<<<<<< HEAD
 
 (add-to-list 'load-path (directory-file-name
                          (or (file-name-directory #$) (car load-path))))
 
 
 ;;;### (autoloads nil "go-errcheck" "go-errcheck.el" (0 0 0 0))
+=======
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+;;;### (autoloads nil "go-errcheck" "go-errcheck.el" (22548 52539
+;;;;;;  250856 221000))
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;; Generated autoloads from go-errcheck.el
 
 (autoload 'go-errcheck "go-errcheck" "\
@@ -23,14 +30,20 @@ default to the buffer's directory.
 
 \(fn DIRECTORY IGNOREPKG IGNORE)" t nil)
 
+<<<<<<< HEAD
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "go-errcheck" '("go-")))
 
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+<<<<<<< HEAD
 ;; coding: utf-8
+=======
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
 ;; End:
 ;;; go-errcheck-autoloads.el ends here

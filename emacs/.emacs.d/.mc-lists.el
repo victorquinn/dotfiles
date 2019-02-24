@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        coffee-dedent-line-backspace
         helm-mini
         indent-for-tab-command
         kill-region
@@ -20,6 +21,10 @@
         mac-mwheel-scroll
         markdown-dedent-or-delete
         markdown-exdent-or-delete
+<<<<<<< HEAD
         markdown-outdent-or-delete
+=======
+        mouse-drag-mode-line
+>>>>>>> Latest changes, remove a lot of cruft, fix emacs indent to 2
         mouse-set-region
         ))
