@@ -160,7 +160,7 @@
  '(js2-indent-switch-body t)
  '(package-selected-packages
    (quote
-    (js2-closure graphql-mode typescript-mode vue-mode zenburn-theme yaml-mode web-mode w3m vlf toml-mode symon swift-mode spaceline smex seti-theme rust-mode rainbow-delimiters quack org-bullets nodejs-repl nim-mode multi-term mic-paren markdown-mode magit less-css-mode keyfreq json-mode jscs js3-mode js2-refactor js2-highlight-vars js-doc js-comint jade-mode helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame flycheck-rust farmhouse-theme dtrt-indent dracula-theme dark-krystal-theme company-sourcekit color-theme-solarized color-theme-buffer-local coffee-mode cider caroline-theme badger-theme autopair arduino-mode anzu ansible angular-snippets android-mode ample-theme alect-themes ag ace-window)))
+    (graphviz-dot-mode rjsx-mode dockerfile-mode graphql-mode typescript-mode vue-mode yaml-mode web-mode vlf toml-mode swift-mode spaceline smex rust-mode rainbow-delimiters org-bullets nim-mode mic-paren markdown-mode magit json-mode js-doc helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame farmhouse-theme coffee-mode autopair anzu ansible android-mode ag)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tab-width 2)
@@ -214,9 +214,6 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-;; node.js
-(require 'nodejs-repl)
-
 ;; (load-theme 'wombat t)
 
 ;; Load the seti theme
@@ -258,6 +255,12 @@
 ;; JSON
 ;; (require 'json-mode)
 
+;; Indent 2 spaces for JSON mode
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+
 ;;
 (require 'handlebars-mode)
 (add-to-list 'auto-mode-alist '("\\.\\(hbs\\|handlebars\\)$" . handlebars-mode))
@@ -293,9 +296,6 @@
   uniquify-buffer-name-style 'post-forward
   uniquify-separator ":")
 
-(require 'js-comint)
-(setq inferior-js-program-command "node")
-(setenv "NODE_NO_READLINE" "1")
 ;; not "node-repl"
 ;; Use your favorited js mode here:
 (add-hook 'js2-mode-hook '(lambda ()
@@ -305,6 +305,9 @@
   (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
   (local-set-key "\C-cl" 'js-load-file-and-go)))
 
+
+;; graphviz-dot-mode
+(require 'cc-mode)
 
 ;; Git gutter fixes for OS X
 ;; Fix spacing on added/deleted characters
