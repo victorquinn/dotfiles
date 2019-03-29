@@ -67,6 +67,9 @@ source $ZSH/oh-my-zsh.sh
 export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 export GOPATH=$HOME/Development/go
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
@@ -75,9 +78,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Add the yarn path
 export PATH="$(yarn global bin | grep -o '/.*'):$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # eval $(thefuck --alias)
 
