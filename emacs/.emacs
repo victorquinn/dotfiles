@@ -128,8 +128,12 @@
              '("marmalade" . "http://marmalade-repo.org/packages/" ) t)
 
 ;; Add milkbox
-(add-to-list 'package-archives
-             '("milkbox" . "http://melpa.milkbox.net/packages/" ) t)
+;; (add-to-list 'package-archives
+;;             '("milkbox" . "http://melpa.milkbox.net/packages/" ) t)
+
+;; Melpa
+ (add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/" ) t)
 
 (package-initialize)
 
@@ -160,7 +164,7 @@
  '(js2-indent-switch-body t)
  '(package-selected-packages
    (quote
-    (graphviz-dot-mode rjsx-mode dockerfile-mode graphql-mode typescript-mode vue-mode yaml-mode web-mode vlf toml-mode swift-mode spaceline smex rust-mode rainbow-delimiters org-bullets nim-mode mic-paren markdown-mode magit json-mode js-doc helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame farmhouse-theme coffee-mode autopair anzu ansible android-mode ag)))
+    (graphviz-dot-mode rjsx-mode dockerfile-mode graphql-mode typescript-mode vue-mode yaml-mode web-mode vlf toml-mode swift-mode spaceline smex rust-mode rainbow-delimiters org-bullets nim-mode mic-paren markdown-mode magit json-mode js-doc helm-themes helm-swoop helm-projectile-all helm-projectile helm-open-github helm-ls-git helm-helm-commands helm-google helm-go-package helm-github-stars helm-git helm-gist helm-flycheck helm-dired-recent-dirs helm-dictionary helm-dash helm-css-scss helm-aws helm-anything helm-ack handlebars-mode go-stacktracer go-snippets go-projectile go-play go-errcheck go-direx go-autocomplete gitignore-mode git-link git-gutter-fringe git-blame farmhouse-theme autopair anzu ansible ag)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tab-width 2)
