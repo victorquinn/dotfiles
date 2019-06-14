@@ -49,4 +49,8 @@
         hide-status = 1
 
 [pull]
-	rebase = true
+        default = current
+        rebase = true
+
+[rebase]
+        autosquash = true

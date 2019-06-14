@@ -1,3 +1,4 @@
+
 ;; Declared Emacs Bankruptcy on April 9, 2019
 ;; Everything from here on is started then :) Go through git history for
 ;; more past changes
@@ -32,3 +33,38 @@ There are two things you can do about this warning:
 ;; Hide top frame on macOS
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . light))
+
+;; Place all backup files in one directory.
+(setq backup-directory-alist `((".*" . "~/.saves")))
+(setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+      kept-new-versions 10
+      kept-old-versions 2
+      version-control t)
+(setq make-backup-files t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (terraform-mode farmhouse-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; Load theme
+(load-theme 'farmhouse-dark t)
+
+;; Turn on column numbers
+(setq column-number-mode t)
+
+;; Indent by 2 spaces
+(setq tab-width 2)
+(setq js-indent-level 2)
+
+;; Turn off tabs
+(setq-default indent-tabs-mode nil)
