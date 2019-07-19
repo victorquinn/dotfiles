@@ -52,12 +52,12 @@ URLTOOLS_METHOD="xnode"
 if  [[ "$(uname)" != "Darwin" ]]
 then
     # Linux
-    plugins=(battery colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
+    plugins=(battery colorize extract git git-extras git-flow gitfast node npm urltools)
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
 else
     # Mac only
-    plugins=(battery brew colored-man colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
+    plugins=(battery brew colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
     export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
