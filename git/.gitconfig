@@ -23,6 +23,7 @@
 [alias]
         cavm = commit -avm
         a = add -p
+        bh = for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
         st = status
         pr = pull --rebase
         br = branch
