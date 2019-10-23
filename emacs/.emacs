@@ -49,14 +49,10 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (terraform-mode farmhouse-theme))))
- '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(package-selected-packages
+   (quote
+    (graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+ '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 ;; Load theme
 (load-theme 'farmhouse-dark t)
@@ -67,6 +63,7 @@ There are two things you can do about this warning:
 ;; Indent by 2 spaces
 (setq tab-width 2)
 (setq js-indent-level 2)
+(setq typescript-indent-level 2)
 
 ;; Turn off tabs
 (setq-default indent-tabs-mode nil)
