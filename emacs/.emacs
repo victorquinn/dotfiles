@@ -51,7 +51,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+    (multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 ;; Load theme
@@ -67,3 +67,37 @@ There are two things you can do about this warning:
 
 ;; Turn off tabs
 (setq-default indent-tabs-mode nil)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; ========
+;; Org Mode
+;; ========
+
+(setq org-log-done 'time)
+;; Add a note when closed
+(setq org-log-done 'note)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-todo-keywords
+'((sequence "TODO" "IN PROGRESS" "|" "DONE" "DEFERRED")))
+
+(setq org-todo-keyword-faces
+'(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE") ("DEFERRED" . "orange")))
+
+(setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(define-key org-mode-map "\M-q" 'toggle-truncate-lines)
+
+;; ================
+;; Multiple Cursors
+;; ================
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
