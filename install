@@ -1,6 +1,9 @@
 #!/bin/sh
 files=(emacs git tmux zsh)
 
+# Bail if stow is not installed
+command -v stow >/dev/null 2>&1 || echo "Dependency stow not installed. Install it first then run this again" && exit 1
+
 for file in "${files[@]}"
 do
     echo "Symlinking $file"
