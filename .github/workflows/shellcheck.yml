@@ -12,5 +12,5 @@ jobs:
         uses: reviewdog/action-shellcheck@v1.0.0
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          path: "./install"
+          reporter: github-check
+          level: warning
