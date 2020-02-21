@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 files=(emacs git tmux zsh)
 
 # Bail if stow is not installed
@@ -21,7 +21,7 @@ then
     mkdir -p "$HOME/.zfunctions"
     cp "./zsh/pure.zsh" "$HOME/.zfunctions/prompt_pure_setup"
     cp "./zsh/async.zsh" "$HOME/.zfunctions/async"
-    cp "./zsh/bullet-train.zsh-theme" "$ZSH_CUSTOM/themes"
+    cp "./zsh/bullet-train.zsh-theme" "$HOME/.oh-my-zsh/themes"
 else
     echo "Skipping zsh-syntax-highlighting plugin because it's already installed"
 fi
