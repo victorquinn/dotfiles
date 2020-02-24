@@ -54,8 +54,21 @@ There are two things you can do about this warning:
     (multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
-;; Load theme
+;; Inhibit .# lockfiles
+(setq create-lockfiles nil)
+
+;; =====
+;; Theme
+;; =====
+
 (load-theme 'farmhouse-dark t)
+
+;; ====
+;; Font
+;; ====
+
+(add-to-list 'default-frame-alist '(font . "Operator Mono"))
+(set-face-attribute 'default nil :font "Operator Mono" :height 140)
 
 ;; Turn on column numbers
 (setq column-number-mode t)
@@ -92,7 +105,7 @@ There are two things you can do about this warning:
 (setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-(define-key org-mode-map "\M-q" 'toggle-truncate-lines)
+; (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
 
 ;; ================
 ;; Multiple Cursors
