@@ -67,8 +67,10 @@ source $ZSH/oh-my-zsh.sh
 export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 export GOPATH=$HOME/Development/go
 
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
@@ -106,3 +108,4 @@ export PATH="$PATH:$HOME/Development/mono/tools/knot/bin2"
 export KNOT_VERBOSE=1
 
 export PATH="$PATH:$HOME/.linuxbrew/bin"
+
