@@ -109,3 +109,8 @@ export KNOT_VERBOSE=1
 
 export PATH="$PATH:$HOME/.linuxbrew/bin"
 
+# Better specific
+eval "$(pyenv init -)"
+source /Users/vquinn/.artifactoryrc
+
+alias ls="exa"
