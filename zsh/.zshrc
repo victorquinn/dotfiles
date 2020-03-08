@@ -109,8 +109,23 @@ export KNOT_VERBOSE=1
 
 export PATH="$PATH:$HOME/.linuxbrew/bin"
 
+alias ls="exa"
+
+# HSTR configuration - add this to ~/.zshrc
+alias hh=hstr                    # hh to be alias for hstr
+setopt histignorespace           # skip cmds w/ leading space from history
+export HSTR_CONFIG=hicolor       # get more colors
+bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+
+alias ccat=/usr/bin/cat
+alias cat=bat
+alias ping=prettyping
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+export KUBECONFIG=$KUBECONFIG:~/.kube/config
+
+alias restart-audio="pulseaudio --kill && pulseaudio --start"
+
 # Better specific
 eval "$(pyenv init -)"
 source /Users/vquinn/.artifactoryrc
-
-alias ls="exa"
