@@ -83,8 +83,6 @@ export PATH="$(yarn global bin | grep -o '/.*'):$PATH"
 
 # eval $(thefuck --alias)
 
-export PATH="$PATH:`yarn global bin`"
-
 export GPG_TTY=$(tty)
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
@@ -104,12 +102,33 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 
-export PATH="$PATH:$HOME/Development/mono/tools/knot/bin2"
-export KNOT_VERBOSE=1
-
 export PATH="$PATH:$HOME/.linuxbrew/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
-alias ls="exa"
+# Colors
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+BLUE=`tput setaf 4`
+RESET= `tput sgr0`
+
+# Better specific
+eval "$(pyenv init -)"
+source /Users/vquinn/.artifactoryrc
+
+if hash exa 2>/dev/null; then
+    alias ls="exa"
+else
+    echo "${GREEN}exa not installed, recommend downloading ${BLUE}https://the.exa.website/${RESET}"
+fi
+
+if hash bat 2>/dev/null; then
+    alias ccat=/usr/bin/cat
+    alias cat=bat
+else
+    echo "${GREEN}bat not installed, recommend downloading ${BLUE}https://github.com/sharkdp/bat${RESET}"
+fi
+
+# These should be conditional and check that the alternatives exist before using them
 
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
@@ -117,8 +136,6 @@ setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
-alias ccat=/usr/bin/cat
-alias cat=bat
 alias ping=prettyping
 alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
@@ -126,6 +143,4 @@ export KUBECONFIG=$KUBECONFIG:~/.kube/config
 
 alias restart-audio="pulseaudio --kill && pulseaudio --start"
 
-# Better specific
-eval "$(pyenv init -)"
-source /Users/vquinn/.artifactoryrc
+source /usr/share/nvm/init-nvm.sh
