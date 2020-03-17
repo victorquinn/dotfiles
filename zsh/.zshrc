@@ -109,11 +109,12 @@ export PATH="$PATH:$HOME/.cargo/bin"
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
 BLUE=`tput setaf 4`
-RESET= `tput sgr0`
 
 # Better specific
-eval "$(pyenv init -)"
-source /Users/vquinn/.artifactoryrc
+if hash pyenv 2>/dev/null; then
+    eval "$(pyenv init -)"
+    source /Users/vquinn/.artifactoryrc
+fi
 
 if hash exa 2>/dev/null; then
     alias ls="exa"

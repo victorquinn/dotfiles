@@ -47,7 +47,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+    (handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -138,3 +138,6 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Wrap text in all text modes
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
