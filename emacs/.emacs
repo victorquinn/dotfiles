@@ -47,7 +47,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+    (ace-window ag handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -61,8 +61,15 @@ There are two things you can do about this warning:
 (add-to-list 'default-frame-alist '(font . "Operator Mono"))
 (set-face-attribute 'default nil :font "Operator Mono" :height 120)
 
-;; Add key bindings for helm
+;; ===========
+;; Keybindings
+;; ===========
+
+;; Helm
 (global-set-key (kbd "C-x b") 'helm-mini)
+
+;; Ace window
+(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; ========
 ;; Org Mode

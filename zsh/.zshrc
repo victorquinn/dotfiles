@@ -145,3 +145,4 @@ export KUBECONFIG=$KUBECONFIG:~/.kube/config
 alias restart-audio="pulseaudio --kill && pulseaudio --start"
 
 source /usr/share/nvm/init-nvm.sh
+export PATH="/usr/local/opt/ruby@2.5/bin:$PATH"
