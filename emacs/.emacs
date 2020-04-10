@@ -30,6 +30,10 @@ There are two things you can do about this warning:
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+;; Use Package
+(eval-when-compile
+  (require 'use-package))
+
 ;; Place all backup files in one directory.
 (setq backup-directory-alist `((".*" . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
@@ -45,9 +49,12 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default)))
  '(package-selected-packages
    (quote
-    (rjsx-mode ace-window ag handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+    (rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -58,22 +65,23 @@ There are two things you can do about this warning:
 ;; Font
 ;; ====
 
-(add-to-list 'default-frame-alist '(font . "Operator Mono"))
-(set-face-attribute 'default nil :font "Operator Mono" :height 120)
+(add-to-list 'default-frame-alist '(font . "Operator Mono Book"))
+(set-face-attribute 'default nil :font "Operator Mono Book" :height 100)
 
-;; ===========
-;; Keybindings
-;; ===========
-
-;; Helm
+;; Add key bindings for helm
 (global-set-key (kbd "C-x b") 'helm-mini)
-
-;; Ace window
-(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; ========
 ;; Org Mode
 ;; ========
+
+;; Enable org-babel languages I'd use
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)))
 
 (setq org-log-done 'time)
 ;; Add a note when closed
@@ -127,7 +135,16 @@ There are two things you can do about this warning:
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; Load theme
-(load-theme 'farmhouse-dark t)
+;; (load-theme 'farmhouse-dark t)
+(use-package twilight-bright-theme
+  :ensure
+  :config
+  (enable-theme 'twilight-bright))
+
+;; (use-package farmhouse-theme
+;;   :ensure
+;;   :config
+;;   (load-theme 'farmhouse-light t))
 
 ;; Turn on column numbers
 (setq column-number-mode t)

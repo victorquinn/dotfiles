@@ -102,6 +102,8 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 
+export NPM_CONFIG_PREFIX=~/.npm-global
+export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH="$PATH:$HOME/.linuxbrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
