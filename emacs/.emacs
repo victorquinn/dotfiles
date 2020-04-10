@@ -68,8 +68,15 @@ There are two things you can do about this warning:
 (add-to-list 'default-frame-alist '(font . "Operator Mono Book"))
 (set-face-attribute 'default nil :font "Operator Mono Book" :height 100)
 
-;; Add key bindings for helm
+;; ===========
+;; Keybindings
+;; ===========
+
+;; Helm
 (global-set-key (kbd "C-x b") 'helm-mini)
+
+;; Ace window
+(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; ========
 ;; Org Mode
