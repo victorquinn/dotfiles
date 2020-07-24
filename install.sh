@@ -26,6 +26,8 @@ else
     echo "Skipping zsh-syntax-highlighting plugin because it's already installed"
 fi
 
+cp "./zsh/.zsh_trap.sh $HOME/.zsh_trap.sh"
+
 if  [[ "$(uname)" != "Darwin" ]]
 then
     # Linux

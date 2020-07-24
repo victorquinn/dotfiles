@@ -52,9 +52,10 @@ There are two things you can do about this warning:
  '(custom-safe-themes
    (quote
     ("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default)))
+ '(minimap-mode t)
  '(package-selected-packages
    (quote
-    (rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+    (org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -67,6 +68,15 @@ There are two things you can do about this warning:
 
 (add-to-list 'default-frame-alist '(font . "Operator Mono Book"))
 (set-face-attribute 'default nil :font "Operator Mono Book" :height 100)
+
+;; ======
+;; Hydras
+;; ======
+
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
 
 ;; ===========
 ;; Keybindings
@@ -88,21 +98,37 @@ There are two things you can do about this warning:
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((ditaa . t)))
+ '((ditaa . t)
+   (js . t)
+   (typescript . t)))
+
+(setq org-babel-js-function-wrapper
+      "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
+
+(defun org-babel-execute:typescript (body params)
+  (let ((org-babel-js-cmd "npx ts-node"))
+    (org-babel-execute:js body params)))
 
 (setq org-log-done 'time)
 ;; Add a note when closed
 (setq org-log-done 'note)
+
+;; Keyboard shortcuts
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-todo-keywords
 '((sequence "TODO" "IN PROGRESS" "|" "DONE" "DEFERRED")))
 
 (setq org-todo-keyword-faces
-'(("TODO" . "pink") ("IN PROGRESS" . "yellow") ("DONE") ("DEFERRED" . "orange")))
+'(("TODO" . "pink") ("IN PROGRESS" . "blue") ("DONE") ("DEFERRED" . "orange")))
 
 (setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(setq org-default-notes-file "~/Development/knowledge/inbox.org")
+(setq org-agenda-files (list "~/Development/knowledge/"))
 
 ;; (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
 
@@ -129,6 +155,41 @@ There are two things you can do about this warning:
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/Development/"))
 
+;; ========
+;; Snippets
+;; ========
+
+(add-to-list 'load-path
+             "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'popup)
+
+;; add some shortcuts in popup menu mode
+(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+(defun yas/popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+
+(setq yas/prompt-functions '(yas/popup-isearch-prompt yas/no-prompt))
+
 ;; ======
 ;; Visual
 ;; ======
@@ -140,6 +201,9 @@ There are two things you can do about this warning:
 ;; Hide toolbars
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; Remove menu bar
+(menu-bar-mode -1)
 
 ;; Load theme
 ;; (load-theme 'farmhouse-dark t)
@@ -172,3 +236,21 @@ There are two things you can do about this warning:
 
 ;; Wrap text in all text modes
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
+;; Add Ctrl+Scroll to zoom in and out
+(global-set-key [C-mouse-4] 'text-scale-increase)
+(global-set-key [C-mouse-5] 'text-scale-decrease)
+
+;; =======
+;; Yequake
+;; =======
+
+(setq yequake-frames
+      '(("Yequake & scratch" .
+         ((width . 0.75)
+          (height . 0.5)
+          (alpha . 0.95)
+          (buffer-fns . ("~/src/emacs/yequake/yequake.el"
+                         split-window-horizontally
+                         "*scratch*"))
+          (frame-parameters . ((undecorated . t)))))))
