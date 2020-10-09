@@ -164,4 +164,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Start up zsh trap which will store all commands in a sqlite database
 source ~/.zsh_trap.sh
+
+# Kill processes matching the supplied text
+function killit () {
+    ps -eaf | grep $1 | grep -v grep | awk '{ print $2 }' | xargs kill -9
+}

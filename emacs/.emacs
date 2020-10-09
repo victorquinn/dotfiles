@@ -50,12 +50,10 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default)))
+   '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
  '(minimap-mode t)
  '(package-selected-packages
-   (quote
-    (org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme))))
+   '(org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -87,6 +85,9 @@ There are two things you can do about this warning:
 
 ;; Ace window
 (global-set-key (kbd "C-x o") 'ace-window)
+
+;; Org Board
+(global-set-key (kbd "C-c o") org-board-keymap)
 
 ;; ========
 ;; Org Mode
@@ -206,16 +207,11 @@ There are two things you can do about this warning:
 (menu-bar-mode -1)
 
 ;; Load theme
-;; (load-theme 'farmhouse-dark t)
-(use-package twilight-bright-theme
-  :ensure
-  :config
-  (enable-theme 'twilight-bright))
-
-;; (use-package farmhouse-theme
+(load-theme 'farmhouse-dark t)
+;; (use-package twilight-bright-theme
 ;;   :ensure
 ;;   :config
-;;   (load-theme 'farmhouse-light t))
+;;   (enable-theme 'twilight-bright))
 
 ;; Turn on column numbers
 (setq column-number-mode t)
