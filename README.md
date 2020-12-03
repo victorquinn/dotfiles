@@ -9,9 +9,5 @@ Since git will not allow you to clone directly into an existing directory (and o
 
 Then run the install script to symlink to  all dotfiles/directories into my home directory. Run:
 
-	cd ~/dotfiles
-    ./install
-
-You may see node errors if you don't have some of the node dependencies installed globally for this install script. To resolve them, run the following:
-
-	npm install -g q q-io commander prompt
+    cd ~/dotfiles
+    ./install.sh
