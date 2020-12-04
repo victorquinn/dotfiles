@@ -9,8 +9,10 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="pygmalion"
 if [ -n "$INSIDE_EMACS" ]; then
     export ZSH_THEME="rawsyntax"
+    echo "Loading rawsyntax theme..."
 else
     export ZSH_THEME="bullet-train"
+    echo "Loading bullet-train theme..."
 fi
 
 # Example aliases
@@ -67,19 +69,11 @@ source $ZSH/oh-my-zsh.sh
 export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 export GOPATH=$HOME/Development/go
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-### Add the yarn path
-export PATH="$(yarn global bin | grep -o '/.*'):$PATH"
 
 # eval $(thefuck --alias)
 
@@ -87,10 +81,6 @@ export GPG_TTY=$(tty)
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 autoload -U +X bashcompinit && bashcompinit
-
-export PATH="$PATH:`yarn global bin`"
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
-
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -131,6 +121,18 @@ else
     echo "${GREEN}bat not installed, recommend downloading ${BLUE}https://github.com/sharkdp/bat${RESET}"
 fi
 
+if hash yarn 2>/dev/null; then
+    ### Add the yarn path
+    export PATH="$PATH:`yarn global bin`"
+fi
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    "$NVM_DIR/nvm.sh" # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 # These should be conditional and check that the alternatives exist before using them
 
 # HSTR configuration - add this to ~/.zshrc
@@ -145,9 +147,6 @@ alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 export KUBECONFIG=$KUBECONFIG:~/.kube/config
 
 alias restart-audio="pulseaudio --kill && pulseaudio --start"
-
-source /usr/share/nvm/init-nvm.sh
-export PATH="/usr/local/opt/ruby@2.5/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -169,5 +168,10 @@ source ~/.zsh_trap.sh
 
 # Kill processes matching the supplied text
 function killit () {
-    ps -eaf | grep $1 | grep -v grep | awk '{ print $2 }' | xargs kill -9
+    if [ $# -eq 0 ]; then
+        echo "Error: No argument supplied\n"
+        echo "Usage: killit {process_name}";
+    else
+        ps -eaf | grep $1 | grep -v grep | awk '{ print $2 }' | xargs kill -9
+    fi
 }
