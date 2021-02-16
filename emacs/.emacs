@@ -53,12 +53,38 @@ There are two things you can do about this warning:
    '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
  '(minimap-mode t)
  '(package-selected-packages
-   '(clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
+   '(web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
 ;; Inhibit .# lockfiles
 (setq create-lockfiles nil)
+
+;; ============
+;; Centaur Tabs
+;; ============
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+
+;; =======
+;; Emojify
+;; =======
+
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+
+;; ==========
+;; Encryption
+;; ========++
+
+(require 'epa-file)
+(epa-file-enable)
 
 ;; ====
 ;; Font
@@ -88,6 +114,20 @@ There are two things you can do about this warning:
 
 ;; Org Board
 (global-set-key (kbd "C-c o") org-board-keymap)
+
+;; =====
+;; Modes
+;; =====
+
+(add-to-list 'auto-mode-alist '("\\.ts?x\\'" . typescript-mode))
+
+;; ================
+;; Multiple Cursors
+;; ================
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; ========
 ;; Org Mode
@@ -133,14 +173,6 @@ There are two things you can do about this warning:
 
 ;; (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
 
-;; ================
-;; Multiple Cursors
-;; ================
-
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
 ;; ====
 ;; PATH
 ;; ====
@@ -151,10 +183,10 @@ There are two things you can do about this warning:
 ;; Projectile
 ;; ==========
 
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-project-search-path '("~/Development/"))
+;; (projectile-mode +1)
+;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; (setq projectile-project-search-path '("~/Development/"))
 
 ;; ========
 ;; Snippets

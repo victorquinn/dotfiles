@@ -4,10 +4,10 @@
 #	email = vquinn@ngpvan.com # NGP VAN
 #	email = victor@socialradar.com # SocialRadar
         email = mail@victorquinn.com # Personal
-        signingkey = 0C785D78CCCF28C39841222FEF304CDD429F5478
+#        signingkey = 0C785D78CCCF28C39841222FEF304CDD429F5478
 
-[commit]
-        gpgsign=true
+# [commit]
+#         gpgsign=true
 
 [core]
         editor = emacs

@@ -57,11 +57,13 @@ then
     plugins=(battery colorize extract git git-extras git-flow gitfast node npm urltools)
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
+    PLATFORM="linux"
 else
     # Mac only
     plugins=(battery brew colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
     export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+    PLATFORM="mac"
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -75,12 +77,10 @@ export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/lo
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# eval $(thefuck --alias)
-
-export GPG_TTY=$(tty)
+#export GPG_TTY=$(tty)
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
-autoload -U +X bashcompinit && bashcompinit
+# autoload -U +X bashcompinit && bashcompinit
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -108,12 +108,14 @@ if hash pyenv 2>/dev/null; then
     source /Users/vquinn/.artifactoryrc
 fi
 
+# exa
 if hash exa 2>/dev/null; then
     alias ls="exa"
 else
     echo "${GREEN}exa not installed, recommend downloading ${BLUE}https://the.exa.website/${RESET}"
 fi
 
+# bat
 if hash bat 2>/dev/null; then
     alias ccat=/usr/bin/cat
     alias cat=bat
@@ -121,9 +123,41 @@ else
     echo "${GREEN}bat not installed, recommend downloading ${BLUE}https://github.com/sharkdp/bat${RESET}"
 fi
 
+# prettyping
+if hash prettyping 2>/dev/null; then
+    alias ping=prettyping
+else
+    echo "prettyping not found, installing..."
+    if  [ $PLATFORM = 'mac' ]; then
+        PRETTYPING_INSTALL="brew install prettyping"
+    elif [ $PLATFORM = 'linux' ]; then
+        PRETTYPING_INSTALL="sudo pacman -S prettyping"
+    fi
+    eval "$PRETTYPING_INSTALL"
+    alias ping=prettyping
+fi
+
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+
+# Yarn
 if hash yarn 2>/dev/null; then
     ### Add the yarn path
     export PATH="$PATH:`yarn global bin`"
+fi
+
+# thefuck
+if hash thefuck 2>/dev/null; then
+    eval $(thefuck --alias)
+else
+    echo "thefuck not found, installing..."
+    if  [ $PLATFORM = 'mac' ]; then
+        THEFUCK_INSTALL="brew install thefuck"
+    elif [ $PLATFORM = 'linux' ]; then
+        THEFUCK_INSTALL="sudo pacman -S thefuck"
+    fi
+    eval "$THEFUCK_INSTALL"
+    eval $(thefuck --alias)
 fi
 
 # NVM
@@ -131,6 +165,10 @@ export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
     "$NVM_DIR/nvm.sh" # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
+    source /usr/share/nvm/init-nvm.sh
 fi
 
 # These should be conditional and check that the alternatives exist before using them
@@ -146,25 +184,11 @@ alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/config
 
-alias restart-audio="pulseaudio --kill && pulseaudio --start"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/victor/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/victor/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/victor/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/victor/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # Start up zsh trap which will store all commands in a sqlite database
 source ~/.zsh_trap.sh
+
+# Custom commands I have created
+alias restart-audio="pulseaudio --kill && pulseaudio --start"
 
 # Kill processes matching the supplied text
 function killit () {
