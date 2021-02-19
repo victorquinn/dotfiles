@@ -141,6 +141,7 @@ There are two things you can do about this warning:
  'org-babel-load-languages
  '((ditaa . t)
    (js . t)
+   (shell . t)
    (typescript . t)))
 
 (setq org-babel-js-function-wrapper
