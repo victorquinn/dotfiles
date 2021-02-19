@@ -2,8 +2,11 @@ Config {
 
    -- appearance
      font =         "xft:Operator Mono:size=10:bold:antialias=true"
-   , bgColor =      "black"
-   , fgColor =      "#646464"
+   , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=20:antialias=true:hinting=true"
+                       , "xft:FontAwesome:pixelsize=13"
+                       ]
+   , bgColor =      "#272b34"
+   , fgColor =      "white"
    , position =     Top
    , border =       BottomB
    , borderColor =  "#646464"
@@ -11,7 +14,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }{ %KJFK% | %date% || %kbd% "
+   , template = "%StdinReader% } %date% { %KJFK% | %multicpu% | %coretemp% | %memory% | %dynnetwork%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -37,12 +40,14 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands = 
 
+        [ Run StdinReader
+
         -- weather monitor
-        [ Run Weather "KJFK" [ "--template", "<skyCondition> | <fc=#4682B4><tempF></fc>°F | <fc=#4682B4><rh></fc>% Humidity"
+        , Run Weather "KJFK" [ "--template", "<skyCondition> | <fc=#4682B4><tempF></fc>°F | <fc=#4682B4><rh></fc>% Humidity"
                              ] 36000
 
         -- network activity monitor (dynamic interface resolution)
-        , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+        , Run DynNetwork     [ "--template" , "<dev>: <fn=1>\xf0aa</fn><tx>kB/s|<fn=1>\xf0ab</fn><rx>kB/s"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
                              , "--low"      , "darkgreen"
@@ -77,30 +82,9 @@ Config {
                              , "--high"     , "darkred"
                              ] 10
 
-        -- battery monitor
-        , Run Battery        [ "--template" , "Batt: <acstatus>"
-                             , "--Low"      , "10"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
-
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o"	, "<left>% (<timeleft>)"
-                                       -- AC "on" status
-                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
-                                       -- charged status
-                                       , "-i"	, "<fc=#006000>Charged</fc>"
-                             ] 50
-
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "<fc=#ABABAB>%F (%a) %T</fc>" "date" 10
+        , Run Date           "%F (%a) %T" "date" 10
 
-        -- keyboard layout indicator
-        , Run Kbd            [ ("us(dvorak)" , "<fc=#00008B>DV</fc>")
-                             , ("us"         , "<fc=#8B0000>US</fc>")
-                             ]
         ]
    }
