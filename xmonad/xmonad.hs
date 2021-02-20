@@ -2,8 +2,16 @@
 import XMonad
 import Data.Monoid
 import System.Exit
-import XMonad.Hooks.DynamicLog
+
+-- Hooks
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.WorkspaceHistory
+
+-- Utilities
+import XMonad.Util.NamedWindows
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 
@@ -25,7 +33,7 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
 -- Width of the window border in pixels.
---
+myBorderWidth :: Dimension
 myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
@@ -36,6 +44,9 @@ myBorderWidth   = 2
 -- This makes the Command key the modmask
 -- Switch back to mod1Mask to make it left alt
 myModMask       = mod4Mask
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
@@ -232,7 +243,11 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+myLogHook :: X ()
+myLogHook = fadeInactiveLogHook fadeAmount
+    where fadeAmount = 1.0
+
+-- myLogHook = xmobarPP { ppCurrent = xmobarColor "#fa5fa8" "" . wrap "<" ">" }
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -255,17 +270,23 @@ myPP = xmobarPP { ppCurrent = xmobarColor "#fa5fa8" "" . wrap "<" ">" }
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
+-- Notifications
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+  urgencyHook LibNotifyUrgencyHook w = do
+    name <- getName w
+    Just idx <- fmap(W.findTag w) $ gets windowset
+
+    safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+main = do
+  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.xmobarrc"
+  xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.xmobarrc"
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -284,9 +305,22 @@ defaults = def {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        logHook            = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
+         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
+         , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]" -- Current workspace in xmobar
+         , ppVisible = xmobarColor "#98be65" ""                -- Visible but not current workspace
+         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
+         , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
+         , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
+         , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"          -- Separators in xmobar
+         , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
+         , ppExtras  = [windowCount]                           -- # of windows current workspace
+         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+         },        
         startupHook        = myStartupHook
     }
+
+  -- xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
