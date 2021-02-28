@@ -53,7 +53,7 @@ There are two things you can do about this warning:
    '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
  '(minimap-mode t)
  '(package-selected-packages
-   '(web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
+   '(lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -91,7 +91,7 @@ There are two things you can do about this warning:
 ;; ====
 
 (add-to-list 'default-frame-alist '(font . "Operator Mono Book"))
-(set-face-attribute 'default nil :font "Operator Mono Book" :height 100)
+(set-face-attribute 'default nil :font "Operator Mono Book" :height 90)
 
 ;; ======
 ;; Hydras

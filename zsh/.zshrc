@@ -171,6 +171,11 @@ if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
     source /usr/share/nvm/init-nvm.sh
 fi
 
+# PrettyPing
+if hash prettyping 2>/dev/null; then
+    alias ping=prettyping
+fi
+
 # These should be conditional and check that the alternatives exist before using them
 
 # HSTR configuration - add this to ~/.zshrc
@@ -179,7 +184,6 @@ setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor       # get more colors
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
-alias ping=prettyping
 alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/config
@@ -199,3 +203,4 @@ function killit () {
         ps -eaf | grep $1 | grep -v grep | awk '{ print $2 }' | xargs kill -9
     fi
 }
+
