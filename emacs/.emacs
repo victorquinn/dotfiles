@@ -76,8 +76,8 @@ There are two things you can do about this warning:
 ;; Emojify
 ;; =======
 
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+;; (use-package emojify
+;;   :hook (after-init . global-emojify-mode))
 
 ;; ==========
 ;; Encryption
