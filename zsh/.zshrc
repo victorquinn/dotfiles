@@ -146,6 +146,11 @@ if hash yarn 2>/dev/null; then
     export PATH="$PATH:`yarn global bin`"
 fi
 
+# Mixer
+if hash ncpamixer 2>/dev/null; then
+    alias mixer=ncpamixer
+fi
+
 # thefuck
 if hash thefuck 2>/dev/null; then
     eval $(thefuck --alias)
