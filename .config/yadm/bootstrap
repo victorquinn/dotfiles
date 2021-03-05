@@ -1,0 +1,25 @@
+#!/bin/sh
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+  # install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+fi
+
+# install oh-my-zsh if it's missing
+if [ ! -d ~/.oh-my-zsh ]
+then
+    echo "Installing Oh My ZSH"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+    echo "Skipping Oh My ZSH install since it's already installed"
+fi
