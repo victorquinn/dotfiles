@@ -129,6 +129,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
+    -- Volume Controls
+    , ((modm, xK_Page_Up), spawn "pamixer --increase 5")
+
+    , ((modm, xK_Page_Down), spawn "pamixer --decrease 5")
+
+    , ((modm .|. shiftMask, xK_Page_Down), spawn "pamixer -t")
+
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
