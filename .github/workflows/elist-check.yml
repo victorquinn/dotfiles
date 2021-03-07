@@ -1,0 +1,3 @@
+uses: leotaku/elisp-check@master
+with:
+  file: .emacs
