@@ -1,9 +1,18 @@
--- IMPORTS
+-- xmonad config used by Victor Quinn
+-- Author: Victor Quinn
+-- https://github.com/victorquinn/dotfiles
+
 import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
+import XMonad.Hooks.WorkspaceHistory
+
+import XMonad.Layout.ThreeColumns
+
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 
@@ -12,7 +21,6 @@ import qualified Data.Map        as M
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
---
 myTerminal      = "alacritty"
 -- myTextEditor    = "emacs"
 
@@ -46,7 +54,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["main","side","personal","start","5","6","7","8","9"]
+myWorkspaces    = ["main","side","personal","start"] ++ map show [5..9]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -180,19 +188,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts(tiled ||| Mirror tiled ||| Full)
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/3
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+myLayout = avoidStruts(
+  ThreeColMid 1 (3/100) (1/2) |||
+  Tall 1 (3/100) (1/2) |||
+  Mirror (Tall 1 (3/100) (1/2)) |||
+  Full)
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -213,7 +213,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -224,7 +225,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = ewmhDesktopsEventHook <+> docksEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -232,7 +233,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return ()
+
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -243,6 +245,7 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"   -- Desktop wallpaper
   spawnOnce "picom &"                -- Transparency
+  spawn "notify-send 'xmonad restarted'"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -257,36 +260,40 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+main = do
+  xmproc <- spawnPipe "xmobar"
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
+  -- statusBar myBar myPP toggleStrutsKey
+  xmonad $ ewmh defaults {
+    logHook = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP
+      {
+        ppOutput = hPutStrLn xmproc
+      }
+    , manageHook = manageDocks <+> myManageHook
+  }
 
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
 
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
-    }
+defaults = defaultConfig {
+    -- simple stuff
+    terminal           = myTerminal
+    , focusFollowsMouse  = myFocusFollowsMouse
+    , clickJustFocuses   = myClickJustFocuses
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = myNormalBorderColor
+    , focusedBorderColor = myFocusedBorderColor
+
+    -- key bindings
+    , keys               = myKeys
+    , mouseBindings      = myMouseBindings
+
+    -- hooks, layouts
+    , layoutHook         = myLayout
+    , manageHook         = myManageHook
+    , handleEventHook    = myEventHook
+    , startupHook        = myStartupHook
+}
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
