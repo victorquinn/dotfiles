@@ -3,7 +3,10 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
+import XMonad.Hooks.WorkspaceHistory
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 
@@ -232,7 +235,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return ()
+
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -257,36 +261,39 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+main = do
+  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.xmobarrc"
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
+  -- statusBar myBar myPP toggleStrutsKey
+  xmonad $ ewmh defaults {
+    logHook = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP
+      {
+        ppOutput = \x -> hPutStrLn xmproc0 x
+      }
     }
+
+
+defaults = defaultConfig {
+    -- simple stuff
+    terminal           = myTerminal
+    , focusFollowsMouse  = myFocusFollowsMouse
+    , clickJustFocuses   = myClickJustFocuses
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = myNormalBorderColor
+    , focusedBorderColor = myFocusedBorderColor
+
+    -- key bindings
+    , keys               = myKeys
+    , mouseBindings      = myMouseBindings
+
+    -- hooks, layouts
+    , layoutHook         = myLayout
+    , manageHook         = ( isFullscreen --> doFullFloat )
+    , handleEventHook    = myEventHook
+    , startupHook        = myStartupHook
+}
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
