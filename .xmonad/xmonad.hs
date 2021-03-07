@@ -213,7 +213,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -224,7 +225,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = ewmhDesktopsEventHook <+> docksEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -260,13 +261,13 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.xmobarrc"
+  xmproc <- spawnPipe "xmobar"
 
   -- statusBar myBar myPP toggleStrutsKey
   xmonad $ ewmh defaults {
     logHook = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP
       {
-        ppOutput = hPutStrLn xmproc0
+        ppOutput = hPutStrLn xmproc
       }
     , manageHook = manageDocks <+> myManageHook
   }
@@ -289,7 +290,7 @@ defaults = defaultConfig {
 
     -- hooks, layouts
     , layoutHook         = myLayout
-    , manageHook         = ( isFullscreen --> doFullFloat )
+    , manageHook         = myManageHook
     , handleEventHook    = myEventHook
     , startupHook        = myStartupHook
 }
