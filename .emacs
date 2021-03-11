@@ -90,8 +90,8 @@ There are two things you can do about this warning:
 ;; Font
 ;; ====
 
-(add-to-list 'default-frame-alist '(font . "Operator Mono Book"))
-(set-face-attribute 'default nil :font "Operator Mono Book" :height 90)
+(add-to-list 'default-frame-alist '(font . "Operator Mono Light"))
+(set-face-attribute 'default nil :font "Operator Mono Light" :height 100)
 
 ;; ======
 ;; Hydras

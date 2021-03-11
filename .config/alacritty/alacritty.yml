@@ -1,0 +1,26 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator
+
+font:
+  normal:
+    family: Operator Mono
+    style: Light
+  bold:
+    family: Operator Mono
+    style: Book
+  size: 10.0
+
+draw_bold_text_with_bright_colors: true
+
+colors:
+  # Bright colors
+  normal:
+    black:   '0x545454'
+    red:     '0xef5350'
+    green:   '0x8bc34a'
+    yellow:  '0xffeb3b'
+    blue:    '0x64b5f6'
+    magenta: '0xba68c8'
+    cyan:    '0x26c6da'
+    white:   '0xe0e0e0'
+
+background_opacity: 0.9

@@ -11,6 +11,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 import XMonad.Hooks.WorkspaceHistory
 
+import XMonad.Layout.Grid
+import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 
 import XMonad.Util.SpawnOnce
@@ -66,8 +68,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch dmenu
+    -- launch rofi
     , ((modm,               xK_p     ), spawn "rofi -show run")
+
+    -- emoji menu
+    , ((modm              , xK_f     ), spawn "rofi -show emoji -modi emoji")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -76,10 +81,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_c     ), kill)
 
      -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), spawn "rofi -combi-modi window,drun -show combi -modi combi")
+    , ((modm .|. shiftMask, xK_space ), spawn "rofi -combi-modi window,drun -show combi -modi combi")
 
     --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), sendMessage NextLayout)
+    , ((modm,               xK_space ), sendMessage NextLayout)
     -- , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
@@ -128,9 +133,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Volume Controls
-    , ((modm, xK_Page_Up), spawn "pamixer --increase 5")
+    , ((modm, xK_Page_Up), spawn "pamixer --increase 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume increased to $vol\" -u low")
 
-    , ((modm, xK_Page_Down), spawn "pamixer --decrease 5")
+    , ((modm, xK_Page_Down), spawn "pamixer --decrease 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume decreased to $vol\" -u low")
 
     , ((modm .|. shiftMask, xK_Page_Down), spawn "pamixer -t")
 
@@ -193,10 +198,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts(
+myLayout = spacing 5 $ avoidStruts(
   ThreeColMid 1 (3/100) (1/2) |||
-  Tall 1 (3/100) (1/2) |||
+  ThreeCol 1 (3/100) (1/2) |||
   Mirror (Tall 1 (3/100) (1/2)) |||
+  Grid |||
   Full)
 
 ------------------------------------------------------------------------
