@@ -24,3 +24,10 @@ colors:
     white:   '0xe0e0e0'
 
 background_opacity: 0.9
+
+window:
+  dynamic_padding: true
+  padding:
+    x: 10
+    y: 10
+
