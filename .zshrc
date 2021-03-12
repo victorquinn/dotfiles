@@ -209,3 +209,5 @@ function killit () {
     fi
 }
 
+# Load secrets
+source .secrets
