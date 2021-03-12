@@ -133,9 +133,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Volume Controls
-    , ((modm, xK_Page_Up), spawn "pamixer --increase 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume increased to $vol\" -u low")
+    , ((modm, xK_Page_Up), spawn "pamixer --increase 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume increased to $vol\" -u low -i ~/.config/dunst/volume-up.png")
 
-    , ((modm, xK_Page_Down), spawn "pamixer --decrease 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume decreased to $vol\" -u low")
+    , ((modm, xK_Page_Down), spawn "pamixer --decrease 5 && vol=$(pamixer --get-volume) && notify-send 'Volume' \"Volume decreased to $vol\" -u low -i ~/.config/dunst/volume-down.png")
 
     , ((modm .|. shiftMask, xK_Page_Down), spawn "pamixer -t")
 
