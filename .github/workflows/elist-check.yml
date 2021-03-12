@@ -1,3 +1,8 @@
-uses: leotaku/elisp-check@master
-with:
-  file: .emacs
+name: Emacs Lint
+
+on: [push, pull_request]
+
+jobs:
+  uses: leotaku/elisp-check@master
+  with:
+    file: .emacs
