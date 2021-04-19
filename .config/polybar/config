@@ -53,11 +53,12 @@ module-margin-right = 2
 
 font-0 = Operator Mono Light:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = Weather Icons:size=12;1
+font-2 = Weather Icons:size=12;4
+font-3 = Siji:size=16;2
 
-modules-left = filesystem cpu memory battery bspwm i3
+modules-left = filesystem cpu memory info-hackspeed
 modules-center = mpd date openweathermap-fullfeatured
-modules-right = xbacklight pulseaudio xkeyboard wlan eth battery
+modules-right = xbacklight pulseaudio pulseaudio-microphone xkeyboard wlan eth battery
 
 tray-position = right
 tray-padding = 2
@@ -88,6 +89,20 @@ type = custom/script
 exec = ~/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
 interval = 600
 label-font = 3
+click-left = "brave https://openweathermap.org/city/5128581"
+
+[module/info-hackspeed]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/info-hackspeed/info-hackspeed.sh
+tail = true
+format-underline = #124cd3
+
+[module/pulseaudio-microphone]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh
+tail = true
+click-left = ~/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-microphone/pulseaudio-microphone.sh --toggle &
+format-underline = #b7690a
 
 [module/xwindow]
 type = internal/xwindow
@@ -282,7 +297,7 @@ format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
-label = %date% %time%
+label = %{A1:brave https\://calendar.google.com:} %date% %time% %{A}
 
 [module/pulseaudio]
 type = internal/pulseaudio
