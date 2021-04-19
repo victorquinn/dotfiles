@@ -55,9 +55,9 @@ font-0 = Operator Mono Light:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Weather Icons:size=12;1
 
-modules-left = cpu memory battery bspwm i3
-modules-center = mpd date
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery openweathermap-fullfeatured
+modules-left = filesystem cpu memory battery bspwm i3
+modules-center = mpd date openweathermap-fullfeatured
+modules-right = xbacklight pulseaudio xkeyboard wlan eth battery
 
 tray-position = right
 tray-padding = 2
