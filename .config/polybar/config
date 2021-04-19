@@ -33,7 +33,7 @@ width = 100%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0.0
 fixed-center = false
 
 background = ${colors.background}
@@ -51,13 +51,13 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+font-0 = Operator Mono Light:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-2 = Weather Icons:size=12;1
 
 modules-left = cpu memory battery bspwm i3
-modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-center = mpd date
+modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery openweathermap-fullfeatured
 
 tray-position = right
 tray-padding = 2
@@ -80,6 +80,14 @@ cursor-scroll = ns-resize
 [bar/secondary]
 inherit = bar/main
 monitor = ${env:MONITOR:DP-4}
+modules-center =
+modules-left =
+
+[module/openweathermap-fullfeatured]
+type = custom/script
+exec = ~/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
+interval = 600
+label-font = 3
 
 [module/xwindow]
 type = internal/xwindow
@@ -264,10 +272,10 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
+date = "%A %b %d"
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
+time = "%I:%M%P %Z"
 time-alt = %H:%M:%S
 
 format-prefix = 
@@ -387,7 +395,6 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/menu
 
 expand-right = true
-
 format-spacing = 1
 
 label-open = 
