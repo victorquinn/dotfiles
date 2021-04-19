@@ -14,7 +14,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader% } %date% { %multicpu% | %coretemp% | %memory% | %dynnetwork% | %KJFK%"
+   , template = "%StdinReader% } %date% { %multicpu% | %memory% | %dynnetwork% | %KJFK%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -56,7 +56,7 @@ Config {
                              ] 10
 
         -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
+        , Run MultiCpu       [ "--template" , "CPU: <total0>%|<total1>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "darkgreen"

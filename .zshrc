@@ -211,3 +211,6 @@ function killit () {
 
 # Load secrets
 source .secrets
+
+ARTIFACTORY_USER=vquinn
+

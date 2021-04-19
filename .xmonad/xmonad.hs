@@ -1,4 +1,4 @@
--- xmonad config used by Victor Quinn
+ -- xmonad config used by Victor Quinn
 -- Author: Victor Quinn
 -- https://github.com/victorquinn/dotfiles
 
@@ -53,7 +53,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["main","side","personal","start"] ++ map show [5..9]
+myWorkspaces    = map show [1..9]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -80,8 +80,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
-     -- Rotate through the available layout algorithms
-    , ((modm .|. shiftMask, xK_space ), spawn "rofi -combi-modi window,drun -show combi -modi combi")
+    -- launch clipboard manager
+    , ((modm,               xK_v     ), spawn "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'")
+
+    -- Launch rofi
+    , ((modm .|. shiftMask, xK_space ), spawn "rofi -combi-modi window,drun,\"clipboard:greenclip print\" -show combi -modi combi")
 
     --  Reset the layouts on the current workspace to default
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -143,7 +146,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile; killall polybar; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
@@ -198,8 +201,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacing 5 $ avoidStruts(
-  ThreeColMid 1 (3/100) (1/2) |||
+myLayout = spacing 4 $ avoidStruts(
   ThreeCol 1 (3/100) (1/2) |||
   Mirror (Tall 1 (3/100) (1/2)) |||
   Grid |||
@@ -255,7 +257,7 @@ myEventHook = ewmhDesktopsEventHook <+> docksEventHook
 -- per-workspace layout choices.
 myStartupHook = do
   spawnOnce "nitrogen --restore &"   -- Desktop wallpaper
-  spawnOnce "picom &"                -- Transparency
+  -- spawnOnce "picom --experimental-backends &"                -- Transparency
   spawn "notify-send 'xmonad restarted'"
 
 ------------------------------------------------------------------------
@@ -272,7 +274,9 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "xmobar"
+  -- xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc.hs"
+  xmproc <- spawnPipe "polybar main"
+  xmproc <- spawnPipe "polybar secondary"
 
   -- statusBar myBar myPP toggleStrutsKey
   xmonad $ ewmh defaults {
