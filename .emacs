@@ -8,53 +8,69 @@
 ;; ==================
 ;; Note, this has to come first which breaks alphabetization but is needed for things that come below
 
-(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (when no-ssl
-    (warn "\
-Your version of Emacs does not support SSL connections,
-which is unsafe because it allows man-in-the-middle attacks.
-There are two things you can do about this warning:
-1. Install an Emacs version that does support SSL and be safe.
-2. Remove this warning from your init file so you won't see it again."))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
-(package-initialize)
+;; (require 'package)
+;; (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+;;                     (not (gnutls-available-p))))
+;;        (proto (if no-ssl "http" "https")))
+;;   (when no-ssl
+;;     (warn "\
+;; Your version of Emacs does not support SSL connections,
+;; which is unsafe because it allows man-in-the-middle attacks.
+;; There are two things you can do about this warning:
+;; 1. Install an Emacs version that does support SSL and be safe.
+;; 2. Remove this warning from your init file so you won't see it again."))
+;;   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+;;   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+;;   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+;;   (when (< emacs-major-version 24)
+;;     ;; For important compatibility libraries like cl-lib
+;;     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+;; (package-initialize)
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; Use Package
-(eval-when-compile
-  (require 'use-package))
+;; ;; Use Package
+;; (eval-when-compile
+;;   (require 'use-package))
 
-;; Place all backup files in one directory.
-(setq backup-directory-alist `((".*" . "~/.saves")))
-(setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
-(setq backup-by-copying t)
-(setq delete-old-versions t
-      kept-new-versions 10
-      kept-old-versions 2
-      version-control t)
-(setq make-backup-files t)
+;; ;; Place all backup files in one directory.
+;; (setq backup-directory-alist `((".*" . "~/.saves")))
+;; (setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
+;; (setq backup-by-copying t)
+;; (setq delete-old-versions t
+;;       kept-new-versions 10
+;;       kept-old-versions 2
+;;       version-control t)
+;; (setq make-backup-files t)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
- '(minimap-mode t)
- '(package-selected-packages
-   '(helm-projectile org-projectile org-projectile-helm projectile lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
- '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(custom-safe-themes
+;;    '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
+;;  '(minimap-mode t)
+;;  '(package-selected-packages
+;;    '(helm-projectile org-projectile org-projectile-helm projectile lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
+;;  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
+
+
+;; Straight.el for package management
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 
 
 ;; Inhibit .# lockfiles
@@ -64,13 +80,13 @@ There are two things you can do about this warning:
 ;; Centaur Tabs
 ;; ============
 
-(use-package centaur-tabs
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward))
+;; (use-package centaur-tabs
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   :bind
+;;   ("C-<prior>" . centaur-tabs-backward)
+;;   ("C-<next>" . centaur-tabs-forward))
 
 ;; =======
 ;; Emojify
@@ -97,10 +113,10 @@ There are two things you can do about this warning:
 ;; Hydras
 ;; ======
 
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out"))
+;; (defhydra hydra-zoom (global-map "<f2>")
+;;   "zoom"
+;;   ("g" text-scale-increase "in")
+;;   ("l" text-scale-decrease "out"))
 
 ;; ===========
 ;; Keybindings
@@ -113,7 +129,7 @@ There are two things you can do about this warning:
 (global-set-key (kbd "C-x o") 'ace-window)
 
 ;; Org Board
-(global-set-key (kbd "C-c o") org-board-keymap)
+;; (global-set-key (kbd "C-c o") org-board-keymap)
 
 ;; =====
 ;; Modes
@@ -137,19 +153,19 @@ There are two things you can do about this warning:
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((ditaa . t)
-   (js . t)
-   (shell . t)
-   (typescript . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((ditaa . t)
+;;    (js . t)
+;;    (shell . t)
+;;    (typescript . t)))
 
-(setq org-babel-js-function-wrapper
-      "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
+;; (setq org-babel-js-function-wrapper
+;;       "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
 
-(defun org-babel-execute:typescript (body params)
-  (let ((org-babel-js-cmd "npx ts-node"))
-    (org-babel-execute:js body params)))
+;; (defun org-babel-execute:typescript (body params)
+;;   (let ((org-babel-js-cmd "npx ts-node"))
+;;     (org-babel-execute:js body params)))
 
 (setq org-log-done 'time)
 ;; Add a note when closed
@@ -184,6 +200,7 @@ There are two things you can do about this warning:
 ;; Projectile
 ;; ==========
 
+(straight-use-package 'projectile-mode)
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
