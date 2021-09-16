@@ -3,11 +3,14 @@
 #       email = vquinn@amherst.edu # Amherst College
 #	email = vquinn@ngpvan.com # NGP VAN
 #	email = victor@socialradar.com # SocialRadar
+#       email = victor@shopspring.com # Spring
+#       email = victor@knotel.com # Knotel
         email = mail@victorquinn.com # Personal
-#        signingkey = 0C785D78CCCF28C39841222FEF304CDD429F5478
+#       email = vquinn@better.com # Better
+        signingkey = 0C785D78CCCF28C39841222FEF304CDD429F5478
 
-# [commit]
-#         gpgsign=true
+[commit]
+        gpgsign=true
 
 [core]
         editor = emacs
@@ -55,3 +58,5 @@
 
 [rebase]
         autosquash = true
+[init]
+	defaultBranch = main

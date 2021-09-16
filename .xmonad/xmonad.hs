@@ -1,4 +1,4 @@
- -- xmonad config used by Victor Quinn
+-- xmonad config used by Victor Quinn
 -- Author: Victor Quinn
 -- https://github.com/victorquinn/dotfiles
 
@@ -146,7 +146,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; killall polybar; xmonad --restart")
+    -- , ((modm              , xK_q     ), spawn "xmonad --recompile; killall polybar; xmonad --restart")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile; killall xmobar; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
@@ -201,7 +202,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacing 4 $ avoidStruts(
+myLayout = spacingRaw True (Border 4 4 4 4) True (Border 2 2 2 2) True $ avoidStruts(
   ThreeCol 1 (3/100) (1/2) |||
   Mirror (Tall 1 (3/100) (1/2)) |||
   Grid |||
@@ -274,9 +275,9 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  -- xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc.hs"
-  xmproc <- spawnPipe "polybar main"
-  xmproc <- spawnPipe "polybar secondary"
+  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc.hs"
+  -- xmproc <- spawnPipe "polybar main"
+  -- xmproc <- spawnPipe "polybar secondary"
 
   -- statusBar myBar myPP toggleStrutsKey
   xmonad $ ewmh defaults {

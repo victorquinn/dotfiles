@@ -13,17 +13,46 @@ draw_bold_text_with_bright_colors: true
 
 colors:
   # Bright colors
-  normal:
-    black:   '0x545454'
-    red:     '0xef5350'
-    green:   '0x8bc34a'
-    yellow:  '0xffeb3b'
-    blue:    '0x64b5f6'
-    magenta: '0xba68c8'
-    cyan:    '0x26c6da'
-    white:   '0xe0e0e0'
+  # normal:
+  #   black:   '0x545454'
+  #   red:     '0xef5350'
+  #   green:   '0x8bc34a'
+  #   yellow:  '0xffeb3b'
+  #   blue:    '0x64b5f6'
+  #   magenta: '0xba68c8'
+  #   cyan:    '0x26c6da'
+  #   white:   '0xe0e0e0'
 
-background_opacity: 0.9
+  # Colors (Wombat)
+  # Default colors
+  primary:
+    background: '#1f1f1f'
+    foreground: '#e5e1d8'
+
+  # Normal colors
+  normal:
+    black:   '#000000'
+    red:     '#f7786d'
+    green:   '#bde97c'
+    yellow:  '#efdfac'
+    blue:    '#6ebaf8'
+    magenta: '#ef88ff'
+    cyan:    '#90fdf8'
+    white:   '#e5e1d8'
+
+  # Bright colors
+  bright:
+    black:   '#b4b4b4'
+    red:     '#f99f92'
+    green:   '#e3f7a1'
+    yellow:  '#f2e9bf'
+    blue:    '#b3d2ff'
+    magenta: '#e5bdff'
+    cyan:    '#c2fefa'
+    white:   '#ffffff'
+
+
+background_opacity: 0.98
 
 window:
   dynamic_padding: true
