@@ -53,7 +53,7 @@ There are two things you can do about this warning:
    '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
  '(minimap-mode t)
  '(package-selected-packages
-   '(go-complete go-imenu go-mode go-projectile solaire-mode helm-xref xref xref-js2 dumb-jump helm-projectile org-projectile org-projectile-helm projectile lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
+   '(emacsql-sqlite3 go-complete go-imenu go-mode go-projectile solaire-mode helm-xref xref xref-js2 dumb-jump helm-projectile org-projectile org-projectile-helm projectile lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
  '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
 
 
@@ -180,6 +180,17 @@ There are two things you can do about this warning:
 (setq org-agenda-files (list "~/Development/knowledge/"))
 
 ;; (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
+
+;; Load org-roam
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/Development/knowledge/org-roam")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
 
 ;; ====
 ;; PATH
