@@ -9,10 +9,10 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="pygmalion"
 if [ -n "$INSIDE_EMACS" ]; then
     export ZSH_THEME="rawsyntax"
-    echo "Loading rawsyntax theme..."
+    # echo "Loading rawsyntax theme..."
 else
     export ZSH_THEME="bullet-train"
-    echo "Loading bullet-train theme..."
+    # echo "Loading bullet-train theme..."
 fi
 
 # Example aliases
@@ -176,11 +176,6 @@ if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
     source /usr/share/nvm/init-nvm.sh
 fi
 
-# PrettyPing
-if hash prettyping 2>/dev/null; then
-    alias ping=prettyping
-fi
-
 # These should be conditional and check that the alternatives exist before using them
 
 # HSTR configuration - add this to ~/.zshrc
@@ -192,6 +187,15 @@ bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode che
 alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/config
+
+sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+    echo "History database ready to rock! `sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"` rows found."
+else
+    echo "No database set up yet for history, creating"
+    sqlite3 ~/.bashdb.sqlite3 "CREATE TABLE history (oid INTEGER PRIMARY KEY, command TEXT NOT NULL, arguments TEXT NOT NULL, cwd text NOT NULL, tag text NOT NULL, created DATETIME DEFAULT (datetime('now', 'localtime')));"
+fi
 
 # Start up zsh trap which will store all commands in a sqlite database
 source ~/.zsh_trap.sh
