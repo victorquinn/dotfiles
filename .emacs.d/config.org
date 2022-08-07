@@ -1,0 +1,310 @@
+* Declared Emacs Bankruptcy on April 9, 2019
+** Everything from here on is started then :) Go through git history for
+** more past changes
+
+* Package Management
+** Note, this has to come first which breaks alphabetization but is needed for things that come below
+** Code
+#+begin_src emacs-lisp
+  (require 'package)
+  (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                      (not (gnutls-available-p))))
+         (proto (if no-ssl "http" "https")))
+    (when no-ssl
+      (warn "\
+  Your version of Emacs does not support SSL connections,
+  which is unsafe because it allows man-in-the-middle attacks.
+  There are two things you can do about this warning:
+  p1. Install an Emacs version that does support SSL and be safe.
+  2. Remove this warning from your init file so you won't see it again."))
+    ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+    (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+    ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+    (when (< emacs-major-version 24)
+      ;; For important compatibility libraries like cl-lib
+      (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+  (package-initialize)
+
+  (add-to-list 'package-archives
+               '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+  ;; Use Package
+  (eval-when-compile
+    (require 'use-package))
+
+  ;; Place all backup files in one directory.
+  (setq backup-directory-alist `((".*" . "~/.saves")))
+  (setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
+  (setq backup-by-copying t)
+  (setq delete-old-versions t
+        kept-new-versions 10
+        kept-old-versions 2
+        version-control t)
+  (setq make-backup-files t)
+
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     '("8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e8825f26af32403c5ad8bc983f8610a4a4786eb55e3a363fa9acb48e0677fe7e" default))
+   '(minimap-mode t)
+   '(package-selected-packages
+     '(emacsql-sqlite3 go-complete go-imenu go-mode go-projectile solaire-mode helm-xref xref xref-js2 dumb-jump helm-projectile org-projectile org-projectile-helm projectile lua-mode toml-mode web-mode centaur-tabs nim-mode clojure-mode org-super-agenda org-brain org-roam org-roam-server company-org-roam company-shell company-statistics company-terraform company-web company-go company graphviz-dot-mode hydra helm rust-mode yequake org-bullets ob-http popup-complete yasnippet-snippets org-board js-react-redux-yasnippets mocha-snippets yasnippet minimap rjsx-mode ob-go ob-graphql ob-nim ob-rust ob-sql-mode ob-typescript twilight-bright twilight-bright-theme ample-theme apropospriate-theme ace-window handlebars-mode typescript-mode multiple-cursors markdown-toc markdown-mode graphql graphql-mode yaml-mode terraform-mode farmhouse-theme)))
+   '(package-selected-packages (quote (terraform-mode json-mode farmhouse-theme typescript-mode)))
+
+
+  ;; Inhibit .# lockfiles
+  (setq create-lockfiles nil)
+
+#+end_src
+
+* Centaur Tabs
+** This puts nice tabs on the top of the window
+** Code
+#+begin_src emacs-lisp
+  (use-package centaur-tabs
+    :demand
+    :config
+    (centaur-tabs-mode t)
+    :bind
+    ("C-<prior>" . centaur-tabs-backward)
+    ("C-<next>" . centaur-tabs-forward))
+
+ #+end_src
+
+* Dumb Jump
+** Code
+ #+begin_src emacs-lisp
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+
+  ;; =======
+  ;; Emojify
+  ;; =======
+
+  ;; (use-package emojify
+  ;;   :hook (after-init . global-emojify-mode))
+
+  ;; ==========
+  ;; Encryption
+  ;; ==========
+
+  (require 'epa-file)
+  (epa-file-enable)
+
+  ;; ====
+  ;; Font
+  ;; ====
+
+  (add-to-list 'default-frame-alist '(font . "Operator Mono"))
+  (set-face-attribute 'default nil :font "Operator Mono" :height 120)
+
+  ;; ======
+  ;; Hydras
+  ;; ======
+
+  (defhydra hydra-zoom (global-map "<f2>")
+    "zoom"
+    ("g" text-scale-increase "in")
+    ("l" text-scale-decrease "out"))
+
+  ;; ===========
+  ;; Keybindings
+  ;; ===========
+
+  ;; Helm
+  (global-set-key (kbd "C-x b") 'helm-mini)
+
+  ;; Ace window
+  (global-set-key (kbd "C-x o") 'ace-window)
+
+  ;; Org Board
+  (global-set-key (kbd "C-c o") org-board-keymap)
+
+  ;; =====
+  ;; Modes
+  ;; =====
+
+  (add-to-list 'auto-mode-alist '("\\.ts?x\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.md?x\\'" . markdown-mode))
+
+  ;; ================
+  ;; Multiple Cursors
+  ;; ================
+
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+  ;; ========
+  ;; Org Mode
+  ;; ========
+
+  ;; Enable org-babel languages I'd use
+
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ditaa . t)
+     (js . t)
+     (shell . t)
+     (typescript . t)))
+
+  (setq org-babel-js-function-wrapper
+        "console.log(require('util').inspect(function(){\n%s\n}(), { depth: 100 }))")
+
+  (defun org-babel-execute:typescript (body params)
+    (let ((org-babel-js-cmd "npx ts-node"))
+      (org-babel-execute:js body params)))
+
+  (setq org-log-done 'time)
+  ;; Add a note when closed
+  (setq org-log-done 'note)
+
+  ;; Keyboard shortcuts
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+
+  (setq org-todo-keywords
+        '((sequence "TODO" "IN PROGRESS" "|" "DONE" "DEFERRED")))
+
+  (setq org-todo-keyword-faces
+        '(("TODO" . "pink") ("IN PROGRESS" . "orange") ("DONE") ("DEFERRED" . "yellow")))
+
+  (setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+  (setq org-default-notes-file "~/Development/knowledge/inbox.org")
+  (setq org-agenda-files (list "~/Development/knowledge/"))
+
+  ;; (define-key org-mode-map "\M-q" 'toggle-truncate-lines)
+
+  ;; Load org-roam
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/Development/knowledge/org-roam")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+
+  ;; ====
+  ;; PATH
+  ;; ====
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/local/bin")))
+
+  ;; ==========
+  ;; Projectile
+  ;; ==========
+
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-project-search-path '("~/Development/"))
+
+  ;; ========
+  ;; Snippets
+  ;; ========
+
+  (add-to-list 'load-path
+               "~/.emacs.d/plugins/yasnippet")
+  (require 'yasnippet)
+  (yas-global-mode 1)
+
+  (require 'popup)
+
+  ;; add some shortcuts in popup menu mode
+  (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+  (define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+  (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+  (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+  (define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+  (defun yas/popup-isearch-prompt (prompt choices &optional display-fn)
+    (when (featurep 'popup)
+      (popup-menu*
+       (mapcar
+        (lambda (choice)
+          (popup-make-item
+           (or (and display-fn (funcall display-fn choice))
+               choice)
+           :value choice))
+        choices)
+       :prompt prompt
+       ;; start isearch mode immediately
+       :isearch t
+       )))
+
+  (setq yas/prompt-functions '(yas/popup-isearch-prompt yas/no-prompt))
+
+  ;; ======
+  ;; Visual
+  ;; ======
+
+  ;; Hide top frame on macOS
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . light))
+
+  ;; Hide toolbars
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+  ;; Remove menu bar
+  (menu-bar-mode -1)
+
+  ;; Load theme
+  (load-theme 'farmhouse-dark t)
+  ;; (use-package twilight-bright-theme
+  ;;   :ensure
+  ;;   :config
+  ;;   (enable-theme 'twilight-bright))
+
+  ;; Solaire mode
+  ;; See https://github.com/hlissner/emacs-solaire-mode
+  (solaire-global-mode +1)
+
+  ;; Turn on column numbers
+  (setq column-number-mode t)
+
+  ;; Indent by 2 spaces
+  (setq tab-width 2)
+  (setq js-indent-level 2)
+  (setq typescript-indent-level 2)
+
+  ;; Turn off tabs
+  (setq-default indent-tabs-mode nil)
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+
+  ;; Wrap text in all text modes
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
+  ;; Add Ctrl+Scroll to zoom in and out
+  (global-set-key [C-mouse-4] 'text-scale-increase)
+  (global-set-key [C-mouse-5] 'text-scale-decrease)
+
+  ;; =======
+  ;; Yequake
+  ;; =======
+
+  (setq yequake-frames
+        '(("Yequake & scratch" .
+           ((width . 0.75)
+            (height . 0.5)
+            (alpha . 0.95)
+            (buffer-fns . ("~/src/emacs/yequake/yequake.el"
+                           split-window-horizontally
+                           "*scratch*"))
+            (frame-parameters . ((undecorated . t)))))))
+#+end_src
