@@ -13,7 +13,7 @@
         gpgsign=true
 
 [core]
-        editor = emacs
+        editor = nano
 	excludesfile = /Users/victorquinn/.gitignore
 
 [color]
@@ -60,3 +60,8 @@
         autosquash = true
 [init]
 	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

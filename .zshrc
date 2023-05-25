@@ -11,8 +11,9 @@ if [ -n "$INSIDE_EMACS" ]; then
     export ZSH_THEME="rawsyntax"
     # echo "Loading rawsyntax theme..."
 else
-    export ZSH_THEME="bullet-train"
+    # export ZSH_THEME="bullet-train"
     # echo "Loading bullet-train theme..."
+    export ZSH_THEME="agnoster"
 fi
 
 # Example aliases
@@ -72,7 +73,7 @@ export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 export GOPATH=$HOME/Development/go
 
 # Customize to your needs...
-export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH
+export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:~/Library/Python/3.9/bin:$PATH
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -101,12 +102,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 RED=`tput setaf 1`
 GREEN=`tput setaf 2`
 BLUE=`tput setaf 4`
-
-# Better specific
-if hash pyenv 2>/dev/null; then
-    eval "$(pyenv init -)"
-    source /Users/vquinn/.artifactoryrc
-fi
 
 # exa
 if hash exa 2>/dev/null; then
@@ -167,10 +162,8 @@ fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-    "$NVM_DIR/nvm.sh" # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
     source /usr/share/nvm/init-nvm.sh
@@ -188,17 +181,17 @@ alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/config
 
-sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"
-RESULT=$?
-if [ $RESULT -eq 0 ]; then
-    echo "History database ready to rock! `sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"` rows found."
-else
-    echo "No database set up yet for history, creating"
-    sqlite3 ~/.bashdb.sqlite3 "CREATE TABLE history (oid INTEGER PRIMARY KEY, command TEXT NOT NULL, arguments TEXT NOT NULL, cwd text NOT NULL, tag text NOT NULL, created DATETIME DEFAULT (datetime('now', 'localtime')));"
-fi
+# sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"
+# RESULT=$?
+# if [ $RESULT -eq 0 ]; then
+#     echo "History database ready to rock! `sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"` rows found."
+# else
+#     echo "No database set up yet for history, creating"
+#     sqlite3 ~/.bashdb.sqlite3 "CREATE TABLE history (oid INTEGER PRIMARY KEY, command TEXT NOT NULL, arguments TEXT NOT NULL, cwd text NOT NULL, tag text NOT NULL, created DATETIME DEFAULT (datetime('now', 'localtime')));"
+# fi
 
 # Start up zsh trap which will store all commands in a sqlite database
-source ~/.zsh_trap.sh
+# source ~/.zsh_trap.sh
 
 # Custom commands I have created
 alias restart-audio="pulseaudio --kill && pulseaudio --start"
