@@ -99,7 +99,7 @@
   ;; ====
 
   (add-to-list 'default-frame-alist '(font . "Operator Mono"))
-  (set-face-attribute 'default nil :font "Operator Mono" :height 120)
+  (set-face-attribute 'default nil :font "Operator Mono" :height 160)
 
   ;; ======
   ;; Hydras

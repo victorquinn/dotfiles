@@ -78,7 +78,7 @@ export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/lo
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-#export GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # autoload -U +X bashcompinit && bashcompinit
@@ -93,8 +93,8 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 
-export NPM_CONFIG_PREFIX=~/.npm-global
-export PATH="$PATH:$HOME/.npm-global/bin"
+# export NPM_CONFIG_PREFIX=~/.npm-global
+# export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH="$PATH:$HOME/.linuxbrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -209,5 +209,15 @@ function killit () {
 # Load secrets
 source .secrets
 
-ARTIFACTORY_USER=vquinn
+alias python="python3"
+alias pip="pip3"
+alias yw="yarn workspace"
+alias yws="yarn workspaces"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /Users/victor/.config/op/plugins.sh
+
+#export GITHUB_TOKEN=$(op item get 'GitHub Personal Access Token' --format json | jq -r '.fields[1].value')
+unset NPM_CONFIG_PREFIX
