@@ -104,10 +104,10 @@ GREEN=`tput setaf 2`
 BLUE=`tput setaf 4`
 
 # exa
-if hash exa 2>/dev/null; then
-    alias ls="exa"
+if hash eza 2>/dev/null; then
+    alias ls="eza"
 else
-    echo "${GREEN}exa not installed, recommend downloading ${BLUE}https://the.exa.website/${RESET}"
+    echo "${GREEN}eza not installed, recommend downloading ${BLUE}brew install eza{RESET}"
 fi
 
 # bat
