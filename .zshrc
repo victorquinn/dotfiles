@@ -1,223 +1,182 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-
-# ZSH_THEME="pygmalion"
+# Theme selection based on environment
 if [ -n "$INSIDE_EMACS" ]; then
     export ZSH_THEME="rawsyntax"
-    # echo "Loading rawsyntax theme..."
 else
-    # export ZSH_THEME="bullet-train"
-    # echo "Loading bullet-train theme..."
     export ZSH_THEME="agnoster"
 fi
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias emacs='emacsclient -nc -a ""'
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-URLTOOLS_METHOD="xnode"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-if  [[ "$(uname)" != "Darwin" ]]
-then
-    # Linux
+# Platform detection
+if [[ "$(uname)" != "Darwin" ]]; then
+    PLATFORM="linux"
     plugins=(battery colorize extract git git-extras git-flow gitfast node npm urltools)
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
-    PLATFORM="linux"
 else
-    # Mac only
+    PLATFORM="mac"
     plugins=(battery brew colorize extract git git-extras git-flow gitfast node npm urltools zsh-syntax-highlighting)
     export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    PLATFORM="mac"
 fi
+
+# Oh My Zsh settings
+COMPLETION_WAITING_DOTS="true"
+URLTOOLS_METHOD="xnode"
 
 source $ZSH/oh-my-zsh.sh
 
-export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
-export GOPATH=$HOME/Development/go
-
-# Customize to your needs...
-export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:${GOPATH//://bin:}/bin:$GOPATH/bin:$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:~/Library/Python/3.9/bin:$PATH
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export GPG_TTY=$(tty)
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
-
-# autoload -U +X bashcompinit && bashcompinit
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /home/victor/.nvm/versions/node/v10.15.2/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
-
-# export NPM_CONFIG_PREFIX=~/.npm-global
-# export PATH="$PATH:$HOME/.npm-global/bin"
-export PATH="$PATH:$HOME/.linuxbrew/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Colors
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-BLUE=`tput setaf 4`
-
-# exa
-if hash eza 2>/dev/null; then
-    alias ls="eza"
-else
-    echo "${GREEN}eza not installed, recommend downloading ${BLUE}brew install eza{RESET}"
-fi
-
-# bat
-if hash bat 2>/dev/null; then
-    alias ccat=/usr/bin/cat
-    alias cat=bat
-else
-    echo "${GREEN}bat not installed, recommend downloading ${BLUE}https://github.com/sharkdp/bat${RESET}"
-fi
-
-# prettyping
-if hash prettyping 2>/dev/null; then
-    alias ping=prettyping
-else
-    echo "prettyping not found, installing..."
-    if  [ $PLATFORM = 'mac' ]; then
-        PRETTYPING_INSTALL="brew install prettyping"
-    elif [ $PLATFORM = 'linux' ]; then
-        PRETTYPING_INSTALL="sudo pacman -S prettyping"
-    fi
-    eval "$PRETTYPING_INSTALL"
-    alias ping=prettyping
-fi
-
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-
-
-# Yarn
-if hash yarn 2>/dev/null; then
-    ### Add the yarn path
-    export PATH="$PATH:`yarn global bin`"
-fi
-
-# Mixer
-if hash ncpamixer 2>/dev/null; then
-    alias mixer=ncpamixer
-fi
-
-# thefuck
-if hash thefuck 2>/dev/null; then
-    eval $(thefuck --alias)
-else
-    echo "thefuck not found, installing..."
-    if  [ $PLATFORM = 'mac' ]; then
-        THEFUCK_INSTALL="brew install thefuck"
-    elif [ $PLATFORM = 'linux' ]; then
-        THEFUCK_INSTALL="sudo pacman -S thefuck"
-    fi
-    eval "$THEFUCK_INSTALL"
-    eval $(thefuck --alias)
-fi
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-if [ -s "/usr/share/nvm/init-nvm.sh" ]; then
-    source /usr/share/nvm/init-nvm.sh
-fi
-
-# These should be conditional and check that the alternatives exist before using them
-
-# HSTR configuration - add this to ~/.zshrc
-alias hh=hstr                    # hh to be alias for hstr
-setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
-bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-
-export KUBECONFIG=$KUBECONFIG:~/.kube/config
-
-# sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"
-# RESULT=$?
-# if [ $RESULT -eq 0 ]; then
-#     echo "History database ready to rock! `sqlite3 ~/.bashdb.sqlite3 "SELECT COUNT(*) FROM history;"` rows found."
-# else
-#     echo "No database set up yet for history, creating"
-#     sqlite3 ~/.bashdb.sqlite3 "CREATE TABLE history (oid INTEGER PRIMARY KEY, command TEXT NOT NULL, arguments TEXT NOT NULL, cwd text NOT NULL, tag text NOT NULL, created DATETIME DEFAULT (datetime('now', 'localtime')));"
-# fi
-
-# Start up zsh trap which will store all commands in a sqlite database
-# source ~/.zsh_trap.sh
-
-# Custom commands I have created
-alias restart-audio="pulseaudio --kill && pulseaudio --start"
-
-# Kill processes matching the supplied text
-function killit () {
-    if [ $# -eq 0 ]; then
-        echo "Error: No argument supplied\n"
-        echo "Usage: killit {process_name}";
-    else
-        ps -eaf | grep $1 | grep -v grep | awk '{ print $2 }' | xargs kill -9
+# Function to detect package manager
+detect_package_manager() {
+    if [ "$PLATFORM" = "mac" ]; then
+        echo "brew"
+    elif [ "$PLATFORM" = "linux" ]; then
+        if [ -f /etc/os-release ]; then
+            . /etc/os-release
+            case "$ID" in
+                ubuntu|debian|pop|linuxmint) echo "apt" ;;
+                arch|manjaro|endeavouros) echo "pacman" ;;
+                fedora) echo "dnf" ;;
+                opensuse*) echo "zypper" ;;
+                *) echo "unknown" ;;
+            esac
+        else
+            echo "unknown"
+        fi
     fi
 }
 
-# Load secrets
-source .secrets
+# Function to get install command for a package
+get_install_command() {
+    local pkg_name=$1
+    local pkg_manager=$(detect_package_manager)
 
+    case "$pkg_manager" in
+        brew) echo "brew install $pkg_name" ;;
+        apt) echo "sudo apt-get install -y $pkg_name" ;;
+        pacman) echo "sudo pacman -S --noconfirm $pkg_name" ;;
+        dnf) echo "sudo dnf install -y $pkg_name" ;;
+        zypper) echo "sudo zypper install -y $pkg_name" ;;
+        *) echo "" ;;
+    esac
+}
+
+# Function to check and suggest installation
+check_command() {
+    local cmd=$1
+    local pkg_name=${2:-$1}  # Use second arg as package name, or default to command name
+    local alias_cmd=$3
+
+    if hash $cmd 2>/dev/null; then
+        [ -n "$alias_cmd" ] && alias $alias_cmd=$cmd
+        return 0
+    else
+        local install_cmd=$(get_install_command $pkg_name)
+        if [ -n "$install_cmd" ]; then
+            echo "${GREEN}$cmd not found. Install with: ${BLUE}$install_cmd${RESET}"
+        else
+            echo "${GREEN}$cmd not found. Please install $pkg_name manually.${RESET}"
+        fi
+        return 1
+    fi
+}
+
+# Colors
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+BLUE=$(tput setaf 4)
+RESET=$(tput sgr0)
+
+# Tool checks and aliases
+check_command eza eza ls
+check_command bat bat cat && alias ccat=/usr/bin/cat
+check_command prettyping prettyping ping
+check_command thefuck thefuck && eval $(thefuck --alias)
+check_command ncpamixer ncpamixer mixer
+check_command ncdu ncdu && alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+# Path configuration - build it cleanly
+PATH_ADDITIONS=(
+    "/usr/local/bin"
+    "$HOME/.rvm/bin"
+    "/usr/local/share/npm/bin"
+    "/usr/local/sbin"
+    "${GOPATH//://bin:}/bin"
+    "$GOPATH/bin"
+    "$HOME/bin"
+    "$HOME/.yarn/bin"
+    "$HOME/.config/yarn/global/node_modules/.bin"
+    "$HOME/.local/bin"
+    "$HOME/Library/Python/3.9/bin"
+    "/usr/local/heroku/bin"
+    "$HOME/.npm-global/bin"
+    "$HOME/.linuxbrew/bin"
+    "$HOME/.cargo/bin"
+)
+
+# Add yarn global bin if yarn exists
+if hash yarn 2>/dev/null; then
+    PATH_ADDITIONS+=("$(yarn global bin)")
+fi
+
+# Build PATH without duplicates
+for p in "${PATH_ADDITIONS[@]}"; do
+    case ":$PATH:" in
+        *":$p:"*) ;;
+        *) [ -d "$p" ] && PATH="$p:$PATH" ;;
+    esac
+done
+
+export PATH
+
+# Environment variables
+export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
+export GOPATH=$HOME/Development/go
+export GPG_TTY=$(tty)
+export KUBECONFIG=$KUBECONFIG:~/.kube/config
+
+# NVM configuration (only once)
+export NVM_DIR="$HOME/.nvm"
+if [ -s "/opt/homebrew/opt/nvm/nvm.sh" ]; then
+    source "/opt/homebrew/opt/nvm/nvm.sh"
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+elif [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+elif [ -s "/usr/share/nvm/init-nvm.sh" ]; then
+    source "/usr/share/nvm/init-nvm.sh"
+fi
+
+# HSTR configuration
+if hash hstr 2>/dev/null; then
+    alias hh=hstr
+    setopt histignorespace
+    export HSTR_CONFIG=hicolor
+    bindkey -s "\C-r" "\C-a hstr -- \C-j"
+fi
+
+# Custom functions and aliases
+# alias emacs='emacsclient -nc -a ""'
+alias restart-audio="pulseaudio --kill && pulseaudio --start"
 alias python="python3"
 alias pip="pip3"
 alias yw="yarn workspace"
 alias yws="yarn workspaces"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /Users/victor/.config/op/plugins.sh
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
-#export GITHUB_TOKEN=$(op item get 'GitHub Personal Access Token' --format json | jq -r '.fields[1].value')
+function killit() {
+    if [ $# -eq 0 ]; then
+        echo "Error: No argument supplied\n"
+        echo "Usage: killit {process_name}"
+    else
+        ps -eaf | grep "$1" | grep -v grep | awk '{ print $2 }' | xargs kill -9
+    fi
+}
+
+# Load additional configs if they exist
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
+[ -f "/Users/victor/.config/op/plugins.sh" ] && source "/Users/victor/.config/op/plugins.sh"
+
 unset NPM_CONFIG_PREFIX
